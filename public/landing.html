@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html class="light" lang="vi">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>VSAPS 2026 - Hội nghị Khoa học Quốc tế Thường niên</title>
+  <meta name="description" content="Hội nghị Khoa học Quốc tế Thường niên lần thứ 10 - Đại hội lần thứ 3 Hội Phẫu thuật Tạo hình Thẩm mỹ Việt Nam. 11-14 tháng 12, 2026 tại Bệnh viện Quân y 175, TP.HCM."/>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet"/>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#061D5F",
+            "secondary": "#F95E8B",
+            "academic-navy": "#061D5F",
+            "academic-slate": "#334155",
+            "academic-grey": "#64748B",
+            "surface": "#F8FAFC",
+            "border-subtle": "#E2E8F0"
+          },
+          fontFamily: {
+            "headline": ["Inter", "sans-serif"],
+            "body": ["Inter", "sans-serif"],
+            "sans": ["Inter", "sans-serif"]
+          },
+          borderRadius: {
+            "none": "0",
+            "sm": "0.5rem",
+            "DEFAULT": "0.75rem",
+            "md": "0.75rem",
+            "lg": "1rem",
+            "xl": "1.25rem",
+            "2xl": "1.5rem",
+            "3xl": "2rem",
+            "full": "9999px"
+          }
+        }
+      }
+    }
+  </script>
+  <style type="text/tailwindcss">
+
+    .hero-overlay {
+      background: linear-gradient(to right, rgba(6,29,95,0.95) 0%, rgba(6,29,95,0.75) 100%);
+    }
+    .agenda-row:hover { background-color: #F1F5F9; }
+    html { scroll-behavior: smooth; }
+
+    /* Countdown flip style */
+    .flip-card {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      backdrop-filter: blur(8px);
+    }
+
+    /* Nav link underline animation */
+    .nav-link::after {
+      content: '';
+      display: block;
+      width: 0;
+      height: 2px;
+      background: #F95E8B;
+      transition: width .25s;
+    }
+    .nav-link:hover::after { width: 100%; }
+
+    /* Animate on scroll helper */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Mobile menu */
+    #mobile-menu { transition: max-height .35s ease, opacity .35s ease; }
+  </style>
+</head>
+<body class="bg-white text-academic-navy font-body antialiased">
+
+<!-- ═══════════════════════ NAVIGATION ═══════════════════════ -->
+<nav class="bg-academic-navy text-white sticky top-0 z-50 border-b border-white/10">
+  <div class="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
+
+    <!-- Logo -->
+    <div class="flex items-center gap-4">
+      <div class="w-10 h-10 bg-secondary rounded-sm flex items-center justify-center font-black text-white text-lg tracking-tighter">VS</div>
+      <div class="h-8 w-px bg-white/20"></div>
+      <span class="text-sm font-semibold tracking-widest uppercase hidden sm:inline">VSAPS 2026</span>
+    </div>
+
+    <!-- Desktop Links -->
+    <div class="hidden lg:flex items-center gap-8">
+      <a class="nav-link text-xs font-bold uppercase tracking-widest text-secondary" href="#">Giới thiệu</a>
+      <a class="nav-link text-xs font-bold uppercase tracking-widest hover:text-secondary transition-colors" href="#program">Chương trình</a>
+      <a class="nav-link text-xs font-bold uppercase tracking-widest hover:text-secondary transition-colors" href="#speakers">Diễn giả</a>
+      <a class="nav-link text-xs font-bold uppercase tracking-widest hover:text-secondary transition-colors" href="#venue">Địa điểm</a>
+      <a class="nav-link text-xs font-bold uppercase tracking-widest hover:text-secondary transition-colors" href="#register">Đăng ký</a>
+      <a href="/login" class="ml-4 px-6 py-2 bg-secondary text-white text-xs font-bold uppercase rounded-sm hover:brightness-110 transition-all">Đăng nhập →</a>
+    </div>
+
+    <!-- Mobile Hamburger -->
+    <button id="menu-btn" class="lg:hidden text-white focus:outline-none" aria-label="Menu">
+      <span class="material-symbols-outlined text-2xl">menu</span>
+    </button>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="lg:hidden max-h-0 opacity-0 overflow-hidden bg-academic-navy border-t border-white/10">
+    <div class="px-6 py-4 space-y-4">
+      <a class="block text-xs font-bold uppercase tracking-widest text-secondary" href="#">Giới thiệu</a>
+      <a class="block text-xs font-bold uppercase tracking-widest text-white/80 hover:text-secondary" href="#program">Chương trình</a>
+      <a class="block text-xs font-bold uppercase tracking-widest text-white/80 hover:text-secondary" href="#speakers">Diễn giả</a>
+      <a class="block text-xs font-bold uppercase tracking-widest text-white/80 hover:text-secondary" href="#venue">Địa điểm</a>
+      <a class="block text-xs font-bold uppercase tracking-widest text-white/80 hover:text-secondary" href="#register">Đăng ký</a>
+      <a href="/login" class="block px-6 py-3 bg-secondary text-white text-xs font-bold uppercase text-center rounded-sm">Đăng nhập →</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════════════════ HERO ═══════════════════════ -->
+<section class="relative bg-academic-navy py-10 lg:py-10 overflow-hidden border-b-4 border-secondary">
+  <!-- BG Image -->
+  <div class="absolute inset-0 z-0">
+    <div class="absolute inset-0 hero-overlay z-10"></div>
+    <img alt="" aria-hidden="true"
+      class="w-full h-full object-cover opacity-25 grayscale"
+      src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1600&q=80"/>
+  </div>
+
+  <div class="relative z-20 max-w-7xl mx-auto px-6">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+
+      <!-- Left -->
+      <div class="max-xl fade-up visible">
+        <p class="text-secondary font-bold tracking-[0.3em] text-xs uppercase mb-4">
+          Hội nghị Khoa học Quốc tế Thường niên lần thứ 10
+        </p>
+        <h1 class="text-white text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-tighter leading-none mb-4">
+          VSAPS<br/><span class="text-secondary">2026</span>
+        </h1>
+        <h2 class="text-white/70 text-base md:text-lg font-light tracking-wide mb-8 border-l-2 border-secondary pl-6">
+          ĐẠI HỘI LẦN THỨ 3<br/>
+          HỘI PHẪU THUẬT TẠO HÌNH THẨM MỸ VIỆT NAM
+        </h2>
+
+        <!-- Date & Location chips -->
+        <div class="flex flex-wrap gap-8 mb-10">
+          <div class="flex flex-col">
+            <span class="text-[10px] uppercase tracking-widest font-bold text-secondary mb-1">Thời gian</span>
+            <span class="text-lg font-semibold text-white">11 – 14 tháng 12, 2026</span>
+          </div>
+          <div class="flex flex-col">
+            <span class="text-[10px] uppercase tracking-widest font-bold text-secondary mb-1">Địa điểm</span>
+            <span class="text-lg font-semibold text-white">Bệnh viện Quân y 175, TP.HCM</span>
+          </div>
+        </div>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="#register" class="px-8 py-4 bg-secondary text-white font-bold text-sm tracking-widest uppercase hover:brightness-110 transition-all text-center">
+            ĐĂNG KÝ THAM DỰ
+          </a>
+          <a href="#program" class="px-8 py-4 border border-white/30 text-white font-bold text-sm tracking-widest uppercase hover:bg-white/10 transition-all text-center">
+            Xem chương trình
+          </a>
+        </div>
+
+        <!-- Countdown -->
+        <div class="mt-10">
+          <p class="text-[10px] uppercase tracking-widest text-white/40 mb-3">Đếm ngược đến sự kiện</p>
+          <div class="flex gap-3" id="countdown">
+            <div class="flip-card rounded-sm px-4 py-3 text-center min-w-[64px]">
+              <p class="text-3xl font-black text-white" id="cd-days">234</p>
+              <p class="text-[8px] font-bold uppercase tracking-widest text-white/50 mt-1">Ngày</p>
+            </div>
+            <div class="flip-card rounded-sm px-4 py-3 text-center min-w-[64px]">
+              <p class="text-3xl font-black text-white" id="cd-hours">00</p>
+              <p class="text-[8px] font-bold uppercase tracking-widest text-white/50 mt-1">Giờ</p>
+            </div>
+            <div class="flip-card rounded-sm px-4 py-3 text-center min-w-[64px]">
+              <p class="text-3xl font-black text-white" id="cd-minutes">00</p>
+              <p class="text-[8px] font-bold uppercase tracking-widest text-white/50 mt-1">Phút</p>
+            </div>
+            <div class="flip-card rounded-sm px-4 py-3 text-center min-w-[64px]">
+              <p class="text-3xl font-black text-white" id="cd-seconds">00</p>
+              <p class="text-[8px] font-bold uppercase tracking-widest text-white/50 mt-1">Giây</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Video Card -->
+      <div class="relative group fade-up visible">
+        <div class="absolute -inset-3 bg-secondary/20 blur-2xl group-hover:bg-secondary/30 transition-all duration-500 rounded-sm"></div>
+        <div class="relative aspect-video bg-academic-navy border border-white/10 overflow-hidden shadow-2xl cursor-pointer" onclick="openVideoModal()">
+          <img alt="Video Preview – VSAPS 2025 Highlights"
+            class="w-full h-full object-cover opacity-50 group-hover:scale-105 transition-transform duration-700"
+            src="https://images.unsplash.com/photo-1551076805-e1869033e561?w=900&q=80"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-academic-navy/80 via-transparent to-transparent"></div>
+          <!-- Play btn -->
+          <div class="absolute inset-0 flex items-center justify-center">
+            <div class="w-20 h-20 rounded-full bg-secondary/90 flex items-center justify-center text-white shadow-xl group-hover:scale-110 group-hover:bg-secondary transition-all duration-300">
+              <span class="material-symbols-outlined text-4xl" style="font-variation-settings:'FILL' 1">play_arrow</span>
+            </div>
+          </div>
+          <!-- Label -->
+          <div class="absolute bottom-6 left-6 right-6">
+            <div class="flex items-center gap-3">
+              <div class="w-2 h-2 rounded-full bg-secondary animate-pulse"></div>
+              <span class="text-[10px] font-bold text-white uppercase tracking-widest">Xem Highlight Hội nghị VSAPS 2025</span>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ ABOUT ═══════════════════════ -->
+<section class="py-8 bg-white" id="about">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start mb-8">
+
+      <!-- Left: Description -->
+      <div class="lg:col-span-7 space-y-6 fade-up">
+        <div>
+          <span class="text-[10px] font-bold text-secondary tracking-[0.3em] uppercase">Về Hội nghị</span>
+          <h2 class="text-5xl font-extrabold tracking-tight text-academic-navy mt-2">VSAPS 2026</h2>
+        </div>
+        <div class="text-academic-slate text-sm leading-relaxed space-y-4">
+          <p>
+            Nhằm tiếp nối hành trình khoa học thường niên đã được duy trì và phát triển suốt hơn 18 năm,
+            năm nay <strong class="text-academic-navy">Hội Phẫu thuật Thẩm mỹ TP. Hồ Chí Minh</strong> phối hợp
+            cùng <strong class="text-academic-navy">Bệnh viện Quân y 175</strong> tổ chức Hội nghị khoa học
+            và cấp chứng chỉ Đào tạo Y khoa Liên tục (CME) cho hội viên và đội ngũ bác sĩ phẫu thuật
+            thẩm mỹ toàn quốc.
+          </p>
+          <p>
+            Đây là diễn đàn để các bác sĩ phẫu thuật thẩm mỹ và thẩm mỹ nội khoa trong nước cũng như
+            quốc tế giao lưu, chia sẻ kinh nghiệm lâm sàng và công bố các công trình nghiên cứu khoa học.
+          </p>
+        </div>
+        <div class="space-y-3 pt-2">
+          <div class="flex items-center gap-4 text-academic-navy">
+            <span class="material-symbols-outlined text-secondary">schedule</span>
+            <p class="text-sm"><span class="font-medium">Thời gian:</span> <strong>08:00 – 17:00, ngày 11-14/12/2026</strong></p>
+          </div>
+          <div class="flex items-center gap-4 text-academic-navy">
+            <span class="material-symbols-outlined text-secondary">location_on</span>
+            <p class="text-sm"><span class="font-medium">Khu hội trường 500 –</span> <strong>Bệnh viện Quân y 175</strong></p>
+          </div>
+          <div class="flex items-center gap-4 text-academic-navy">
+            <span class="material-symbols-outlined text-secondary">workspace_premium</span>
+            <p class="text-sm"><span class="font-medium">Chứng chỉ:</span> <strong>24 giờ CME được Bộ Y tế công nhận</strong></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Quick Links -->
+      <div class="lg:col-span-5 grid grid-cols-2 gap-4 fade-up">
+        <a href="#register" class="p-6 border border-secondary/30 hover:bg-secondary/20 rounded-2xl transition-all group flex flex-col gap-3">
+          <span class="material-symbols-outlined text-secondary text-3xl group-hover:scale-110 transition-transform">person_add</span>
+          <div>
+            <p class="font-bold text-secondary text-sm">Đăng ký tham dự</p>
+            <p class="text-[10px] text-academic-grey italic uppercase font-medium mt-0.5">Register to attend</p>
+          </div>
+        </a>
+        <a href="#program" class="p-6 border border-secondary/30 hover:bg-secondary/20 rounded-2xl transition-all group flex flex-col gap-3">
+          <span class="material-symbols-outlined text-secondary text-3xl group-hover:scale-110 transition-transform">list_alt</span>
+          <div>
+            <p class="font-bold text-secondary text-sm">Nội dung chương trình</p>
+            <p class="text-[10px] text-academic-grey italic uppercase font-medium mt-0.5">Program content</p>
+          </div>
+        </a>
+        <a href="#speakers" class="p-6 border border-secondary/30 hover:bg-secondary/20 transition-all group flex flex-col gap-3">
+          <span class="material-symbols-outlined text-secondary text-3xl group-hover:scale-110 transition-transform">record_voice_over</span>
+          <div>
+            <p class="font-bold text-secondary text-sm">Báo cáo viên</p>
+            <p class="text-[10px] text-academic-grey italic uppercase font-medium mt-0.5">Speakers</p>
+          </div>
+        </a>
+        <a href="#" class="p-6 border border-secondary/30 hover:bg-secondary/20 transition-all group flex flex-col gap-3">
+          <span class="material-symbols-outlined text-secondary text-3xl group-hover:scale-110 transition-transform">groups</span>
+          <div>
+            <p class="font-bold text-secondary text-sm">Ban Chủ tọa</p>
+            <p class="text-[10px] text-academic-grey italic uppercase font-medium mt-0.5">Chairmen</p>
+          </div>
+        </a>
+        <a href="#" class="p-6 border border-secondary/30 hover:bg-secondary/20 transition-all group flex flex-col gap-3">
+          <span class="material-symbols-outlined text-secondary text-3xl group-hover:scale-110 transition-transform">article</span>
+          <div>
+            <p class="font-bold text-secondary text-sm">Gửi bài báo cáo</p>
+            <p class="text-[10px] text-academic-grey italic uppercase font-medium mt-0.5">Submit abstract</p>
+          </div>
+        </a>
+        <a href="#" class="p-6 border border-secondary/30 hover:bg-secondary/20 transition-all group flex flex-col gap-3">
+          <span class="material-symbols-outlined text-secondary text-3xl group-hover:scale-110 transition-transform">business</span>
+          <div>
+            <p class="font-bold text-secondary text-sm">Nhà tài trợ</p>
+            <p class="text-[10px] text-academic-grey italic uppercase font-medium mt-0.5">Sponsors</p>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- Stats Bar -->
+    <div class="grid grid-cols-3 md:grid-cols-6 gap-6 pt-12 border-t border-border-subtle fade-up">
+      <div class="text-center space-y-1">
+        <p class="text-4xl font-extrabold text-secondary" data-count="700">0</p>
+        <p class="text-[10px] font-bold text-academic-grey uppercase tracking-tight">Đại biểu</p>
+      </div>
+      <div class="text-center space-y-1">
+        <p class="text-4xl font-extrabold text-secondary" data-count="25">0</p>
+        <p class="text-[10px] font-bold text-academic-grey uppercase tracking-tight">Chủ tọa &amp; BCV</p>
+      </div>
+      <div class="text-center space-y-1">
+        <p class="text-4xl font-extrabold text-secondary" data-count="10">0</p>
+        <p class="text-[10px] font-bold text-academic-grey uppercase tracking-tight">BCV Quốc tế</p>
+      </div>
+      <div class="text-center space-y-1">
+        <p class="text-4xl font-extrabold text-secondary" data-count="30">0</p>
+        <p class="text-[10px] font-bold text-academic-grey uppercase tracking-tight">Bài báo cáo</p>
+      </div>
+      <div class="text-center space-y-1">
+        <p class="text-4xl font-extrabold text-secondary" data-count="20">0</p>
+        <p class="text-[10px] font-bold text-academic-grey uppercase tracking-tight">Doanh nghiệp</p>
+      </div>
+      <div class="text-center space-y-1">
+        <p class="text-4xl font-extrabold text-secondary" data-count="5">0</p>
+        <p class="text-[10px] font-bold text-academic-grey uppercase tracking-tight">Quốc gia</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ SPEAKERS ═══════════════════════ -->
+<section class="py-8 bg-surface border-y border-border-subtle" id="speakers">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="flex justify-between items-end mb-6 fade-up">
+      <div>
+        <span class="text-xs font-bold text-secondary tracking-[0.2em] uppercase">Ban Khoa học</span>
+        <h2 class="text-4xl font-headline font-extrabold text-academic-navy mt-2">Diễn giả Danh dự</h2>
+      </div>
+      <button class="text-xs font-bold uppercase tracking-widest text-academic-navy flex items-center gap-2 hover:text-secondary transition-colors">
+        Xem tất cả <span class="material-symbols-outlined text-sm">arrow_forward</span>
+      </button>
+    </div>
+
+    <div class="flex flex-col gap-4 fade-up">
+      <!-- Top Row: 2 Cards -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <!-- Card 1 Placeholder -->
+        <div class="rounded-3xl shadow-lg overflow-hidden group border border-border-subtle bg-slate-100 aspect-[2/1] relative flex items-center justify-center">
+          <span class="absolute text-slate-400 font-medium text-sm">Upload image 1 (Tỷ lệ 2:1)</span>
+          <img class="w-full h-full object-cover relative z-10 transition-transform duration-700 group-hover:scale-105"
+            src="/images/speakers/speaker-1.png" alt="Card 1"
+            onerror="this.style.opacity='0'" onload="this.style.opacity='1'" />
+        </div>
+
+        <!-- Card 2 Placeholder -->
+        <div class="rounded-3xl shadow-lg overflow-hidden group border border-border-subtle bg-slate-100 aspect-[2/1] relative flex items-center justify-center">
+          <span class="absolute text-slate-400 font-medium text-sm">Upload image 2 (Tỷ lệ 2:1)</span>
+          <img class="w-full h-full object-cover relative z-10 transition-transform duration-700 group-hover:scale-105"
+            src="/images/speakers/speaker-2.png" alt="Card 2"
+            onerror="this.style.opacity='0'" onload="this.style.opacity='1'" />
+        </div>
+      </div>
+
+      <!-- Bottom Row: 3 Cards -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        <!-- Card 3 Placeholder -->
+        <div class="rounded-3xl shadow-lg overflow-hidden group border border-border-subtle bg-slate-100 aspect-[2/1] relative flex items-center justify-center">
+          <span class="absolute text-slate-400 font-medium text-sm text-center">Upload image 3<br/>(Tỷ lệ 2:1)</span>
+          <img class="w-full h-full object-cover relative z-10 transition-transform duration-700 group-hover:scale-105"
+            src="/images/speakers/speaker-3.png" alt="Card 3"
+            onerror="this.style.opacity='0'" onload="this.style.opacity='1'" />
+        </div>
+
+        <!-- Card 4 Placeholder -->
+        <div class="rounded-3xl shadow-lg overflow-hidden group border border-border-subtle bg-slate-100 aspect-[2/1] relative flex items-center justify-center">
+          <span class="absolute text-slate-400 font-medium text-sm text-center">Upload image 4<br/>(Tỷ lệ 2:1)</span>
+          <img class="w-full h-full object-cover relative z-10 transition-transform duration-700 group-hover:scale-105"
+            src="/images/speakers/speaker-4.png" alt="Card 4"
+            onerror="this.style.opacity='0'" onload="this.style.opacity='1'" />
+        </div>
+
+        <!-- Card 5 Placeholder -->
+        <div class="rounded-3xl shadow-lg overflow-hidden group border border-border-subtle bg-slate-100 aspect-[2/1] relative flex items-center justify-center">
+          <span class="absolute text-slate-400 font-medium text-sm text-center">Upload image 5<br/>(Tỷ lệ 2:1)</span>
+          <img class="w-full h-full object-cover relative z-10 transition-transform duration-700 group-hover:scale-105"
+            src="/images/speakers/speaker-5.png" alt="Card 5"
+            onerror="this.style.opacity='0'" onload="this.style.opacity='1'" />
+        </div>
+      </div>
+
+      <!-- Carousel Dots -->
+      <div class="flex justify-center gap-2 mt-4 mb-2">
+        <button class="w-1.5 h-1.5 rounded-full border border-border-subtle"></button>
+        <button class="w-1.5 h-1.5 rounded-full border border-border-subtle"></button>
+        <button class="w-2 h-2 rounded-full bg-academic-navy -my-0.5"></button>
+        <button class="w-1.5 h-1.5 rounded-full border border-border-subtle"></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ PROGRAM ═══════════════════════ -->
+<section class="py-8 bg-white" id="program">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12 fade-up">
+      <div>
+        <span class="text-xs font-bold text-secondary tracking-[0.2em] uppercase">Chương trình chi tiết</span>
+        <h2 class="text-4xl font-headline font-extrabold text-academic-navy mt-2">Chương trình Khoa học</h2>
+      </div>
+    </div>
+
+    <!-- Mobile Schedule (Hidden on Desktop) -->
+    <div class="block lg:hidden space-y-6 mt-6 fade-up">
+      <!-- Day 1 -->
+      <div class="border border-border-subtle rounded-2xl overflow-hidden bg-white shadow-sm">
+        <div class="bg-secondary/40 text-academic-navy font-bold p-3 text-center text-base">NGÀY 1 - 11 DEC 2026</div>
+        <div class="divide-y divide-border-subtle">
+          <div class="p-3">
+            <div class="mb-2"><span class="text-[10px] font-bold text-academic-navy bg-primary/10 px-2 py-1 rounded">HT1: PTTM</span> <span class="text-xs font-semibold">Đăng ký & Check-in</span></div>
+            <div class=""><span class="text-[10px] font-bold text-academic-navy bg-secondary/40 px-2 py-1 rounded">HT2: PTHM & TT</span> <span class="text-xs font-bold uppercase">ĐẠI HỘI VSAPS</span></div>
+          </div>
+          <div class="p-3">
+            <div class="mb-2"><span class="text-[10px] font-bold text-academic-navy bg-primary/10 px-2 py-1 rounded">HT1: PTTM</span> <span class="text-xs font-semibold">Live Surgery</span></div>
+            <div class="mb-2"><span class="text-[10px] font-bold text-academic-navy bg-secondary/40 px-2 py-1 rounded">HT2: PTHM & TT</span> <span class="text-xs font-semibold">Phiên họp BCH Hội VSAPS</span></div>
+            <div class="mb-2"><span class="text-[10px] font-bold text-academic-navy bg-primary/10 px-2 py-1 rounded">HT3: PTTH & TMTQ</span> <span class="text-xs font-bold text-red-600">MASTER CLASS</span></div>
+            <div class=""><span class="text-[10px] font-bold text-academic-navy bg-secondary/40 px-2 py-1 rounded">HT4: TM Ít XL & NK</span> <span class="text-xs font-bold text-red-600">MASTER CLASS</span></div>
+          </div>
+          <div class="p-3 bg-slate-50 text-center text-xs font-semibold text-academic-slate">Nghỉ giải lao</div>
+          <div class="p-3">
+            <div class="mb-2"><span class="text-[10px] font-bold text-academic-navy bg-primary/10 px-2 py-1 rounded">HT1: PTTM</span> <span class="text-xs font-semibold">Live Surgery</span></div>
+            <div class=""><span class="text-[10px] font-bold text-academic-navy bg-secondary/40 px-2 py-1 rounded">HT2: PTHM & TT</span> <span class="text-xs font-semibold">Phiên họp BCH Hội VSAPS (tiếp)</span></div>
+          </div>
+          <div class="p-3 bg-slate-50 text-center text-xs font-semibold text-academic-slate">Nghỉ trưa</div>
+          <div class="p-3">
+            <div class="mb-2"><span class="text-[10px] font-bold text-academic-navy bg-primary/10 px-2 py-1 rounded">HT1: PTTM</span> <span class="text-xs font-semibold">Live Surgery</span></div>
+            <div class=""><span class="text-[10px] font-bold text-academic-navy bg-secondary/40 px-2 py-1 rounded">HT2: PTHM & TT</span> <span class="text-xs font-semibold">Đại hội VSAPS lần thứ 3</span></div>
+          </div>
+          <div class="p-3 bg-slate-50 text-center text-xs font-semibold text-academic-slate">Nghỉ giải lao</div>
+          <div class="p-3">
+            <div class="mb-2"><span class="text-[10px] font-bold text-academic-navy bg-primary/10 px-2 py-1 rounded">HT1: PTTM</span> <span class="text-xs font-bold text-red-600">MASTER CLASS</span></div>
+            <div class="mb-2"><span class="text-[10px] font-bold text-academic-navy bg-secondary/40 px-2 py-1 rounded">HT2: PTHM & TT</span> <span class="text-xs font-semibold">Đại hội VSAPS lần thứ 3 (tiếp)</span></div>
+            <div class="mb-2"><span class="text-[10px] font-bold text-academic-navy bg-primary/10 px-2 py-1 rounded">HT3: PTTH & TMTQ</span> <span class="text-xs font-bold text-red-600">MASTER CLASS</span></div>
+            <div class=""><span class="text-[10px] font-bold text-academic-navy bg-secondary/40 px-2 py-1 rounded">HT4: TM Ít XL & NK</span> <span class="text-xs font-bold text-red-600">MASTER CLASS</span></div>
+          </div>
+          <div class="p-4 bg-academic-navy text-white text-center font-bold tracking-widest text-sm">WELCOME DINNER</div>
+        </div>
+      </div>
+
+      <!-- Day 2 -->
+      <div class="border border-border-subtle rounded-2xl overflow-hidden bg-white shadow-sm">
+        <div class="bg-primary/10 text-academic-navy font-bold p-3 text-center text-base">NGÀY 2 - 12 DEC 2026</div>
+        <div class="divide-y divide-border-subtle">
+          <div class="p-3 text-center">
+            <span class="text-xs font-bold text-red-600 uppercase tracking-widest">MASTER CLASS TẠI CÁC HỘI TRƯỜNG</span>
+          </div>
+          <div class="p-3">
+            <div class="mb-3"><span class="text-[10px] font-bold text-academic-navy bg-primary/10 px-2 py-1 rounded block mb-1">HT1: PTTM</span> <span class="text-xs font-bold text-academic-navy">Phần 1: Xu hướng mới trong Phẫu thuật Tạo hình & Thẩm mỹ</span></div>
+            <div class="mb-3"><span class="text-[10px] font-bold text-academic-navy bg-secondary/40 px-2 py-1 rounded block mb-1">HT2: PTHM & TT</span> <span class="text-xs font-bold text-academic-navy">Phần 8: Phẫu thuật Sọ - Mặt</span></div>
+            <div class="mb-3"><span class="text-[10px] font-bold text-academic-navy bg-primary/10 px-2 py-1 rounded block mb-1">HT3: PTTH & TMTQ</span> <span class="text-xs font-bold text-academic-navy">Phần 16: PT hàm mặt chính xác: Từ lập kế hoạch đến hoàn thiện</span></div>
+            <div class=""><span class="text-[10px] font-bold text-academic-navy bg-secondary/40 px-2 py-1 rounded block mb-1">HT4: TM Ít XL & NK</span> <span class="text-xs font-bold text-academic-navy">Phần 23: Phẫu thuật xâm lấn tối thiểu 1</span></div>
+          </div>
+          <div class="p-3 bg-slate-50 text-center text-xs font-semibold text-academic-slate">Nghỉ giải lao</div>
+          <div class="p-3">
+            <div class="mb-3"><span class="text-[10px] font-bold text-academic-navy bg-primary/10 px-2 py-1 rounded block mb-1">HT1: PTTM</span> <span class="text-xs font-bold text-academic-navy">Phần 2: Những tiến bộ trong Phẫu thuật Thẩm mỹ mắt và Cấy mỡ vùng mặt</span></div>
+            <div class="mb-3"><span class="text-[10px] font-bold text-academic-navy bg-secondary/40 px-2 py-1 rounded block mb-1">HT2: PTHM & TT</span> <span class="text-xs font-bold text-academic-navy">Phần 9: Kỹ thuật nâng cao và xử lý các khuyết phức tạp trong Phẫu thuật Sọ - Mặt</span></div>
+            <div class="mb-3"><span class="text-[10px] font-bold text-academic-navy bg-primary/10 px-2 py-1 rounded block mb-1">HT3: PTTH & TMTQ</span> <span class="text-xs font-bold text-academic-navy">Phần 17: Thách thức và đột phá trong xử trí chấn thương hàm mặt</span></div>
+            <div class=""><span class="text-[10px] font-bold text-academic-navy bg-secondary/40 px-2 py-1 rounded block mb-1">HT4: TM Ít XL & NK</span> <span class="text-xs font-bold text-academic-navy">Phần 24: Phẫu thuật xâm lấn tối thiểu 2</span></div>
+          </div>
+          <div class="p-3 bg-slate-50 text-center text-xs font-semibold text-academic-slate">Nghỉ trưa</div>
+          <div class="p-3">
+            <div class="mb-3"><span class="text-[10px] font-bold text-academic-navy bg-primary/10 px-2 py-1 rounded block mb-1">HT1: PTTM</span> <span class="text-xs font-bold text-academic-navy">Phần 3: Các đổi mới trong Phẫu thuật Thẩm mỹ & Tạo hình vùng mặt</span></div>
+            <div class="mb-3"><span class="text-[10px] font-bold text-academic-navy bg-secondary/40 px-2 py-1 rounded block mb-1">HT2: PTHM & TT</span> <span class="text-xs font-bold text-academic-navy">Phần 10: Phẫu thuật Sọ - Mặt và Chỉnh hình Xương</span></div>
+            <div class="mb-3"><span class="text-[10px] font-bold text-academic-navy bg-primary/10 px-2 py-1 rounded block mb-1">HT3: PTTH & TMTQ</span> <span class="text-xs font-bold text-academic-navy">Phần 18: Tiến bộ trong tái tạo hàm mặt và hài hòa trong thẩm mỹ</span></div>
+            <div class=""><span class="text-[10px] font-bold text-academic-navy bg-secondary/40 px-2 py-1 rounded block mb-1">HT4: TM Ít XL & NK</span> <span class="text-xs font-bold text-academic-navy">Phần 25: Phẫu thuật xâm lấn tối thiểu 3</span></div>
+          </div>
+          <div class="p-3 bg-slate-50 text-center text-xs font-semibold text-academic-slate">Nghỉ giải lao</div>
+          <div class="p-3">
+            <div class="mb-3"><span class="text-[10px] font-bold text-academic-navy bg-primary/10 px-2 py-1 rounded block mb-1">HT1: PTTM</span> <span class="text-xs font-bold text-academic-navy">Phần 4: Các kỹ thuật tiên tiến trong Phẫu thuật thẩm mỹ ngực</span></div>
+            <div class="mb-3"><span class="text-[10px] font-bold text-academic-navy bg-secondary/40 px-2 py-1 rounded block mb-1">HT2: PTHM & TT</span> <span class="text-xs font-bold text-academic-navy">Phần 11: Các đổi mới trong Phẫu thuật Hàm mặt và Phẫu thuật Sọ - Mặt</span></div>
+            <div class="mb-3"><span class="text-[10px] font-bold text-academic-navy bg-primary/10 px-2 py-1 rounded block mb-1">HT3: PTTH & TMTQ</span> <span class="text-xs font-bold text-academic-navy">Phần 19: Những tiến bộ mới trong tái tạo hàm mặt, kết hợp thẩm mỹ</span></div>
+            <div class=""><span class="text-[10px] font-bold text-academic-navy bg-secondary/40 px-2 py-1 rounded block mb-1">HT4: TM Ít XL & NK</span> <span class="text-xs font-bold text-academic-navy">Phần 26: Phẫu thuật xâm lấn tối thiểu 4</span></div>
+          </div>
+          <div class="p-3 text-center">
+            <span class="text-xs font-bold text-red-600 uppercase tracking-widest">MASTER CLASS TẠI CÁC HỘI TRƯỜNG</span>
+          </div>
+          <div class="p-4 bg-academic-navy text-white text-center font-bold tracking-widest text-sm">GALA DINNER</div>
+        </div>
+      </div>
+
+      <!-- Day 3 -->
+      <div class="border border-border-subtle rounded-2xl overflow-hidden bg-white shadow-sm">
+        <div class="bg-secondary/40 text-academic-navy font-bold p-3 text-center text-base">NGÀY 3 - 13 DEC 2026</div>
+        <div class="divide-y divide-border-subtle">
+          <div class="p-3 text-center">
+            <span class="text-xs font-bold text-red-600 uppercase tracking-widest">MASTER CLASS TẠI CÁC HỘI TRƯỜNG</span>
+          </div>
+          <div class="p-3">
+            <div class="mb-3"><span class="text-[10px] font-bold text-academic-navy bg-primary/10 px-2 py-1 rounded block mb-1">HT1: PTTM</span> <span class="text-xs font-bold text-academic-navy">Phần 5: Các kỹ thuật Tạo hình cơ thể tiên tiến</span></div>
+            <div class="mb-3"><span class="text-[10px] font-bold text-academic-navy bg-secondary/40 px-2 py-1 rounded block mb-1">HT2: PTHM & TT</span> <span class="text-xs font-bold text-academic-navy">Phần 12: Phẫu thuật tái tạo thứ phát và chiến lược điều chỉnh</span></div>
+            <div class="mb-3"><span class="text-[10px] font-bold text-academic-navy bg-primary/10 px-2 py-1 rounded block mb-1">HT3: PTTH & TMTQ</span> <span class="text-xs font-bold text-academic-navy">Phần 20: Kỹ thuật đổi mới trong Phẫu thuật Thẩm mỹ & Tạo hình</span></div>
+            <div class=""><span class="text-[10px] font-bold text-academic-navy bg-secondary/40 px-2 py-1 rounded block mb-1">HT4: TM Ít XL & NK</span> <span class="text-xs font-bold text-academic-navy">Phần 27: Thẩm mỹ Nội khoa & Da liễu 5</span></div>
+          </div>
+          <div class="p-3 bg-slate-50 text-center text-xs font-semibold text-academic-slate">Nghỉ giải lao</div>
+          <div class="p-3">
+            <div class="mb-3"><span class="text-[10px] font-bold text-academic-navy bg-primary/10 px-2 py-1 rounded block mb-1">HT1: PTTM</span> <span class="text-xs font-bold text-academic-navy">Phần 6: Các nguyên lý cơ bản và kỹ thuật nâng cao trong Phẫu thuật thẩm mỹ Mũi</span></div>
+            <div class="mb-3"><span class="text-[10px] font-bold text-academic-navy bg-secondary/40 px-2 py-1 rounded block mb-1">HT2: PTHM & TT</span> <span class="text-xs font-bold text-academic-navy">Phần 13: Phẫu thuật Tạo hình & Tái tạo (6 & 7)</span></div>
+            <div class="mb-3"><span class="text-[10px] font-bold text-academic-navy bg-primary/10 px-2 py-1 rounded block mb-1">HT3: PTTH & TMTQ</span> <span class="text-xs font-bold text-academic-navy">Phần 21: Kỹ thuật đổi mới trong Phẫu thuật Thẩm mỹ & Tạo hình</span></div>
+            <div class=""><span class="text-[10px] font-bold text-academic-navy bg-secondary/40 px-2 py-1 rounded block mb-1">HT4: TM Ít XL & NK</span> <span class="text-xs font-bold text-academic-navy">Phần 28: Thẩm mỹ Nội khoa & Da liễu 6</span></div>
+          </div>
+          <div class="p-3 bg-slate-50 text-center text-xs font-semibold text-academic-slate">Nghỉ trưa</div>
+          <div class="p-3">
+            <div class="mb-3"><span class="text-[10px] font-bold text-academic-navy bg-primary/10 px-2 py-1 rounded block mb-1">HT1: PTTM</span> <span class="text-xs font-bold text-academic-navy">Phần 7: Những tiến bộ và đổi mới trong Phẫu thuật Mũi Cấu trúc</span></div>
+            <div class="mb-3"><span class="text-[10px] font-bold text-academic-navy bg-secondary/40 px-2 py-1 rounded block mb-1">HT2: PTHM & TT</span> <span class="text-xs font-bold text-academic-navy">Phần 14: Phẫu thuật Tạo hình & Tái tạo (8)</span></div>
+            <div class="mb-3"><span class="text-[10px] font-bold text-academic-navy bg-primary/10 px-2 py-1 rounded block mb-1">HT3: PTTH & TMTQ</span> <span class="text-xs font-bold text-academic-navy">Phần 22: Kỹ thuật đổi mới trong Phẫu thuật Thẩm mỹ & Tạo hình</span></div>
+            <div class=""><span class="text-[10px] font-bold text-academic-navy bg-secondary/40 px-2 py-1 rounded block mb-1">HT4: TM Ít XL & NK</span> <span class="text-xs font-bold text-academic-navy">Phần 29: Thẩm mỹ không xâm lấn 7</span></div>
+          </div>
+          <div class="p-3 text-center">
+            <span class="text-xs font-bold text-red-600 uppercase tracking-widest">MASTER CLASS TẠI CÁC HỘI TRƯỜNG</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Day 4 -->
+      <div class="border border-border-subtle rounded-2xl overflow-hidden bg-white shadow-sm">
+        <div class="bg-primary/10 text-academic-navy font-bold p-3 text-center text-base">NGÀY 4 - 14 DEC 2026</div>
+        <div class="p-4 bg-slate-50 text-academic-navy text-center font-bold tracking-widest text-sm">TIỆC GIAO LƯU VÀ TOUR DU LỊCH KHÁM PHÁ</div>
+      </div>
+    </div>
+
+    <!-- Schedule Table (Detailed) -->
+    <div class="hidden lg:block w-full overflow-x-auto rounded-3xl border border-border-subtle shadow-sm bg-white fade-up mt-12">
+      <table class="w-full text-xs md:text-sm border-collapse min-w-[1000px] text-center">
+        <thead>
+          <tr>
+            <th class="border border-border-subtle p-2 w-12 bg-white sticky left-0 z-10"></th>
+            <th class="border border-border-subtle p-4 font-bold bg-primary/10 text-academic-navy w-1/4">Hội trường 1:<br/>Phẫu thuật Thẩm mỹ</th>
+            <th class="border border-border-subtle p-4 font-bold bg-secondary/40 text-academic-navy w-1/4">Hội trường 2:<br/>Phẫu thuật Hàm mặt & Tái tạo</th>
+            <th class="border border-border-subtle p-4 font-bold bg-primary/10 text-academic-navy w-1/4">Hội trường 3:<br/>Phẫu thuật Tạo hình & Thẩm mỹ Tổng quát</th>
+            <th class="border border-border-subtle p-4 font-bold bg-secondary/40 text-academic-navy w-1/4">Hội trường 4:<br/>Thẩm mỹ Ít xâm lấn & Nội khoa</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- DAY 1 -->
+          <tr>
+            <td rowspan="8" class="border border-border-subtle p-2 bg-secondary/40 font-bold whitespace-nowrap sticky left-0 z-10 text-academic-navy" style="writing-mode: vertical-rl; transform: rotate(180deg);">NGÀY 1 - 11 DEC 2026</td>
+            <td class="border border-border-subtle p-3 font-semibold text-left">Đăng ký & Check-in</td>
+            <td class="border border-border-subtle p-3 font-bold uppercase text-left">ĐẠI HỘI VSAPS</td>
+            <td class="border border-border-subtle p-3 bg-white"></td>
+            <td class="border border-border-subtle p-3 bg-white"></td>
+          </tr>
+          <tr>
+            <td class="border border-border-subtle p-3 font-semibold text-left">Live Surgery</td>
+            <td class="border border-border-subtle p-3 font-semibold text-left">Phiên họp Ban Chấp hành Hội VSAPS</td>
+            <td class="border border-border-subtle p-3 font-bold text-red-600 uppercase">MASTER CLASS</td>
+            <td class="border border-border-subtle p-3 font-bold text-red-600 uppercase">MASTER CLASS</td>
+          </tr>
+          <tr>
+            <td class="border border-border-subtle p-2 text-academic-slate text-left">Nghỉ giải lao</td>
+            <td class="border border-border-subtle p-2 text-academic-slate text-left">Nghỉ giải lao</td>
+            <td class="border border-border-subtle p-2 text-academic-slate text-left">Nghỉ giải lao</td>
+            <td class="border border-border-subtle p-2 text-academic-slate text-left">Nghỉ giải lao</td>
+          </tr>
+          <tr>
+            <td class="border border-border-subtle p-3 font-semibold text-left">Live Surgery</td>
+            <td class="border border-border-subtle p-3 font-semibold text-left">Phiên họp Ban Chấp hành Hội VSAPS (tiếp)</td>
+            <td class="border border-border-subtle p-3 bg-white"></td>
+            <td class="border border-border-subtle p-3 bg-white"></td>
+          </tr>
+          <tr>
+            <td class="border border-border-subtle p-2 text-academic-slate text-left">Nghỉ trưa</td>
+            <td class="border border-border-subtle p-2 text-academic-slate text-left">Nghỉ trưa</td>
+            <td class="border border-border-subtle p-2 text-academic-slate text-left">Nghỉ trưa</td>
+            <td class="border border-border-subtle p-2 text-academic-slate text-left">Nghỉ trưa</td>
+          </tr>
+          <tr>
+            <td class="border border-border-subtle p-3 font-semibold text-left">Live Surgery</td>
+            <td class="border border-border-subtle p-3 font-semibold text-left">Đại hội VSAPS lần thứ 3</td>
+            <td class="border border-border-subtle p-3 bg-white"></td>
+            <td class="border border-border-subtle p-3 bg-white"></td>
+          </tr>
+          <tr>
+            <td class="border border-border-subtle p-2 text-academic-slate text-left">Nghỉ giải lao</td>
+            <td class="border border-border-subtle p-2 text-academic-slate text-left">Nghỉ giải lao</td>
+            <td class="border border-border-subtle p-2 text-academic-slate text-left">Nghỉ giải lao</td>
+            <td class="border border-border-subtle p-2 text-academic-slate text-left">Nghỉ giải lao</td>
+          </tr>
+          <tr>
+            <td class="border border-border-subtle p-3 font-bold text-red-600 uppercase text-left">MASTER CLASS</td>
+            <td class="border border-border-subtle p-3 font-semibold text-left">Đại hội VSAPS lần thứ 3 (tiếp)</td>
+            <td class="border border-border-subtle p-3 font-bold text-red-600 uppercase text-left">MASTER CLASS</td>
+            <td class="border border-border-subtle p-3 font-bold text-red-600 uppercase text-left">MASTER CLASS</td>
+          </tr>
+
+          <!-- WELCOME DINNER -->
+          <tr>
+            <td colspan="5" class="border border-border-subtle p-4 font-bold text-lg tracking-widest uppercase bg-slate-50 text-academic-navy">WELCOME DINNER</td>
+          </tr>
+
+          <!-- DAY 2 -->
+          <tr>
+            <td rowspan="9" class="border border-border-subtle p-2 bg-primary/10 font-bold whitespace-nowrap sticky left-0 z-10 text-academic-navy" style="writing-mode: vertical-rl; transform: rotate(180deg);">NGÀY 2 - 12 DEC 2026</td>
+            <td class="border border-border-subtle p-3 font-bold text-red-600 uppercase text-left">MASTER CLASS</td>
+            <td class="border border-border-subtle p-3 font-bold text-red-600 uppercase text-left">MASTER CLASS</td>
+            <td class="border border-border-subtle p-3 font-bold text-red-600 uppercase text-left">MASTER CLASS</td>
+            <td class="border border-border-subtle p-3 font-bold text-red-600 uppercase text-left">MASTER CLASS</td>
+          </tr>
+          <tr>
+            <td class="border border-border-subtle p-3 bg-primary/5 font-bold text-left text-academic-navy">Phần 1: Xu hướng mới trong Phẫu thuật Tạo hình & Thẩm mỹ</td>
+            <td class="border border-border-subtle p-3 bg-secondary/20 font-bold text-left text-academic-navy">Phần 8: Phẫu thuật Sọ - Mặt</td>
+            <td class="border border-border-subtle p-3 bg-primary/5 font-bold text-left text-academic-navy">Phần 16: PT hàm mặt chính xác: Từ lập kế hoạch đến hoàn thiện</td>
+            <td class="border border-border-subtle p-3 bg-secondary/20 font-bold text-left text-academic-navy">Phần 23: Phẫu thuật xâm lấn tối thiểu 1</td>
+          </tr>
+          <tr>
+            <td class="border border-border-subtle p-2 text-academic-slate text-left">Nghỉ giải lao</td>
+            <td class="border border-border-subtle p-2 text-academic-slate text-left">Nghỉ giải lao</td>
+            <td class="border border-border-subtle p-2 text-academic-slate text-left">Nghỉ giải lao</td>
+            <td class="border border-border-subtle p-2 text-academic-slate text-left">Nghỉ giải lao</td>
+          </tr>
+          <tr>
+            <td class="border border-border-subtle p-3 bg-primary/5 font-bold text-left text-academic-navy">Phần 2: Những tiến bộ trong Phẫu thuật Thẩm mỹ mắt và Cấy mỡ vùng mặt</td>
+            <td class="border border-border-subtle p-3 bg-secondary/20 font-bold text-left text-academic-navy">Phần 9: Kỹ thuật nâng cao và xử lý các khuyết phức tạp trong Phẫu thuật Sọ - Mặt</td>
+            <td class="border border-border-subtle p-3 bg-primary/5 font-bold text-left text-academic-navy">Phần 17: Thách thức và đột phá trong xử trí chấn thương hàm mặt</td>
+            <td class="border border-border-subtle p-3 bg-secondary/20 font-bold text-left text-academic-navy">Phần 24: Phẫu thuật xâm lấn tối thiểu 2</td>
+          </tr>
+          <tr>
+            <td class="border border-border-subtle p-2 text-academic-slate text-left">Nghỉ trưa</td>
+            <td class="border border-border-subtle p-2 text-academic-slate text-left">Nghỉ trưa</td>
+            <td class="border border-border-subtle p-2 text-academic-slate text-left">Nghỉ trưa</td>
+            <td class="border border-border-subtle p-2 text-academic-slate text-left">Nghỉ trưa</td>
+          </tr>
+          <tr>
+            <td class="border border-border-subtle p-3 bg-primary/5 font-bold text-left text-academic-navy">Phần 3: Các đổi mới trong Phẫu thuật Thẩm mỹ & Tạo hình vùng mặt</td>
+            <td class="border border-border-subtle p-3 bg-secondary/20 font-bold text-left text-academic-navy">Phần 10: Phẫu thuật Sọ - Mặt và Chỉnh hình Xương</td>
+            <td class="border border-border-subtle p-3 bg-primary/5 font-bold text-left text-academic-navy">Phần 18: Tiến bộ trong tái tạo hàm mặt và hài hòa trong thẩm mỹ</td>
+            <td class="border border-border-subtle p-3 bg-secondary/20 font-bold text-left text-academic-navy">Phần 25: Phẫu thuật xâm lấn tối thiểu 3</td>
+          </tr>
+          <tr>
+            <td class="border border-border-subtle p-2 text-academic-slate text-left">Nghỉ giải lao</td>
+            <td class="border border-border-subtle p-2 text-academic-slate text-left">Nghỉ giải lao</td>
+            <td class="border border-border-subtle p-2 text-academic-slate text-left">Nghỉ giải lao</td>
+            <td class="border border-border-subtle p-2 text-academic-slate text-left">Nghỉ giải lao</td>
+          </tr>
+          <tr>
+            <td class="border border-border-subtle p-3 bg-primary/5 font-bold text-left text-academic-navy">Phần 4: Các kỹ thuật tiên tiến trong Phẫu thuật thẩm mỹ ngực</td>
+            <td class="border border-border-subtle p-3 bg-secondary/20 font-bold text-left text-academic-navy">Phần 11: Các đổi mới trong Phẫu thuật Hàm mặt và Phẫu thuật Sọ - Mặt</td>
+            <td class="border border-border-subtle p-3 bg-primary/5 font-bold text-left text-academic-navy">Phần 19: Những tiến bộ mới trong tái tạo hàm mặt, kết hợp thẩm mỹ</td>
+            <td class="border border-border-subtle p-3 bg-secondary/20 font-bold text-left text-academic-navy">Phần 26: Phẫu thuật xâm lấn tối thiểu 4</td>
+          </tr>
+          <tr>
+            <td class="border border-border-subtle p-3 font-bold text-red-600 uppercase text-left">MASTER CLASS</td>
+            <td class="border border-border-subtle p-3 font-bold text-red-600 uppercase text-left">MASTER CLASS</td>
+            <td class="border border-border-subtle p-3 font-bold text-red-600 uppercase text-left">MASTER CLASS</td>
+            <td class="border border-border-subtle p-3 font-bold text-red-600 uppercase text-left">MASTER CLASS</td>
+          </tr>
+
+          <!-- GALA DINNER -->
+          <tr>
+            <td colspan="5" class="border border-border-subtle p-4 font-bold text-lg tracking-widest uppercase bg-slate-50 text-academic-navy">GALA DINNER</td>
+          </tr>
+
+          <!-- DAY 3 -->
+          <tr>
+            <td rowspan="7" class="border border-border-subtle p-2 bg-secondary/40 font-bold whitespace-nowrap sticky left-0 z-10 text-academic-navy" style="writing-mode: vertical-rl; transform: rotate(180deg);">NGÀY 3 - 13 DEC 2026</td>
+            <td class="border border-border-subtle p-3 font-bold text-red-600 uppercase text-left">MASTER CLASS</td>
+            <td class="border border-border-subtle p-3 font-bold text-red-600 uppercase text-left">MASTER CLASS</td>
+            <td class="border border-border-subtle p-3 font-bold text-red-600 uppercase text-left">MASTER CLASS</td>
+            <td class="border border-border-subtle p-3 font-bold text-red-600 uppercase text-left">MASTER CLASS</td>
+          </tr>
+          <tr>
+            <td class="border border-border-subtle p-3 bg-primary/5 font-bold text-left text-academic-navy">Phần 5: Các kỹ thuật Tạo hình cơ thể tiên tiến</td>
+            <td class="border border-border-subtle p-3 bg-secondary/20 font-bold text-left text-academic-navy">Phần 12: Phẫu thuật tái tạo thứ phát và chiến lược điều chỉnh</td>
+            <td class="border border-border-subtle p-3 bg-primary/5 font-bold text-left text-academic-navy">Phần 20: Kỹ thuật đổi mới trong Phẫu thuật Thẩm mỹ & Tạo hình</td>
+            <td class="border border-border-subtle p-3 bg-secondary/20 font-bold text-left text-academic-navy">Phần 27: Thẩm mỹ Nội khoa & Da liễu 5</td>
+          </tr>
+          <tr>
+            <td class="border border-border-subtle p-2 text-academic-slate text-left">Nghỉ giải lao</td>
+            <td class="border border-border-subtle p-2 text-academic-slate text-left">Nghỉ giải lao</td>
+            <td class="border border-border-subtle p-2 text-academic-slate text-left">Nghỉ giải lao</td>
+            <td class="border border-border-subtle p-2 text-academic-slate text-left">Nghỉ giải lao</td>
+          </tr>
+          <tr>
+            <td class="border border-border-subtle p-3 bg-primary/5 font-bold text-left text-academic-navy">Phần 6: Các nguyên lý cơ bản và kỹ thuật nâng cao trong Phẫu thuật thẩm mỹ Mũi</td>
+            <td class="border border-border-subtle p-3 bg-secondary/20 font-bold text-left text-academic-navy">Phần 13: Phẫu thuật Tạo hình & Tái tạo (6 & 7)</td>
+            <td class="border border-border-subtle p-3 bg-primary/5 font-bold text-left text-academic-navy">Phần 21: Kỹ thuật đổi mới trong Phẫu thuật Thẩm mỹ & Tạo hình</td>
+            <td class="border border-border-subtle p-3 bg-secondary/20 font-bold text-left text-academic-navy">Phần 28: Thẩm mỹ Nội khoa & Da liễu 6</td>
+          </tr>
+          <tr>
+            <td class="border border-border-subtle p-2 text-academic-slate text-left">Nghỉ trưa</td>
+            <td class="border border-border-subtle p-2 text-academic-slate text-left">Nghỉ trưa</td>
+            <td class="border border-border-subtle p-2 text-academic-slate text-left">Nghỉ trưa</td>
+            <td class="border border-border-subtle p-2 text-academic-slate text-left">Nghỉ trưa</td>
+          </tr>
+          <tr>
+            <td class="border border-border-subtle p-3 bg-primary/5 font-bold text-left text-academic-navy">Phần 7: Những tiến bộ và đổi mới trong Phẫu thuật Mũi Cấu trúc</td>
+            <td class="border border-border-subtle p-3 bg-secondary/20 font-bold text-left text-academic-navy">Phần 14: Phẫu thuật Tạo hình & Tái tạo (8)</td>
+            <td class="border border-border-subtle p-3 bg-primary/5 font-bold text-left text-academic-navy">Phần 22: Kỹ thuật đổi mới trong Phẫu thuật Thẩm mỹ & Tạo hình</td>
+            <td class="border border-border-subtle p-3 bg-secondary/20 font-bold text-left text-academic-navy">Phần 29: Thẩm mỹ không xâm lấn 7</td>
+          </tr>
+          <tr>
+            <td class="border border-border-subtle p-3 font-bold text-red-600 uppercase text-left">MASTER CLASS</td>
+            <td class="border border-border-subtle p-3 font-bold text-red-600 uppercase text-left">MASTER CLASS</td>
+            <td class="border border-border-subtle p-3 font-bold text-red-600 uppercase text-left">MASTER CLASS</td>
+            <td class="border border-border-subtle p-3 font-bold text-red-600 uppercase text-left">MASTER CLASS</td>
+          </tr>
+
+          <!-- DAY 4 -->
+          <tr>
+            <td class="border border-border-subtle p-2 bg-primary/10 font-bold whitespace-nowrap sticky left-0 z-10 text-academic-navy" style="writing-mode: vertical-rl; transform: rotate(180deg);">NGÀY 4<br/>14 DEC<br/>2026</td>
+            <td colspan="4" class="border border-border-subtle p-4 font-bold text-lg tracking-widest uppercase bg-slate-50 text-academic-navy text-center">TIỆC GIAO LƯU VÀ TOUR DU LỊCH KHÁM PHÁ</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ REGISTER ═══════════════════════ -->
+<section class="py-8 bg-academic-navy" id="register">
+  <div class="max-w-7xl mx-auto px-6 text-center fade-up">
+    <p class="text-secondary font-bold tracking-[0.3em] text-xs uppercase mb-4">Mở đăng ký sớm</p>
+    <h2 class="text-5xl font-extrabold text-white tracking-tight mb-4">Tham gia VSAPS 2026</h2>
+    <p class="text-white/60 text-sm max-w-xl mx-auto mb-10">
+      Đăng ký sớm trước ngày 30/09/2026 để nhận ưu đãi 20% và đảm bảo chỗ tham dự Gala Dinner.
+    </p>
+
+    <!-- Pricing Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 text-left max-w-4xl mx-auto">
+      <div class="border border-white/10 p-8 bg-white/5 hover:bg-white/10 transition-colors">
+        <p class="text-[10px] font-bold uppercase tracking-widest text-secondary mb-4">Hội viên VSAPS</p>
+        <p class="text-4xl font-black text-white mb-1 whitespace-nowrap">1.500.000 <span class="text-lg font-normal text-white/50">đ</span></p>
+        <p class="text-xs text-white/50 mb-6">Áp dụng đến 30/09/2026</p>
+        <ul class="text-xs text-white/70 space-y-2">
+          <li class="flex gap-2"><span class="text-secondary">✓</span> Toàn bộ phiên khoa học</li>
+          <li class="flex gap-2"><span class="text-secondary">✓</span> Chứng chỉ CME 24 giờ</li>
+          <li class="flex gap-2"><span class="text-secondary">✓</span> Tài liệu hội nghị digital</li>
+        </ul>
+      </div>
+      <div class="border-2 border-secondary p-8 bg-secondary/10 relative">
+        <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-secondary text-white text-[8px] font-bold uppercase tracking-widest">Phổ biến nhất</div>
+        <p class="text-[10px] font-bold uppercase tracking-widest text-secondary mb-4">Đại biểu Tự do</p>
+        <p class="text-4xl font-black text-white mb-1 whitespace-nowrap">2.500.000 <span class="text-lg font-normal text-white/50">đ</span></p>
+        <p class="text-xs text-white/50 mb-6">Áp dụng đến 30/09/2026</p>
+        <ul class="text-xs text-white/70 space-y-2">
+          <li class="flex gap-2"><span class="text-secondary">✓</span> Toàn bộ phiên khoa học</li>
+          <li class="flex gap-2"><span class="text-secondary">✓</span> Chứng chỉ CME 24 giờ</li>
+          <li class="flex gap-2"><span class="text-secondary">✓</span> Tài liệu hội nghị digital</li>
+          <li class="flex gap-2"><span class="text-secondary">✓</span> Vé Gala Dinner</li>
+        </ul>
+      </div>
+      <div class="border border-white/10 p-8 bg-white/5 hover:bg-white/10 transition-colors">
+        <p class="text-[10px] font-bold uppercase tracking-widest text-secondary mb-4">Học viên / SV</p>
+        <p class="text-4xl font-black text-white mb-1 whitespace-nowrap">800.000 <span class="text-lg font-normal text-white/50">đ</span></p>
+        <p class="text-xs text-white/50 mb-6">Cần xác nhận của cơ sở đào tạo</p>
+        <ul class="text-xs text-white/70 space-y-2">
+          <li class="flex gap-2"><span class="text-secondary">✓</span> Toàn bộ phiên khoa học</li>
+          <li class="flex gap-2"><span class="text-secondary">✓</span> Chứng nhận tham dự</li>
+          <li class="flex gap-2"><span class="text-secondary">✓</span> Poster session access</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a href="/register-speaker" class="px-10 py-4 bg-secondary text-white font-bold text-sm tracking-widest uppercase hover:brightness-110 transition-all">
+        Đăng ký ngay →
+      </a>
+      <a href="mailto:hotro@vsaps.vn" class="px-10 py-4 border border-white/20 text-white font-bold text-sm tracking-widest uppercase hover:bg-white/10 transition-all">
+        Liên hệ Ban thư ký
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ VENUE ═══════════════════════ -->
+<section class="py-8 bg-white" id="venue">
+  <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+    <div class="space-y-8 fade-up">
+      <div>
+        <span class="text-xs font-bold text-secondary tracking-[0.2em] uppercase">Hỗ trợ Hậu cần</span>
+        <h2 class="text-4xl font-headline font-extrabold text-academic-navy mt-2">Địa điểm Tổ chức</h2>
+        <div class="w-20 h-1 bg-secondary mt-4"></div>
+      </div>
+
+      <div class="space-y-4">
+        <div class="p-6 border border-border-subtle flex gap-5 hover:border-secondary/40 transition-colors">
+          <span class="material-symbols-outlined text-3xl text-secondary flex-shrink-0">location_on</span>
+          <div>
+            <p class="font-bold text-lg text-academic-navy">Bệnh viện Quân y 175</p>
+            <p class="text-sm text-academic-slate mt-1">786 Nguyễn Kiệm, Phường 3, Quận Gò Vấp, TP. Hồ Chí Minh</p>
+          </div>
+        </div>
+        <div class="p-6 border border-border-subtle flex gap-5 hover:border-secondary/40 transition-colors">
+          <span class="material-symbols-outlined text-3xl text-secondary flex-shrink-0">bed</span>
+          <div>
+            <p class="font-bold text-lg text-academic-navy">Khách sạn Khuyến nghị</p>
+            <p class="text-sm text-academic-slate mt-1">Giá ưu đãi cho đại biểu tại <strong>Tân Sơn Nhất Pavilion</strong> và <strong>Parkroyal Sài Gòn</strong>. Đặt phòng qua Ban thư ký.</p>
+          </div>
+        </div>
+        <div class="p-6 border border-border-subtle flex gap-5 hover:border-secondary/40 transition-colors">
+          <span class="material-symbols-outlined text-3xl text-secondary flex-shrink-0">school</span>
+          <div>
+            <p class="font-bold text-lg text-academic-navy">Chứng chỉ CME</p>
+            <p class="text-sm text-academic-slate mt-1">Đại biểu nhận <strong>24 giờ CME</strong> chính thức được công nhận bởi Bộ Y tế Việt Nam.</p>
+          </div>
+        </div>
+        <div class="p-6 border border-border-subtle flex gap-5 hover:border-secondary/40 transition-colors">
+          <span class="material-symbols-outlined text-3xl text-secondary flex-shrink-0">flight</span>
+          <div>
+            <p class="font-bold text-lg text-academic-navy">Di chuyển &amp; Đón tiếp</p>
+            <p class="text-sm text-academic-slate mt-1">Sân bay Tân Sơn Nhất cách địa điểm <strong>5 phút</strong> di chuyển. Dịch vụ đưa đón sẽ được thông báo sau.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Map placeholder -->
+    <div class="relative fade-up">
+      <div class="absolute -top-8 -right-8 w-64 h-64 bg-secondary/20 -z-10"></div>
+      <div class="overflow-hidden border border-border-subtle shadow-xl">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.7862892097957!2d106.66237757480784!3d10.833839289310086!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3174de99d5fb23e9%3A0x9c82a9a3f9ab40ed!2zQuG7h25oIHZp4buHbiBRdeG6n24geSAxNzU!5e0!3m2!1svi!2svn!4v1713671234567!5m2!1svi!2svn"
+          width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"
+          title="Bản đồ Bệnh viện Quân y 175"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ SPONSORS ═══════════════════════ -->
+<section class="py-10 bg-surface border-t border-border-subtle">
+  <div class="max-w-7xl mx-auto px-6 text-center fade-up">
+    <p class="text-[10px] font-bold text-academic-grey uppercase tracking-widest mb-8">Đồng hành cùng VSAPS 2026</p>
+    <div class="flex flex-wrap justify-center items-center gap-12 opacity-50 grayscale filter hover:grayscale-0 hover:opacity-100 transition-all duration-500">
+      <div class="text-2xl font-black text-academic-navy tracking-tighter">ALLERGAN</div>
+      <div class="text-2xl font-black text-academic-navy tracking-tighter">MENTOR</div>
+      <div class="text-2xl font-black text-academic-navy tracking-tighter">SILIMED</div>
+      <div class="text-2xl font-black text-academic-navy tracking-tighter">MOTIVA</div>
+      <div class="text-2xl font-black text-academic-navy tracking-tighter">SIENTRA</div>
+      <div class="text-2xl font-black text-academic-navy tracking-tighter">STRYKER</div>
+    </div>
+    <div class="mt-8">
+      <a href="mailto:hotro@vsaps.vn" class="text-xs font-bold text-secondary uppercase tracking-widest hover:underline">
+        Trở thành Nhà tài trợ →
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ FOOTER ═══════════════════════ -->
+<footer class="bg-academic-navy text-white py-10 px-6 border-t-4 border-secondary">
+  <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+
+    <!-- Brand -->
+    <div class="col-span-1 md:col-span-2 space-y-6">
+      <div class="flex items-center gap-4">
+        <div class="w-12 h-12 bg-secondary rounded-sm flex items-center justify-center font-black text-white text-xl tracking-tighter">VS</div>
+        <span class="text-2xl font-black tracking-tighter">VSAPS 2026</span>
+      </div>
+      <p class="text-white/40 text-xs leading-relaxed max-w-md">
+        Hội Phẫu thuật Tạo hình Thẩm mỹ Việt Nam (VSAPS) là cơ quan chuyên môn hàng đầu về y học thẩm mỹ tại Việt Nam.
+        VSAPS 2026 là diễn đàn quốc tế uy tín cho sự xuất sắc trong khoa học phẫu thuật thẩm mỹ.
+      </p>
+      <div class="flex gap-3">
+        <a href="https://facebook.com" target="_blank" class="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center hover:bg-secondary hover:border-secondary transition-colors">
+          <span class="text-xs font-bold">fb</span>
+        </a>
+        <a href="https://youtube.com" target="_blank" class="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center hover:bg-secondary hover:border-secondary transition-colors">
+          <span class="material-symbols-outlined text-sm">smart_display</span>
+        </a>
+        <a href="mailto:hotro@vsaps.vn" class="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center hover:bg-secondary hover:border-secondary transition-colors">
+          <span class="material-symbols-outlined text-sm">mail</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Links -->
+    <div>
+      <h5 class="text-[10px] font-bold uppercase tracking-widest text-secondary mb-6">Liên kết Học thuật</h5>
+      <ul class="space-y-3 text-xs text-white/60">
+        <li><a class="hover:text-white transition-colors" href="#">Mời gửi bài báo cáo</a></li>
+        <li><a class="hover:text-white transition-colors" href="#speakers">Ban Khoa học</a></li>
+        <li><a class="hover:text-white transition-colors" href="#program">Chứng nhận CME</a></li>
+        <li><a class="hover:text-white transition-colors" href="#">Lưu trữ hội nghị các năm</a></li>
+        <li><a class="hover:text-white transition-colors" href="#register">Đăng ký tham dự</a></li>
+      </ul>
+    </div>
+
+    <!-- Contact -->
+    <div>
+      <h5 class="text-[10px] font-bold uppercase tracking-widest text-secondary mb-6">Ban Thư ký</h5>
+      <p class="text-xs text-white/60 leading-relaxed mb-4">
+        hotro@vsaps.vn<br/>
+        +84 (28) 3895 4941<br/><br/>
+        <strong class="text-white/40">Văn phòng:</strong><br/>
+        786 Nguyễn Kiệm, Gò Vấp, TP.HCM
+      </p>
+      <div class="pt-4 border-t border-white/10">
+        <p class="text-[10px] text-white/30 uppercase tracking-widest">© 2026 VSAPS. Bảo lưu mọi quyền.</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════ VIDEO MODAL ═══════════════════════ -->
+<div id="video-modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-primary/80 backdrop-blur-sm p-4">
+  <div class="relative w-full max-w-4xl">
+    <button onclick="closeVideoModal()" class="absolute -top-10 right-0 text-white/70 hover:text-white text-sm font-bold uppercase tracking-widest flex items-center gap-2">
+      <span class="material-symbols-outlined text-lg">close</span> Đóng
+    </button>
+    <div class="aspect-video bg-primary border border-white/10 flex items-center justify-center">
+      <p class="text-white/40 text-sm">Video Highlight VSAPS 2025 sẽ được cập nhật sớm.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════ BACK TO TOP ═══════════════════════ -->
+<button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})"
+  class="fixed bottom-6 right-6 w-12 h-12 bg-secondary text-white rounded-sm flex items-center justify-center shadow-lg opacity-0 pointer-events-none transition-all duration-300 z-40">
+  <span class="material-symbols-outlined text-xl">arrow_upward</span>
+</button>
+
+<!-- ═══════════════════════ SCRIPTS ═══════════════════════ -->
+<script>
+  // ── Mobile menu ──
+  const menuBtn = document.getElementById('menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  let menuOpen = false;
+  menuBtn.addEventListener('click', () => {
+    menuOpen = !menuOpen;
+    mobileMenu.style.maxHeight = menuOpen ? mobileMenu.scrollHeight + 'px' : '0';
+    mobileMenu.style.opacity = menuOpen ? '1' : '0';
+  });
+
+  // ── Countdown ──
+  const target = new Date('2026-12-11T08:00:00+07:00');
+  function updateCountdown() {
+    const now = new Date();
+    const diff = target - now;
+    if (diff <= 0) { document.getElementById('countdown').innerHTML = '<p class="text-secondary font-bold text-lg">Hội nghị đã bắt đầu!</p>'; return; }
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    document.getElementById('cd-days').textContent = String(d).padStart(3,'0');
+    document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
+    document.getElementById('cd-minutes').textContent = String(m).padStart(2,'0');
+    document.getElementById('cd-seconds').textContent = String(s).padStart(2,'0');
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  // ── Counter animation ──
+  function animateCount(el) {
+    const target = parseInt(el.dataset.count);
+    const suffix = el.dataset.count >= 100 ? '+' : (parseInt(el.dataset.count) >= 10 ? '+' : '+');
+    let current = 0;
+    const step = Math.max(1, Math.floor(target / 40));
+    const timer = setInterval(() => {
+      current = Math.min(current + step, target);
+      el.textContent = current + suffix;
+      if (current >= target) clearInterval(timer);
+    }, 30);
+  }
+
+  // ── Scroll animations ──
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        // Trigger counters
+        entry.target.querySelectorAll('[data-count]').forEach(animateCount);
+      }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // ── Back to top button ──
+  const backTop = document.getElementById('back-top');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 400) {
+      backTop.style.opacity = '1';
+      backTop.style.pointerEvents = 'auto';
+    } else {
+      backTop.style.opacity = '0';
+      backTop.style.pointerEvents = 'none';
+    }
+  });
+
+  // ── Day tab switcher ──
+  function setDay(btn, day) {
+    document.querySelectorAll('.day-btn').forEach(b => {
+      b.classList.remove('bg-academic-navy','text-white');
+      b.classList.add('bg-white','text-academic-navy');
+    });
+    btn.classList.add('bg-academic-navy','text-white');
+    btn.classList.remove('bg-white','text-academic-navy');
+  }
+
+  // ── Video modal ──
+  function openVideoModal() {
+    const m = document.getElementById('video-modal');
+    m.classList.remove('hidden');
+    m.classList.add('flex');
+  }
+  function closeVideoModal() {
+    const m = document.getElementById('video-modal');
+    m.classList.add('hidden');
+    m.classList.remove('flex');
+  }
+  document.getElementById('video-modal').addEventListener('click', function(e) {
+    if (e.target === this) closeVideoModal();
+  });
+</script>
+</body>
+</html>

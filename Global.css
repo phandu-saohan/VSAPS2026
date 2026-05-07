@@ -1,0 +1,197 @@
+/* 
+  VSAPS 2026 Global Design System 
+  Premium Academic Aesthetic
+*/
+
+:root {
+  /* Core Colors */
+  --color-primary: #061D5F;
+  --color-primary-rgb: 6, 29, 95;
+  --color-secondary: #F95E8B;
+  --color-secondary-rgb: 249, 94, 139;
+  
+  /* Academic Palette */
+  --academic-navy: #061D5F;
+  --academic-slate: #334155;
+  --academic-grey: #64748B;
+  --academic-surface: #F8FAFC;
+  --border-subtle: #E2E8F0;
+  
+  /* Status Colors */
+  --status-success: #10B981;
+  --status-warning: #F59E0B;
+  --status-error: #EF4444;
+  --status-info: #3B82F6;
+  
+  /* Effects */
+  --shadow-premium: 0 10px 25px -5px rgba(0, 0, 0, 0.04), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.12);
+}
+
+/* Base Styles */
+body {
+  background-color: var(--academic-surface);
+  color: #0F172A;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Typography Enhancements */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 700;
+  color: var(--academic-navy);
+}
+
+/* Global Utilities */
+.text-academic-navy { color: var(--academic-navy) !important; }
+.bg-academic-navy { background-color: var(--academic-navy) !important; }
+.border-academic-navy { border-color: var(--academic-navy) !important; }
+
+.text-academic-slate { color: var(--academic-slate) !important; }
+.bg-academic-slate { background-color: var(--academic-slate) !important; }
+
+.text-academic-grey { color: var(--academic-grey) !important; }
+.bg-surface { background-color: var(--academic-surface) !important; }
+.border-border-subtle { border-color: var(--border-subtle) !important; }
+
+/* Premium Components */
+.card-premium {
+  background: white;
+  border: 1px solid var(--border-subtle);
+  border-radius: 1.5rem;
+  box-shadow: var(--shadow-premium);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-premium:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.06), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.glass-effect {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+}
+
+/* Animations */
+.fade-up {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--academic-surface);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
+}
+
+/* Interactive Elements */
+.nav-link-premium {
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.nav-link-premium::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--color-secondary);
+  transition: width 0.3s ease;
+}
+
+.nav-link-premium:hover::after {
+  width: 100%;
+}
+
+.btn-premium {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  gap: 0.5rem;
+}
+
+.btn-primary-premium {
+  background-color: var(--academic-navy);
+  color: white;
+}
+
+.btn-primary-premium:hover {
+  background-color: #0c2a8a;
+  transform: scale(1.02);
+  box-shadow: 0 4px 12px rgba(6, 29, 95, 0.2);
+}
+
+.btn-secondary-premium {
+  background-color: var(--color-secondary);
+  color: white;
+}
+
+.btn-secondary-premium:hover {
+  background-color: #f73d73;
+  transform: scale(1.02);
+  box-shadow: 0 4px 12px rgba(249, 94, 139, 0.2);
+}
+
+/* Table Styles for Admin Dashboard */
+.table-premium {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.table-premium th {
+  background-color: var(--academic-surface);
+  color: var(--academic-grey);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.table-premium td {
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-subtle);
+  transition: background-color 0.2s ease;
+}
+
+.table-premium tr:hover td {
+  background-color: #F1F5F9;
+}
+
+/* Responsive Overrides */
+@media (max-width: 768px) {
+  .card-premium {
+    border-radius: 1rem;
+  }
+}

@@ -1,0 +1,11 @@
+node_modules
+mcp-supabase/node_modules
+dist
+.git
+.cursor
+*.log
+*.tmp
+*.tsbuildinfo
+README.md
+CODE_REVIEW.md
+TODO.md

@@ -1,0 +1,24 @@
+{
+  "short_name": "VSAPS 2026",
+  "name": "Quản lý sự kiện VSAPS 2026",
+  "description": "Hệ thống quản lý sự kiện, người dùng, nhà tài trợ và công việc cho VSAPS 2026.",
+  "icons": [
+    {
+      "src": "http://vsaps2026-pre0225supabase-8e734b-72-61-123-73.traefik.me/storage/v1/object/public/event_assets/documents/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "http://vsaps2026-pre0225supabase-8e734b-72-61-123-73.traefik.me/storage/v1/object/public/event_assets/documents/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "theme_color": "#EB248E",
+  "background_color": "#F9FAFB"
+}

@@ -1,0 +1,1 @@
+const fs = require('fs'); ['public/landing.html', 'pages/Landing.tsx'].forEach(f => { let s = fs.readFileSync(f, 'utf8'); s = s.split('bg-secondary/15').join('bg-secondary/40'); s = s.split('bg-secondary/5').join('bg-secondary/20'); fs.writeFileSync(f, s); console.log('Done ' + f); });

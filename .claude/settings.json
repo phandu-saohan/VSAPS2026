@@ -1,0 +1,38 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/design1saohan/.claude/projects/C--Users-design1saohan-Desktop-test/.tsrc/content/**)",
+      "mcp__MCP_DOCKER__mcp-find",
+      "Bash(npm --version)",
+      "Bash(curl -I \"http://vsaps2026-pre0225supabase-64f45c-72-61-123-73.traefik.me/rest/v1/\")",
+      "Bash(npm install *)",
+      "Bash(npm run *)",
+      "Bash(timeout 5 node dist/index.js)",
+      "Bash(timeout 15 node dist/index.js)",
+      "Bash(timeout 20 node dist/index.js)",
+      "Bash(npx supabase *)",
+      "Bash(psql --version)",
+      "Bash(npm list *)",
+      "Bash(npx --yes @supabase/supabase db dump --help)",
+      "Bash(where pg_isready)",
+      "Bash(where psql.exe)",
+      "Read(//c/Program Files/**)",
+      "Read(//c/Program Files \\(x86\\)/**)",
+      "Bash(docker --version)",
+      "Bash(curl -s --max-time 10 'http://vsaps2026-pre0225supabase-64f45c-72-61-123-73.traefik.me/rest/v1/profiles?select=id&limit=1' -H 'apikey: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyAgCiAgICAicm9sZSI6ICJhbm9uIiwKICAgICJpc3MiOiAic3VwYWJhc2UtZGVtbyIsCiAgICAiaWF0IjogMTY0MTc2OTIwMCwKICAgICJleHAiOiAxNzk5NTM1NjAwCn0.dc_X5iR_VP_qT0zsiyj_I_OZ2T9FtRU2BBNWN8Bu4GE')",
+      "Bash(curl -s --max-time 10 -X POST http://vsaps2026-pre0225supabase-64f45c-72-61-123-73.traefik.me/rest/v1/rpc/pg_catalog.pg_tables -H 'apikey: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyAgCiAgICAicm9sZSI6ICJhbm9uIiwKICAgICJpc3MiOiAic3VwYWJhc2UtZGVtbyIsCiAgICAiaWF0IjogMTY0MTc2OTIwMCwKICAgICJleHAiOiAxNzk5NTM1NjAwCn0.dc_X5iR_VP_qT0zsiyj_I_OZ2T9Bu4GE' -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyAgCiAgICAicm9sZSI6ICJhbm9uIiwKICAgICJpc3MiOiAic3VwYWJhc2UtZGVtbyIsCiAgICAiaWF0IjogMTY0MTc2OTIwMCwKICAgICJleHAiOiAxNzk5NTM1NjAwCn0.dc_X5iR_VP_qT0zsiyj_I_OZ2T9FtRU2BBNWN8Bu4GE' -H 'Content-Type: application/json' -d '{\"schemaname\":\"public\"}')",
+      "Bash(curl -s --max-time 8 \"http://vsaps2026-pre0225supabase-64f45c-72-61-123-73.traefik.me:5434\")",
+      "Bash(curl -s --max-time 8 \"http://vsaps2026-pre0225supabase-64f45c-72-61-123-73.traefik.me/postgrest\")",
+      "Bash(curl -s --max-time 8 \"http://vsaps2026-pre0225supabase-64f45c-72-61-123-73.traefik.me/postgREST\")",
+      "Bash(curl -s --max-time 8 \"http://vsaps2026-pre0225supabase-64f45c-72-61-123-73.traefik.me:5434/\")",
+      "Bash(curl -s --max-time 8 \"http://vsaps2026-pre0225supabase-64f45c-72-61-123-73.traefik.me/postgres\")",
+      "Bash(node -e \"const net=require\\('net'\\); const s=new net.Socket\\(\\); s.setTimeout\\(5000\\); s.connect\\(5434,'vsaps2026-pre0225supabase-64f45c-72-61-123-73.traefik.me',\\(\\)=>{console.log\\('OPEN'\\);s.destroy\\(\\)}\\).on\\('error',e=>{console.log\\('CLOSED/ERR:',e.message\\)}\\).on\\('timeout',\\(\\)=>{console.log\\('TIMEOUT'\\);s.destroy\\(\\)}\\)\")",
+      "Bash(node setup-database.js)",
+      "Bash(node setup-database.cjs)",
+      "Bash(timeout 12 node dist/index.js)",
+      "Bash(curl -s --max-time 10 'http://vsaps2026-pre0225supabase-64f45c-72-61-123-73.traefik.me/rest/v1/speakers?select=id,full_name,status&limit=3' -H 'apikey: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyAgCiAgICAicm9sZSI6ICJhbm9uIiwKICAgICJpc3MiOiAic3VwYWJhc2UtZGVtbyIsCiAgICAiaWF0IjogMTY0MTc2OTIwMCwKICAgICJleHAiOiAxNzk5NTM1NjAwCn0.dc_X5iR_VP_qT0zsiyj_I_OZ2T9FtRU2BBNWN8Bu4GE')",
+      "Bash(curl -s --max-time 10 http://vsaps2026-pre0225supabase-64f45c-72-61-123-73.traefik.me/storage/v1/bucket -H 'apikey: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyAgCiAgICAicm9sZSI6ICJzZXJ2aWNlX3JvbGUiLAogICAgImlzcyI6ICJzdXBhYmFzZS1kZW1vIiwKICAgICJpYXQiOiAxNjQxNzY5MjAwLAogICAgImV4cCI6IDE3OTk1MzU2MDAKfQ.DaYlNEoUrrEn2Ig7tqibS-PHK5vgusbcbo7X36XVt4Q')",
+      "Bash(node -e ' *)"
+    ]
+  }
+}

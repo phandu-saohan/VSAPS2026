@@ -1,0 +1,5 @@
+{
+  "name": "Quản lý sự kiện VSAPS 2026",
+  "description": "Hệ thống quản lý sự kiện, người dùng, nhà tài trợ và công việc cho VSAPS 2026, dựa trên Supabase.",
+  "requestFramePermissions": []
+}
