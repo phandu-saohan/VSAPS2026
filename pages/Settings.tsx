@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import { UsersIcon } from '../components/icons/UsersIcon';
 import { MailIcon } from '../components/icons/MailIcon';
 import { MessageIcon } from '../components/icons/MessageIcon';
 import { ApiIcon } from '../components/icons/ApiIcon';
+import { NotificationIcon } from '../components/icons/NotificationIcon';
 import { useAuth } from '../App';
 
-// Simple globe icon inline
 const GlobeIcon: React.FC<{ className?: string }> = ({ className }) => (
   <svg xmlns="http://www.w3.org/2000/svg" className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
     <circle cx="12" cy="12" r="10"/>
@@ -21,6 +21,7 @@ const settingsNav = [
     { name: 'Cài đặt Email', href: '/settings/email', icon: MailIcon },
     { name: 'Cài đặt Zalo', href: '/settings/zalo', icon: MessageIcon },
     { name: 'Tích hợp Abitstore', href: '/settings/abitstore', icon: ApiIcon },
+    { name: 'Thông báo đẩy', href: '/settings/push', icon: NotificationIcon },
     { name: 'Trang Giới thiệu', href: '/settings/landing', icon: GlobeIcon },
 ];
 
@@ -33,6 +34,7 @@ const AccessDenied: React.FC = () => (
 
 const Settings: React.FC = () => {
     const { hasPermission } = useAuth();
+    const [pushModalOpen, setPushModalOpen] = useState(false);
     
     if (!hasPermission('settings:view')) {
         return <AccessDenied />;
@@ -40,8 +42,18 @@ const Settings: React.FC = () => {
 
     return (
         <div>
-            <h1 className="text-3xl font-bold text-gray-800">Cài đặt hệ thống</h1>
-            <p className="mt-2 text-gray-600">Quản lý cấu hình chung cho ứng dụng.</p>
+            <div className="flex flex-wrap items-center justify-between gap-4">
+                <div>
+                    <h1 className="text-3xl font-bold text-gray-800">Cài đặt hệ thống</h1>
+                    <p className="mt-2 text-gray-600">Quản lý cấu hình chung cho ứng dụng.</p>
+                </div>
+                <button
+                    onClick={() => setPushModalOpen(true)}
+                    className="px-4 py-2 rounded-lg bg-secondary text-white font-semibold hover:brightness-110"
+                >
+                    Bật thông báo
+                </button>
+            </div>
 
             <div className="flex flex-col lg:flex-row mt-8 gap-8">
                 <aside className="lg:w-1/4">
@@ -78,6 +90,29 @@ const Settings: React.FC = () => {
                     <Outlet />
                 </main>
             </div>
+
+            {pushModalOpen && (
+                <div className="fixed inset-0 z-50 bg-black/40 flex items-center justify-center p-4">
+                    <div className="w-full max-w-lg rounded-2xl bg-white p-6 shadow-2xl">
+                        <h2 className="text-xl font-bold text-gray-900">Bật thông báo</h2>
+                        <p className="mt-2 text-sm text-gray-600">
+                            Mở trang Thông báo đẩy để đăng ký subscription, quản lý thiết bị và gửi push test.
+                        </p>
+                        <div className="mt-6 flex justify-end gap-3">
+                            <button onClick={() => setPushModalOpen(false)} className="px-4 py-2 rounded-lg bg-gray-100 text-gray-700 font-semibold">
+                                Đóng
+                            </button>
+                            <NavLink
+                                to="/settings/push"
+                                onClick={() => setPushModalOpen(false)}
+                                className="px-4 py-2 rounded-lg bg-secondary text-white font-semibold"
+                            >
+                                Đi tới quản lý
+                            </NavLink>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

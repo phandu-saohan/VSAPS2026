@@ -30,17 +30,19 @@ const SpeakerRegistration = lazy(() => import('./pages/SpeakerRegistration'));
 const DelegateRegistration = lazy(() => import('./pages/DelegateRegistration'));
 const LandingPage = lazy(() => import('./pages/Landing'));
 const LandingSettings = lazy(() => import('./pages/settings/LandingSettings'));
+const PushNotifications = lazy(() => import('./pages/settings/PushNotifications'));
 const PublicSpeakers = lazy(() => import('./pages/PublicSpeakers'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 const Reports = lazy(() => import('./pages/Reports'));
 const ReportDetail = lazy(() => import('./pages/ReportDetail'));
+const PwaInstallPrompt = lazy(() => import('./components/PwaInstallPrompt'));
+const NotificationPermissionPrompt = lazy(() => import('./components/NotificationPermissionPrompt'));
 
 
 // Component imports
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';
 import BottomNav from './components/BottomNav';
-import OneSignalInitializer from './OneSignalInitializer';
 
 // Auth context
 interface AuthContextType {
@@ -96,7 +98,6 @@ const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     useEffect(() => {
         const fetchUserData = async () => {
             if (session?.user) {
-                // Fetch profile
                 const { data: profileData, error: profileError } = await supabase
                     .from('profiles')
                     .select('*')
@@ -104,7 +105,7 @@ const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
                     .single();
                 
                 if (profileError) {
-                    console.error("Error fetching profile:", profileError.message);
+                    console.error('Error fetching profile:', profileError.message);
                     setProfile(null);
                     setPermissions([]);
                     return;
@@ -112,7 +113,6 @@ const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
 
                 setProfile(profileData);
 
-                // Fetch permissions for the user's role
                 if (profileData?.role) {
                     const { data: permissionData, error: permissionError } = await supabase
                         .from('role_permissions')
@@ -122,12 +122,11 @@ const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
                     if (!permissionError && permissionData) {
                         setPermissions(permissionData.map(p => p.permission));
                     } else {
-                        console.error("Error fetching permissions:", permissionError?.message);
-                        setPermissions([]); // Default to no permissions if fetch fails
+                        console.error('Error fetching permissions:', permissionError?.message);
+                        setPermissions([]);
                     }
                 }
 
-                // Fetch initial notifications
                 const { data: notificationsData, error: notificationsError } = await supabase
                     .from('notifications')
                     .select('*')
@@ -202,7 +201,7 @@ const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
             .eq('role', 'Quản trị viên');
         
         if (error || !admins) {
-            console.error("Error fetching admins to notify:", error);
+            console.error('Error fetching admins to notify:', error);
             return;
         }
 
@@ -218,7 +217,6 @@ const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     }, []);
     
     const hasPermission = useCallback((permission: string): boolean => {
-        // Super admin role always has all permissions, as a safeguard.
         if (profile?.role === 'Quản trị viên') {
             return true;
         }
@@ -242,7 +240,6 @@ const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     return <AuthContext.Provider value={value}>{!loading && children}</AuthContext.Provider>;
 };
 
-// Protected route component that also serves as the main layout
 const ProtectedLayout: React.FC = () => {
     const { session, loading } = useAuth();
     const location = useLocation();
@@ -278,7 +275,6 @@ const ProtectedLayout: React.FC = () => {
     );
 };
 
-// Generic loading component for Suspense fallback
 const PageLoader: React.FC = () => (
     <div className="flex items-center justify-center h-screen bg-gray-50">
         <div className="flex flex-col items-center">
@@ -291,15 +287,15 @@ const PageLoader: React.FC = () => (
     </div>
 );
 
-// Main App component
 const App: React.FC = () => {
   return (
     <HashRouter>
       <ThemeProvider>
         <ToastProvider>
           <AuthProvider>
-            <OneSignalInitializer />
             <Suspense fallback={<PageLoader />}>
+              <PwaInstallPrompt />
+              <NotificationPermissionPrompt />
               <Routes>
                   <Route path="/login" element={<Login />} />
                   <Route path="/" element={<LandingPage />} />
@@ -328,6 +324,7 @@ const App: React.FC = () => {
                           <Route path="zalo" element={<ZaloSettings />} />
                           <Route path="templates" element={<EmailTemplates />} />
                           <Route path="abitstore" element={<AbitstoreSettings />} />
+                          <Route path="push" element={<PushNotifications />} />
                           <Route path="landing" element={<LandingSettings />} />
                       </Route>
                   </Route>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đang ngoại tuyến - VSAPS 2026</title>
+    <meta name="theme-color" content="#061D5F" />
+    <style>
+      body {
+        margin: 0;
+        font-family: Inter, system-ui, sans-serif;
+        background: linear-gradient(135deg, #061D5F 0%, #0f172a 100%);
+        color: white;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        padding: 24px;
+      }
+      .card {
+        max-width: 560px;
+        width: 100%;
+        background: rgba(255,255,255,0.08);
+        border: 1px solid rgba(255,255,255,0.12);
+        border-radius: 24px;
+        padding: 32px;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+        backdrop-filter: blur(10px);
+      }
+      .badge {
+        display: inline-block;
+        background: #eb248e;
+        color: white;
+        border-radius: 999px;
+        padding: 8px 14px;
+        font-weight: 700;
+        font-size: 12px;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+      }
+      h1 { font-size: 32px; margin: 18px 0 10px; line-height: 1.1; }
+      p { color: rgba(255,255,255,0.82); line-height: 1.7; }
+      .actions { display: flex; gap: 12px; margin-top: 24px; flex-wrap: wrap; }
+      .btn {
+        border: none;
+        border-radius: 14px;
+        padding: 12px 18px;
+        font-weight: 700;
+        cursor: pointer;
+        text-decoration: none;
+      }
+      .btn-primary { background: #eb248e; color: white; }
+      .btn-secondary { background: rgba(255,255,255,0.12); color: white; }
+      .status { margin-top: 18px; font-size: 14px; color: #fde68a; }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <span class="badge">Ngoại tuyến</span>
+      <h1>Bạn đang không có kết nối mạng</h1>
+      <p>
+        Ứng dụng VSAPS 2026 vẫn mở được một phần giao diện đã lưu. Khi có mạng trở lại,
+        các chức năng đồng bộ sẽ hoạt động bình thường.
+      </p>
+      <div class="actions">
+        <a class="btn btn-primary" href="/">Tải lại trang</a>
+        <button class="btn btn-secondary" onclick="location.reload()">Thử lại</button>
+      </div>
+      <div class="status">Mẹo: nếu bạn đã cài PWA, ứng dụng vẫn có thể mở lại từ màn hình chính.</div>
+    </div>
+  </body>
+</html>

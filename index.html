@@ -7,13 +7,14 @@
     <meta name="description" content="Hệ thống quản lý sự kiện, người dùng, nhà tài trợ và công việc cho VSAPS 2026." />
     <link rel="manifest" href="/manifest.json" />
     <meta name="theme-color" content="#061D5F" />
-    <link rel="apple-touch-icon" href="http://vsaps2026-pre0225supabase-8e734b-72-61-123-73.traefik.me/storage/v1/object/public/event_assets/documents/icon-192.png">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='40' fill='%23061D5F'/%3E%3Ctext x='50%25' y='56%25' text-anchor='middle' font-size='80' font-family='Arial, Helvetica, sans-serif' font-weight='700' fill='white'%3EVS%3C/text%3E%3C/svg%3E" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
     <link rel="stylesheet" href="/Global.css">
-    <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -57,171 +58,13 @@
     </script>
     <style>
       :root {
-        --color-primary: 6 29 95; /* dark blue */
+        --color-primary: 6 29 95;
         --color-primary-dark: 23 37 84;
         --color-primary-light: 191 219 254;
-        --color-secondary: 235 36 142; /* pink */
+        --color-secondary: 235 36 142;
         --color-secondary-dark: 201 31 122;
         --color-secondary-light: 253 234 241;
       }
-
-      /* Responsive Table Styles */
-      @media (max-width: 1023px) { /* Tailwind's lg breakpoint */
-        .responsive-table thead {
-          display: none;
-        }
-        .responsive-table tbody, .responsive-table tr, .responsive-table td {
-          display: block;
-          width: 100%;
-        }
-        .responsive-table tr {
-          margin-bottom: 1rem;
-          border: 1px solid #e5e7eb; /* border-gray-200 */
-          border-radius: 0.5rem; /* rounded-lg */
-          overflow: hidden; /* Ensure rounded corners on children */
-        }
-        .responsive-table td {
-          text-align: right;
-          padding-left: 50%;
-          position: relative;
-          padding-top: 0.5rem;
-          padding-bottom: 0.5rem;
-          min-height: 2rem; /* Ensure cells are not collapsed */
-          display: flex;
-          align-items: center;
-          justify-content: flex-end;
-          padding-right: 1rem;
-        }
-        .responsive-table td:before {
-          content: attr(data-label);
-          position: absolute;
-          left: 1rem;
-          width: calc(50% - 1.5rem);
-          padding-right: 0.5rem;
-          font-weight: 600;
-          text-align: left;
-          white-space: nowrap;
-        }
-        .responsive-table td.actions-cell {
-          padding-left: 1rem;
-          border-top: 1px solid #f3f4f6; /* border-gray-100 */
-          margin-top: 0.75rem;
-          padding-top: 0.75rem;
-          justify-content: flex-start;
-        }
-        .responsive-table td.actions-cell:before {
-          content: none;
-        }
-
-        /* Group Header for Responsive View */
-        .responsive-table tr.is-group-header {
-            margin-bottom: 0.5rem;
-            border: none;
-            border-radius: 0;
-            margin-top: 1.5rem;
-            background-color: transparent;
-        }
-        .responsive-table tr.is-group-header td {
-            background-color: #f3f4f6; /* bg-gray-100 */
-            border-radius: 0.5rem;
-            padding: 0.75rem 1rem;
-            text-align: left;
-            position: static;
-            padding-left: 1rem;
-        }
-        .responsive-table tr.is-group-header td:before {
-            content: none;
-        }
-
-
-        /* Improved Submission Card Layout */
-        .responsive-table.submission-cards tr {
-            padding: 0;
-            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-        }
-        /* Card Header */
-        .responsive-table.submission-cards td:first-child {
-            padding: 1rem;
-            text-align: left;
-            justify-content: space-between;
-            align-items: flex-start;
-            border-bottom: 1px solid #e5e7eb;
-            background-color: #f9fafb;
-        }
-        .responsive-table.submission-cards td:first-child::before {
-            content: none;
-        }
-        .responsive-table.submission-cards .responsive-name {
-            font-size: 1.125rem; /* text-lg */
-            font-weight: 600;
-        }
-        .responsive-table.submission-cards .responsive-id {
-            font-size: 0.875rem; /* text-sm */
-            color: #4B5563; /* text-gray-600 */
-            background-color: #e5e7eb; /* bg-gray-200 */
-            padding: 0.125rem 0.5rem;
-            border-radius: 9999px;
-            display: inline-block;
-        }
-        /* Card Body */
-        .responsive-table.submission-cards td:not(:first-child) {
-            padding-top: 0.75rem;
-            padding-bottom: 0.75rem;
-        }
-        /* Card Footer / Actions */
-        .responsive-table.submission-cards td.actions-cell {
-            padding-left: 1rem;
-            border-top: 1px solid #e5e7eb;
-            margin-top: 0;
-            padding-top: 0.75rem;
-            padding-bottom: 0.75rem;
-            background-color: #f9fafb;
-            flex-wrap: wrap;
-            gap: 0.75rem;
-        }
-        
-        /* Sponsor Card Layout for Responsive View */
-        .responsive-table.sponsor-cards tr {
-            padding: 0;
-            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-        }
-        .responsive-table.sponsor-cards td:first-child { /* Header */
-            padding: 1rem;
-            text-align: left;
-            justify-content: space-between;
-            align-items: flex-start;
-            border-bottom: 1px solid #e5e7eb;
-            background-color: #f9fafb;
-        }
-        .responsive-table.sponsor-cards td:first-child::before {
-            content: none;
-        }
-        .responsive-table.sponsor-cards .responsive-name {
-            font-size: 1.125rem; /* text-lg */
-            font-weight: 600; /* semibold */
-            color: #1f2937; /* text-primary */
-        }
-        .responsive-table.sponsor-cards .responsive-subtext {
-            font-size: 0.875rem; /* text-sm */
-            color: #4b5563; /* text-gray-600 */
-        }
-        .responsive-table.sponsor-cards td:not(:first-child) { /* Body */
-            padding-top: 0.75rem;
-            padding-bottom: 0.75rem;
-        }
-        .responsive-table.sponsor-cards td.actions-cell { /* Footer */
-            padding-left: 1rem;
-            border-top: 1px solid #e5e7eb;
-            margin-top: 0;
-            padding-top: 0.75rem;
-            padding-bottom: 0.75rem;
-            background-color: #f9fafb;
-            flex-wrap: wrap;
-            gap: 0.75rem;
-        }
-
-      }
-
     </style>
   <script type="importmap">
 {
@@ -243,6 +86,13 @@
 </head>
   <body class="bg-gray-100 font-sans antialiased">
     <div id="root"></div>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/service-worker.js').catch(() => {});
+        });
+      }
+    </script>
     <script type="module" src="/index.tsx"></script>
   </body>
 </html>
