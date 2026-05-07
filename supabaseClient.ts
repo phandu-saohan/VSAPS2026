@@ -1,12 +1,11 @@
 import { createClient } from '@supabase/supabase-js';
 
-// --- IMPORTANT ---
-// In development, use a relative URL so Vite proxies requests to Supabase (bypassing CORS).
-// In production (Vercel), use the real absolute URL.
-const isDev = import.meta.env.DEV;
-const SUPABASE_PROD_URL = 'http://vsaps2026-pre0225supabase-8e734b-72-61-123-73.traefik.me';
-const supabaseUrl = SUPABASE_PROD_URL;
-const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyAgCiAgICAicm9sZSI6ICJhbm9uIiwKICAgICJpc3MiOiAic3VwYWJhc2UtZGVtbyIsCiAgICAiaWF0IjogMTY0MTc2OTIwMCwKICAgICJleHAiOiAxNzk5NTM1NjAwCn0.dc_X5iR_VP_qT0zsiyj_I_OZ2T9FtRU2BBNWN8Bu4GE';
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://vsaps2026-pre0225supabase-8e734b-72-61-123-73.traefik.me';
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyAgCiAgICAicm9sZSI6ICJhbm9uIiwKICAgICJpc3MiOiAic3VwYWJhc2UtZGVtbyIsICAgICJpYXQiOiAxNjQxNzY5MjAwLCAKICAgICJleHAiOiAxNzk5NTM1NjAwCn0.dc_X5iR_VP_qT0zsiyj_I_OZ2T9FtRU2BBNWN8Bu4GE';
+
+if (!supabaseUrl || !supabaseAnonKey) {
+  throw new Error('Thiếu biến môi trường Supabase.');
+}
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
@@ -23,7 +22,6 @@ export const uploadFileToStorage = async (file: File, bucket: string, folder: st
         let fileToUpload = file;
         let fileName = `${Date.now()}_${Math.random().toString(36).substring(2)}.${file.name.split('.').pop()}`;
 
-        // Convert WEBP to JPEG
         if (file.type === 'image/webp') {
             fileName = fileName.replace('.webp', '.jpeg');
             const canvas = document.createElement('canvas');
@@ -41,7 +39,7 @@ export const uploadFileToStorage = async (file: File, bucket: string, folder: st
                         } else {
                             reject(new Error('Canvas to Blob conversion failed'));
                         }
-                    }, 'image/jpeg', 0.9); // 90% quality
+                    }, 'image/jpeg', 0.9);
                 };
                 image.onerror = reject;
                 image.src = URL.createObjectURL(file);
@@ -78,23 +76,16 @@ export const uploadFileToStorage = async (file: File, bucket: string, folder: st
     }
 };
 
-/**
- * Generates a URL for a transformed (resized) image from Supabase Storage.
- * @param publicUrl The original public URL of the image.
- * @param width The target width in pixels.
- * @param height The target height in pixels.
- * @returns The transformed image URL, or the original URL if it's invalid.
- */
 export const getTransformedImageUrl = (publicUrl: string | null | undefined, width: number, height: number): string | undefined => {
     if (!publicUrl) return undefined;
     try {
         const url = new URL(publicUrl);
         url.searchParams.set('width', String(width));
         url.searchParams.set('height', String(height));
-        url.searchParams.set('resize', 'contain'); // Ensures the image fits within the dimensions
+        url.searchParams.set('resize', 'contain');
         return url.toString();
     } catch (error) {
-        console.error("Invalid URL for transformation:", publicUrl);
-        return publicUrl; // Return original URL on error
+        console.error('Invalid URL for transformation:', publicUrl);
+        return publicUrl;
     }
 };
