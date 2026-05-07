@@ -61,5 +61,3 @@ update_admin.cjs
 update_admin.js
 make_admin.sql
 metadata.json
-manifest.json
-service-worker.js
