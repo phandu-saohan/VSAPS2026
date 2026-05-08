@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { supabase } from '../supabaseClient';
+import { supabase, normalizePublicStorageUrl } from '../supabaseClient';
 import { DEFAULT_LANDING_CONFIG, LandingConfig } from '../types/landing';
 import LandingHeader from '../components/LandingHeader';
 
@@ -172,7 +172,7 @@ export default function LandingPage() {
     <div className="absolute inset-0 hero-overlay z-10"></div>
     <img alt="" aria-hidden="true"
       className="w-full h-full object-cover opacity-25 grayscale"
-      src={cfg.hero_image_url || 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1600&q=80'}/>
+      src={normalizePublicStorageUrl(cfg.hero_image_url) || 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1600&q=80'}/>
   </div>
 
   <div className="relative z-20 max-w-7xl mx-auto px-6">
@@ -243,7 +243,7 @@ export default function LandingPage() {
         <div className="relative aspect-video bg-academic-navy border border-white/10 overflow-hidden shadow-2xl cursor-pointer" onClick={() => setVideoModalOpen(true)} >
           <img alt="Video Preview – VSAPS 2025 Highlights"
             className="w-full h-full object-cover opacity-50 group-hover:scale-105 transition-transform duration-700"
-            src={cfg.hero_video_thumb_url || 'https://images.unsplash.com/photo-1551076805-e1869033e561?w=900&q=80'}/>
+            src={normalizePublicStorageUrl(cfg.hero_video_thumb_url) || 'https://images.unsplash.com/photo-1551076805-e1869033e561?w=900&q=80'}/>
           <div className="absolute inset-0 bg-gradient-to-t from-academic-navy/80 via-transparent to-transparent"></div>
           {/*  Play btn  */}
           <div className="absolute inset-0 flex items-center justify-center">
@@ -375,7 +375,7 @@ export default function LandingPage() {
         <div className="rounded-3xl shadow-lg overflow-hidden group border border-border-subtle bg-slate-100 aspect-[2/1] relative flex items-center justify-center">
           {!(cfg.speaker_card_images?.[0]) && <span className="absolute text-slate-400 font-medium text-sm">Upload image 1 (Tỷ lệ 2:1)</span>}
           <img className="w-full h-full object-cover relative z-10 transition-transform duration-700 group-hover:scale-105"
-            src={cfg.speaker_card_images?.[0] || '/images/speakers/speaker-1.png'} alt="Card 1"
+            src={normalizePublicStorageUrl(cfg.speaker_card_images?.[0]) || '/images/speakers/speaker-1.png'} alt="Card 1"
             onError={(e) => e.currentTarget.style.opacity = '0'} 
             onLoad={(e) => e.currentTarget.style.opacity = '1'} />
         </div>
@@ -384,7 +384,7 @@ export default function LandingPage() {
         <div className="rounded-3xl shadow-lg overflow-hidden group border border-border-subtle bg-slate-100 aspect-[2/1] relative flex items-center justify-center">
           {!(cfg.speaker_card_images?.[1]) && <span className="absolute text-slate-400 font-medium text-sm">Upload image 2 (Tỷ lệ 2:1)</span>}
           <img className="w-full h-full object-cover relative z-10 transition-transform duration-700 group-hover:scale-105"
-            src={cfg.speaker_card_images?.[1] || '/images/speakers/speaker-2.png'} alt="Card 2"
+            src={normalizePublicStorageUrl(cfg.speaker_card_images?.[1]) || '/images/speakers/speaker-2.png'} alt="Card 2"
             onError={(e) => e.currentTarget.style.opacity = '0'} 
             onLoad={(e) => e.currentTarget.style.opacity = '1'} />
         </div>
@@ -396,7 +396,7 @@ export default function LandingPage() {
         <div className="rounded-3xl shadow-lg overflow-hidden group border border-border-subtle bg-slate-100 aspect-[2/1] relative flex items-center justify-center">
           {!(cfg.speaker_card_images?.[2]) && <span className="absolute text-slate-400 font-medium text-sm text-center">Upload image 3<br/>(Tỷ lệ 2:1)</span>}
           <img className="w-full h-full object-cover relative z-10 transition-transform duration-700 group-hover:scale-105"
-            src={cfg.speaker_card_images?.[2] || '/images/speakers/speaker-3.png'} alt="Card 3"
+            src={normalizePublicStorageUrl(cfg.speaker_card_images?.[2]) || '/images/speakers/speaker-3.png'} alt="Card 3"
             onError={(e) => e.currentTarget.style.opacity = '0'} 
             onLoad={(e) => e.currentTarget.style.opacity = '1'} />
         </div>
@@ -405,7 +405,7 @@ export default function LandingPage() {
         <div className="rounded-3xl shadow-lg overflow-hidden group border border-border-subtle bg-slate-100 aspect-[2/1] relative flex items-center justify-center">
           {!(cfg.speaker_card_images?.[3]) && <span className="absolute text-slate-400 font-medium text-sm text-center">Upload image 4<br/>(Tỷ lệ 2:1)</span>}
           <img className="w-full h-full object-cover relative z-10 transition-transform duration-700 group-hover:scale-105"
-            src={cfg.speaker_card_images?.[3] || '/images/speakers/speaker-4.png'} alt="Card 4"
+            src={normalizePublicStorageUrl(cfg.speaker_card_images?.[3]) || '/images/speakers/speaker-4.png'} alt="Card 4"
             onError={(e) => e.currentTarget.style.opacity = '0'} 
             onLoad={(e) => e.currentTarget.style.opacity = '1'} />
         </div>
@@ -414,7 +414,7 @@ export default function LandingPage() {
         <div className="rounded-3xl shadow-lg overflow-hidden group border border-border-subtle bg-slate-100 aspect-[2/1] relative flex items-center justify-center">
           {!(cfg.speaker_card_images?.[4]) && <span className="absolute text-slate-400 font-medium text-sm text-center">Upload image 5<br/>(Tỷ lệ 2:1)</span>}
           <img className="w-full h-full object-cover relative z-10 transition-transform duration-700 group-hover:scale-105"
-            src={cfg.speaker_card_images?.[4] || '/images/speakers/speaker-5.png'} alt="Card 5"
+            src={normalizePublicStorageUrl(cfg.speaker_card_images?.[4]) || '/images/speakers/speaker-5.png'} alt="Card 5"
             onError={(e) => e.currentTarget.style.opacity = '0'} 
             onLoad={(e) => e.currentTarget.style.opacity = '1'} />
         </div>
@@ -911,7 +911,7 @@ export default function LandingPage() {
             {tierSponsors.map(sp => (
               <div key={sp.id} className={`rounded-2xl border ${st.border} ${st.bg} flex flex-col items-center justify-center gap-2 p-5 hover:shadow-lg transition-shadow`}>
                 {sp.logo_url
-                  ? <img src={sp.logo_url} alt={sp.name} className={`${st.logoH} w-auto object-contain`}/>
+                  ? <img src={normalizePublicStorageUrl(sp.logo_url) || sp.logo_url} alt={sp.name} className={`${st.logoH} w-auto object-contain`}/>
                   : <span className="font-black text-academic-navy tracking-tighter text-lg text-center">{sp.name}</span>
                 }
               </div>

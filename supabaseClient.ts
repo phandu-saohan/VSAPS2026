@@ -80,16 +80,37 @@ export const uploadFileToStorage = async (file: File, bucket: string, folder: st
     }
 };
 
-export const getTransformedImageUrl = (publicUrl: string | null | undefined, width: number, height: number): string | undefined => {
+export const normalizePublicStorageUrl = (publicUrl: string | null | undefined): string | undefined => {
     if (!publicUrl) return undefined;
+
     try {
-        const url = new URL(publicUrl);
+        const url = new URL(publicUrl, window.location.origin);
+        if (url.hostname === 'localhost' || url.hostname === '127.0.0.1') {
+            const secureOrigin = window.location.origin;
+            const normalized = new URL(url.pathname + url.search + url.hash, secureOrigin);
+            return normalized.toString();
+        }
+        if (url.protocol === 'http:' && window.location.protocol === 'https:') {
+            url.protocol = 'https:';
+        }
+        return url.toString();
+    } catch (error) {
+        console.error('Invalid URL for normalization:', publicUrl);
+        return publicUrl;
+    }
+};
+
+export const getTransformedImageUrl = (publicUrl: string | null | undefined, width: number, height: number): string | undefined => {
+    const normalized = normalizePublicStorageUrl(publicUrl);
+    if (!normalized) return undefined;
+    try {
+        const url = new URL(normalized);
         url.searchParams.set('width', String(width));
         url.searchParams.set('height', String(height));
         url.searchParams.set('resize', 'contain');
         return url.toString();
     } catch (error) {
-        console.error('Invalid URL for transformation:', publicUrl);
-        return publicUrl;
+        console.error('Invalid URL for transformation:', normalized);
+        return normalized;
     }
 };
