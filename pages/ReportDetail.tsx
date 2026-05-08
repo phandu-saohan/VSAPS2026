@@ -33,6 +33,8 @@ const FadeIn: React.FC<{ children: React.ReactNode; className?: string }> = ({ c
   );
 };
 
+const getShareUrl = (path: string) => `${window.location.origin}${path}`;
+
 type ReportComment = {
   id: number;
   author: string;
@@ -132,7 +134,6 @@ const ReportDetail: React.FC = () => {
                     <div className="flex items-center gap-3">
                       <img src={speaker.avatar_url || `https://ui-avatars.com/api/?name=${encodeURIComponent(speaker.full_name)}&background=random`} alt={speaker.full_name} className="h-12 w-12 rounded-full object-cover" />
                       <div>
-                        <p className="text-sm font-bold text-[#1e0f24]">{speaker.academic_rank} {speaker.full_name}</p>
                         <p className="text-xs text-[#9a4c6c]">{speaker.workplace}</p>
                       </div>
                     </div>
@@ -303,8 +304,30 @@ const ReportDetail: React.FC = () => {
 
               <FadeIn>
                 <div className="rounded-xl bg-[#1e0f24] p-6 text-white shadow-sm">
-                  <p className="text-sm font-bold">Điều hướng</p>
-                  <Link to="/speakers-list" className="mt-4 block rounded-lg bg-[#e6a1ff] px-4 py-2.5 text-center font-bold text-[#1e0f24]">Quay lại danh sách diễn giả</Link>
+                  <p className="text-sm font-bold">Chia sẻ qua mạng xã hội</p>
+                  <div className="mt-4 flex gap-3">
+                    <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(getShareUrl(`/reports/${speaker?.id || id}`))}`} target="_blank" rel="noreferrer" className="flex h-10 flex-1 items-center justify-center gap-2 rounded-lg bg-white/10 px-4 text-sm font-semibold hover:bg-white/15">
+                      <span className="material-symbols-outlined text-[18px]">facebook</span> Facebook
+                    </a>
+                    <a href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(getShareUrl(`/reports/${speaker?.id || id}`))}`} target="_blank" rel="noreferrer" className="flex h-10 flex-1 items-center justify-center gap-2 rounded-lg bg-white/10 px-4 text-sm font-semibold hover:bg-white/15">
+                      <span className="material-symbols-outlined text-[18px]">share</span> LinkedIn
+                    </a>
+                  </div>
+                  <button
+                    onClick={async () => {
+                      const url = getShareUrl(`/reports/${speaker?.id || id}`);
+                      try {
+                        await navigator.clipboard.writeText(url);
+                      } catch {
+                        window.prompt('Sao chép liên kết', url);
+                      }
+                    }}
+                    className="mt-3 flex h-10 w-full items-center justify-center gap-2 rounded-lg bg-[#e6a1ff] px-4 text-sm font-bold text-[#1e0f24] hover:brightness-110"
+                  >
+                    <span className="material-symbols-outlined text-[18px]">link</span>
+                    Sao chép link
+                  </button>
+                  <Link to="/speakers-list" className="mt-4 block rounded-lg bg-white px-4 py-2.5 text-center font-bold text-[#1e0f24]">Quay lại danh sách diễn giả</Link>
                 </div>
               </FadeIn>
             </aside>
