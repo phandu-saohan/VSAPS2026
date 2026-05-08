@@ -1,10 +1,11 @@
-import React, { useState, useEffect, createContext, useContext, ReactNode, useCallback, Suspense, lazy } from 'react';
+import React, { useState, useEffect, ReactNode, useCallback, Suspense, lazy } from 'react';
 import { HashRouter, Routes, Route, Navigate, Outlet, useLocation } from 'react-router-dom';
 import { supabase } from './supabaseClient';
-import { Session, RealtimeChannel } from '@supabase/supabase-js';
+import { RealtimeChannel } from '@supabase/supabase-js';
 import { Profile, Notification } from './types';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { ToastProvider } from './contexts/ToastContext';
+import { AuthContext } from './contexts/AuthContext';
 
 // Page imports using React.lazy
 const Login = lazy(() => import('./pages/Login'));
@@ -44,34 +45,9 @@ import Sidebar from './components/Sidebar';
 import Header from './components/Header';
 import BottomNav from './components/BottomNav';
 
-// Auth context
-interface AuthContextType {
-  session: Session | null;
-  profile: Profile | null;
-  loading: boolean;
-  notifications: Notification[];
-  permissions: string[];
-  hasPermission: (permission: string) => boolean;
-  logout: () => void;
-  markNotificationAsRead: (id: number) => Promise<void>;
-  clearAllNotifications: () => Promise<void>;
-  createNotification: (notification: Omit<Notification, 'id' | 'created_at' | 'read' | 'user_id'> & { user_id: string }) => Promise<void>;
-  notifyAdmins: (message: string, link: string) => Promise<void>;
-}
-
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
-
-export const useAuth = () => {
-    const context = useContext(AuthContext);
-    if (context === undefined) {
-        throw new Error('useAuth must be used within an AuthProvider');
-    }
-    return context;
-};
-
 // Auth provider component
 const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-    const [session, setSession] = useState<Session | null>(null);
+    const [session, setSession] = useState<import('@supabase/supabase-js').Session | null>(null);
     const [profile, setProfile] = useState<Profile | null>(null);
     const [loading, setLoading] = useState(true);
     const [notifications, setNotifications] = useState<Notification[]>([]);

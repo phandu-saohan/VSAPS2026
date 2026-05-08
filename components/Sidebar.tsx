@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { NAV_ITEMS } from '../constants';
-import { useAuth } from '../App';
+import { useAuth } from '../contexts/AuthContext';
 import { LogoutIcon } from './icons/LogoutIcon';
 import { BrandIcon } from './icons/BrandIcon';
 import { XIcon } from './icons/XIcon';
@@ -39,13 +39,17 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
             className={({ isActive }) =>
               `flex items-center px-4 py-2.5 rounded-lg text-sm font-medium transition-colors duration-200 ${
                 isActive
-                  ? 'bg-secondary text-white shadow'
+                  ? 'bg-secondary text-white shadow-[0_10px_24px_rgba(235,36,142,0.32)] ring-1 ring-secondary/30'
                   : 'text-gray-600 hover:bg-gray-100 hover:text-gray-800'
               }`
             }
           >
-            {item.icon}
-            <span className="ml-3">{item.label}</span>
+            {({ isActive }) => (
+              <>
+                <span className={isActive ? 'text-white' : 'text-gray-500'}>{item.icon}</span>
+                <span className="ml-3">{item.label}</span>
+              </>
+            )}
           </NavLink>
         ))}
       </nav>
