@@ -89,8 +89,8 @@ const ReportDetail: React.FC = () => {
   return (
     <div className="min-h-screen bg-surface text-gray-800">
       <Header />
-      <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 lg:py-12">
-        <Link to="/speakers-list" className="mb-8 inline-flex items-center gap-2 text-sm font-semibold text-academic-grey transition-colors hover:text-secondary">
+      <main className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 lg:py-12">
+        <Link to="/speakers-list" className="mb-6 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-semibold text-academic-grey shadow-sm ring-1 ring-border-subtle transition-colors hover:text-secondary">
           <span className="material-symbols-outlined text-[18px]">arrow_back</span>
           Quay lại danh sách
         </Link>
@@ -110,9 +110,9 @@ const ReportDetail: React.FC = () => {
         ) : (
           <div className="grid gap-8 lg:grid-cols-[360px_1fr] xl:grid-cols-[400px_1fr]">
             <FadeIn>
-              <aside className="sticky top-24 space-y-6 self-start">
+              <aside className="space-y-6 self-start lg:sticky lg:top-24">
                 <div className="card-premium overflow-hidden">
-                  <div className="relative h-80 bg-academic-navy">
+                  <div className="relative h-72 overflow-hidden bg-academic-navy sm:h-80 lg:h-96">
                     <img
                       src={speaker.avatar_url || `https://ui-avatars.com/api/?name=${encodeURIComponent(speaker.full_name)}&background=random`}
                       alt={speaker.full_name}
@@ -124,13 +124,13 @@ const ReportDetail: React.FC = () => {
                         {speaker.speaker_type}
                       </span>
                     </div>
-                    <div className="absolute bottom-4 left-4 right-4 text-white">
-                      <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/75">{speaker.academic_rank}</p>
-                      <h1 className="mt-1 text-3xl font-black leading-tight">{speaker.full_name}</h1>
+                    <div className="absolute bottom-4 left-4 right-4 text-white sm:bottom-5 sm:left-5 sm:right-5">
+                      <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-white/75">{speaker.academic_rank}</p>
+                      <h1 className="mt-1 text-2xl font-black leading-tight sm:text-3xl">{speaker.full_name}</h1>
                     </div>
                   </div>
 
-                  <div className="space-y-4 p-5">
+                  <div className="space-y-4 p-4 sm:p-5">
                     <div className="flex items-start gap-3 rounded-2xl bg-surface p-4">
                       <span className="material-symbols-outlined mt-0.5 text-secondary">apartment</span>
                       <div>
@@ -185,7 +185,7 @@ const ReportDetail: React.FC = () => {
               </FadeIn>
 
               <FadeIn>
-                <section className="grid gap-6 md:grid-cols-3">
+                <section className="grid gap-3 sm:grid-cols-3 sm:gap-4 md:grid-cols-3">
                   {[
                     { label: 'Học hàm', value: speaker.academic_rank || '—' },
                     { label: 'Loại phiên', value: speaker.speaker_type || '—' },
@@ -200,10 +200,10 @@ const ReportDetail: React.FC = () => {
               </FadeIn>
 
               <FadeIn>
-                <section className="card-premium p-6 sm:p-8">
+                <section className="card-premium p-5 sm:p-6 lg:p-8">
                   <div className="mb-6 flex items-center gap-3 border-b border-border-subtle pb-4">
                     <span className="material-symbols-outlined text-2xl text-secondary">article</span>
-                    <h3 className="text-xl font-black text-academic-navy sm:text-2xl">Tóm tắt báo cáo</h3>
+                    <h3 className="text-lg font-black text-academic-navy sm:text-xl lg:text-2xl">Tóm tắt báo cáo</h3>
                   </div>
                   {speaker.abstract_text ? (
                     <div
@@ -220,10 +220,10 @@ const ReportDetail: React.FC = () => {
 
               {speaker.abstract_text_en && (
                 <FadeIn>
-                  <section className="card-premium p-6 sm:p-8">
-                    <div className="mb-6 flex items-center gap-3 border-b border-border-subtle pb-4">
+                  <section className="card-premium p-5 sm:p-6 lg:p-8">
+                    <div className="mb-5 flex items-center gap-3 border-b border-border-subtle pb-4">
                       <span className="material-symbols-outlined text-2xl text-secondary">language</span>
-                      <h3 className="text-xl font-black text-academic-navy sm:text-2xl">Abstract (English)</h3>
+                      <h3 className="text-lg font-black text-academic-navy sm:text-xl lg:text-2xl">Abstract (English)</h3>
                     </div>
                     <div
                       className="prose prose-slate max-w-none prose-headings:text-academic-navy prose-a:text-secondary prose-strong:text-academic-navy prose-blockquote:border-l-secondary prose-blockquote:text-academic-slate"
@@ -235,10 +235,10 @@ const ReportDetail: React.FC = () => {
 
               {speaker.keywords && (
                 <FadeIn>
-                  <section className="card-premium p-6 sm:p-8">
-                    <div className="mb-6 flex items-center gap-3 border-b border-border-subtle pb-4">
+                  <section className="card-premium p-5 sm:p-6 lg:p-8">
+                    <div className="mb-5 flex items-center gap-3 border-b border-border-subtle pb-4">
                       <span className="material-symbols-outlined text-2xl text-secondary">sell</span>
-                      <h3 className="text-xl font-black text-academic-navy sm:text-2xl">Từ khóa liên quan</h3>
+                      <h3 className="text-lg font-black text-academic-navy sm:text-xl lg:text-2xl">Từ khóa liên quan</h3>
                     </div>
                     <div className="flex flex-wrap gap-3">
                       {speaker.keywords.split(',').map((kw, i) => (
@@ -255,7 +255,7 @@ const ReportDetail: React.FC = () => {
         )}
       </main>
 
-      <footer className="mt-12 border-t border-border-subtle bg-academic-navy text-white">
+      <footer className="mt-10 border-t border-border-subtle bg-academic-navy text-white sm:mt-12">
         <div className="mx-auto max-w-7xl px-4 py-5 sm:px-6 lg:px-8">
           <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-white/30">© 2026 VSAPS Conference. All rights reserved.</p>
         </div>
