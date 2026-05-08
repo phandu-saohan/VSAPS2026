@@ -166,7 +166,7 @@ const Dashboard: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#f8f6f6] text-[#221610]">
-      <main className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
+      <main className="mx-auto w-full max-w-none px-4 py-6 sm:px-6 lg:px-8 lg:py-8 2xl:px-10">
         <section className="rounded-3xl bg-white p-5 shadow-sm ring-1 ring-gray-100 sm:p-6 lg:p-8">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
             <div className="max-w-2xl">
@@ -187,7 +187,7 @@ const Dashboard: React.FC = () => {
         </section>
 
         <section className="mt-6 grid gap-6 lg:grid-cols-12">
-          <div className="lg:col-span-8 space-y-6">
+          <div className="lg:col-span-9 space-y-6">
             {(isSponsor || isStaff) && (
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
                 <StatCard label="Tổng giá trị tài trợ" value={`${new Intl.NumberFormat('vi-VN').format(stats.totalSponsorValue)} đ`} accent="text-blue-600" />
@@ -342,7 +342,7 @@ const Dashboard: React.FC = () => {
             )}
           </div>
 
-          <aside className="lg:col-span-4 space-y-6">
+          <aside className="lg:col-span-3 space-y-6">
             <div className="rounded-3xl border border-gray-100 bg-white p-6 shadow-sm">
               <h3 className="text-lg font-bold text-gray-800">Điều hướng nhanh</h3>
               <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
