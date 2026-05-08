@@ -33,11 +33,23 @@ const FadeIn: React.FC<{ children: React.ReactNode; className?: string }> = ({ c
   );
 };
 
+type ReportComment = {
+  id: number;
+  author: string;
+  content: string;
+  createdAt: string;
+};
+
 const ReportDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [speaker, setSpeaker] = useState<Speaker | null>(null);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
+  const [commentText, setCommentText] = useState('');
+  const [commentAuthor, setCommentAuthor] = useState('Khách tham dự');
+  const [comments, setComments] = useState<ReportComment[]>([]);
+  const [commentLoading, setCommentLoading] = useState(true);
+  const [commentSaving, setCommentSaving] = useState(false);
 
   useEffect(() => {
     const fetchItem = async () => {
@@ -47,6 +59,34 @@ const ReportDetail: React.FC = () => {
       setLoading(false);
     };
     fetchItem();
+  }, [id]);
+
+  useEffect(() => {
+    const fetchComments = async () => {
+      setCommentLoading(true);
+      const { data, error } = await supabase
+        .from('report_comments')
+        .select('id, author, content, created_at')
+        .eq('report_id', Number(id))
+        .order('created_at', { ascending: false });
+
+      if (!error && data) {
+        setComments(
+          data.map((comment) => ({
+            id: comment.id,
+            author: comment.author,
+            content: comment.content,
+            createdAt: new Date(comment.created_at).toLocaleString('vi-VN', {
+              dateStyle: 'short',
+              timeStyle: 'short',
+            }),
+          }))
+        );
+      }
+      setCommentLoading(false);
+    };
+
+    fetchComments();
   }, [id]);
 
   const keywords = useMemo(() => speaker?.keywords?.split(',').map((k) => k.trim()).filter(Boolean) || [], [speaker]);
@@ -145,6 +185,83 @@ const ReportDetail: React.FC = () => {
                   </section>
                 </FadeIn>
               )}
+
+              <FadeIn>
+                <section className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
+                  <div className="mb-4 flex items-center gap-3 border-b border-gray-100 pb-3">
+                    <span className="material-symbols-outlined text-[#ec5b13]">chat</span>
+                    <h2 className="text-lg font-black text-[#1e0f24]">Bình luận</h2>
+                  </div>
+
+                  <div className="space-y-4">
+                    {commentLoading ? (
+                      <div className="rounded-xl bg-[#f8f6f6] p-4 text-sm text-[#9a4c6c]">Đang tải bình luận...</div>
+                    ) : comments.length === 0 ? (
+                      <div className="rounded-xl bg-[#f8f6f6] p-4 text-sm text-[#9a4c6c]">Chưa có bình luận nào.</div>
+                    ) : (
+                      comments.map((comment) => (
+                        <div key={comment.id} className="rounded-xl bg-[#f8f6f6] p-4">
+                          <div className="flex items-center justify-between gap-4">
+                            <p className="font-bold text-[#1e0f24]">{comment.author}</p>
+                            <span className="text-xs text-[#9a4c6c]">{comment.createdAt}</span>
+                          </div>
+                          <p className="mt-2 text-sm leading-7 text-[#221610]">{comment.content}</p>
+                        </div>
+                      ))
+                    )}
+                  </div>
+
+                  <div className="mt-5 space-y-3">
+                    <input
+                      value={commentAuthor}
+                      onChange={(e) => setCommentAuthor(e.target.value)}
+                      placeholder="Tên của bạn"
+                      className="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm outline-none transition focus:border-[#e6a1ff] focus:ring-4 focus:ring-[#e6a1ff]/15"
+                    />
+                    <textarea
+                      value={commentText}
+                      onChange={(e) => setCommentText(e.target.value)}
+                      rows={4}
+                      placeholder="Viết bình luận của bạn..."
+                      className="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm outline-none transition focus:border-[#e6a1ff] focus:ring-4 focus:ring-[#e6a1ff]/15"
+                    />
+                    <button
+                      disabled={commentSaving}
+                      onClick={async () => {
+                        const text = commentText.trim();
+                        const author = commentAuthor.trim();
+                        if (!text || !author || !id) return;
+                        setCommentSaving(true);
+                        const { data, error } = await supabase.from('report_comments').insert({
+                          report_id: Number(id),
+                          author,
+                          content: text,
+                        }).select('id, author, content, created_at').single();
+
+                        if (!error && data) {
+                          setComments((current) => [
+                            {
+                              id: data.id,
+                              author: data.author,
+                              content: data.content,
+                              createdAt: new Date(data.created_at).toLocaleString('vi-VN', {
+                                dateStyle: 'short',
+                                timeStyle: 'short',
+                              }),
+                            },
+                            ...current,
+                          ]);
+                          setCommentText('');
+                        }
+                        setCommentSaving(false);
+                      }}
+                      className="rounded-lg bg-[#ec5b13] px-4 py-2.5 font-bold text-white transition-colors hover:bg-[#d6520d] disabled:cursor-not-allowed disabled:opacity-60"
+                    >
+                      {commentSaving ? 'Đang gửi...' : 'Gửi bình luận'}
+                    </button>
+                  </div>
+                </section>
+              </FadeIn>
             </article>
 
             <aside className="lg:col-span-4 space-y-6">
@@ -155,11 +272,6 @@ const ReportDetail: React.FC = () => {
                     <div className="absolute inset-0 bg-gradient-to-t from-[#1e0f24]/10 via-transparent to-transparent" />
                   </div>
                   <div className="space-y-4 p-5">
-                    <div>
-                      <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#9a4c6c]">Họ và tên</p>
-                      <p className="mt-1 text-base font-black text-[#1e0f24]">{speaker.academic_rank} {speaker.full_name}</p>
-                      <p className="mt-1 text-sm text-[#9a4c6c]">{speaker.workplace}</p>
-                    </div>
                     <div className="grid gap-2 text-sm text-[#221610]">
                       <div className="flex items-center justify-between gap-4 rounded-lg bg-[#f8f6f6] px-3 py-2">
                         <span className="text-[#9a4c6c]">Liên lạc</span>
