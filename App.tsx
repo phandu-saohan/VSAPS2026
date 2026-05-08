@@ -35,8 +35,6 @@ const LandingSettings = lazy(() => import('./pages/settings/LandingSettings'));
 const PushNotifications = lazy(() => import('./pages/settings/PushNotifications'));
 const PublicSpeakers = lazy(() => import('./pages/PublicSpeakers'));
 const NotFound = lazy(() => import('./pages/NotFound'));
-const Reports = lazy(() => import('./pages/Reports'));
-const ReportDetail = lazy(() => import('./pages/ReportDetail'));
 const PwaInstallPrompt = lazy(() => import('./components/PwaInstallPrompt'));
 const NotificationPermissionPrompt = lazy(() => import('./components/NotificationPermissionPrompt'));
 
@@ -283,8 +281,6 @@ const App: React.FC = () => {
               <Routes>
                   <Route path="/login" element={<Login />} />
                   <Route path="/" element={<LandingPage />} />
-                  <Route path="/reports" element={<Reports />} />
-                  <Route path="/reports/:id" element={<ReportDetail />} />
                   <Route path="/register-speaker" element={<SpeakerRegistration />} />
                   <Route path="/register-delegate" element={<DelegateRegistration />} />
                   <Route path="/speakers-list" element={<PublicSpeakers />} />
