@@ -18,9 +18,18 @@ const formatDate = (dateString?: string | null) => {
 };
 
 const AccessDenied: React.FC = () => (
-  <div>
-    <h1 className="text-3xl font-bold text-red-600">Truy cập bị từ chối</h1>
-    <p className="mt-2 text-gray-600">Bạn không có quyền xem trang này.</p>
+  <div className="min-h-screen bg-[#f8f6f6] px-4 py-10">
+    <div className="mx-auto max-w-2xl rounded-3xl border border-gray-100 bg-white p-8 text-center shadow-sm">
+      <h1 className="text-3xl font-black text-red-600">Truy cập bị từ chối</h1>
+      <p className="mt-3 text-gray-600">Bạn không có quyền xem trang này.</p>
+    </div>
+  </div>
+);
+
+const StatCard: React.FC<{ label: string; value: string; accent: string }> = ({ label, value, accent }) => (
+  <div className="rounded-2xl border border-gray-100 bg-white p-5 shadow-sm">
+    <p className="text-sm text-gray-500">{label}</p>
+    <p className={`mt-2 text-3xl font-black ${accent}`}>{value}</p>
   </div>
 );
 
@@ -100,12 +109,12 @@ const Dashboard: React.FC = () => {
 
         const sponsorsData = sponsorsRes.data || [];
         const totalSponsorValue = sponsorsData.reduce((sum, item) => sum + (item.amount || 0), 0);
-        const paidSponsorValue = sponsorsData.filter(item => item.status === Status.PAYMENT_CONFIRMED).reduce((sum, item) => sum + (item.amount || 0), 0);
+        const paidSponsorValue = sponsorsData.filter((item) => item.status === Status.PAYMENT_CONFIRMED).reduce((sum, item) => sum + (item.amount || 0), 0);
 
         setStats({
           attendees: submissionsRes.count ?? 0,
           speakers: speakersRes.count ?? 0,
-          sponsors: sponsorsData.filter(item => item.status === Status.PAYMENT_CONFIRMED).length,
+          sponsors: sponsorsData.filter((item) => item.status === Status.PAYMENT_CONFIRMED).length,
           tasks: tasksRes.count ?? 0,
           totalSponsorValue,
           paidSponsorValue,
@@ -114,7 +123,7 @@ const Dashboard: React.FC = () => {
 
         setRecentSubmissions(recentSubmissionsRes.data || []);
         setRecentSpeakers(recentSpeakersRes.data || []);
-        setUpcomingTasks(upcomingTasksRes.data as Task[] || []);
+        setUpcomingTasks((upcomingTasksRes.data as Task[]) || []);
       } catch (err: any) {
         setError(err.message || 'Đã xảy ra lỗi khi tải dữ liệu.');
       } finally {
@@ -152,99 +161,105 @@ const Dashboard: React.FC = () => {
           : 'Đây là tổng quan nhanh về sự kiện VSAPS 2026.';
 
   if (!hasPermission('dashboard:view')) return <AccessDenied />;
-  if (loading) return <div>Đang tải dữ liệu bảng điều khiển...</div>;
-  if (error) return <div className="text-red-500">Lỗi: {error}</div>;
+  if (loading) return <div className="min-h-screen bg-[#f8f6f6] px-4 py-10 text-center text-sm text-gray-500">Đang tải dữ liệu bảng điều khiển...</div>;
+  if (error) return <div className="min-h-screen bg-[#f8f6f6] px-4 py-10 text-center text-red-500">Lỗi: {error}</div>;
 
   return (
     <div className="min-h-screen bg-[#f8f6f6] text-[#221610]">
       <main className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
-        <section className="rounded-3xl bg-gradient-to-br from-[#1e0f24] to-[#361a41] px-5 py-6 text-white shadow-lg sm:px-6 lg:px-8">
-          <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+        <section className="rounded-3xl bg-white p-5 shadow-sm ring-1 ring-gray-100 sm:p-6 lg:p-8">
+          <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
             <div className="max-w-2xl">
-              <p className="text-xs uppercase tracking-[0.3em] text-[#f7b2d0] font-bold">{role || 'Hệ thống'}</p>
-              <h1 className="mt-2 text-3xl font-black tracking-[-0.03em] sm:text-4xl">
+              <p className="text-xs font-bold uppercase tracking-[0.3em] text-secondary">{role || 'Hệ thống'}</p>
+              <h1 className="mt-2 text-3xl font-black tracking-[-0.03em] text-gray-800 sm:text-4xl">
                 Chào mừng trở lại, {profile?.full_name?.split(' ').pop() || 'bạn'}!
               </h1>
-              <p className="mt-3 max-w-xl text-sm leading-7 text-white/80 sm:text-base">{subtitle}</p>
+              <p className="mt-3 max-w-xl text-sm leading-7 text-gray-600 sm:text-base">{subtitle}</p>
             </div>
 
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:min-w-[520px]">
-              {[
-                { label: 'Đăng ký', value: stats.attendees.toString(), tone: 'bg-white/10' },
-                { label: 'BCV', value: stats.speakers.toString(), tone: 'bg-white/10' },
-                { label: 'N.Tài trợ', value: stats.sponsors.toString(), tone: 'bg-white/10' },
-                { label: 'Công việc', value: stats.tasks.toString(), tone: 'bg-white/10' },
-              ].map((item) => (
-                <div key={item.label} className={`rounded-2xl border border-white/10 ${item.tone} px-4 py-3 backdrop-blur-sm`}>
-                  <p className="text-[11px] uppercase tracking-[0.22em] text-white/60">{item.label}</p>
-                  <p className="mt-1 text-2xl font-black text-white">{item.value}</p>
-                </div>
-              ))}
+              <StatCard label="Đăng ký" value={String(stats.attendees)} accent="text-blue-600" />
+              <StatCard label="BCV" value={String(stats.speakers)} accent="text-pink-600" />
+              <StatCard label="N.Tài trợ" value={String(stats.sponsors)} accent="text-purple-600" />
+              <StatCard label="Công việc" value={String(stats.tasks)} accent="text-slate-700" />
             </div>
           </div>
         </section>
 
-        <div className="mt-6 grid gap-6 lg:grid-cols-12">
-          <section className="lg:col-span-8 space-y-6">
+        <section className="mt-6 grid gap-6 lg:grid-cols-12">
+          <div className="lg:col-span-8 space-y-6">
             {(isSponsor || isStaff) && (
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-                <div className="rounded-2xl border border-gray-100 bg-white p-5 shadow-sm">
-                  <p className="text-sm text-gray-500">Tổng giá trị tài trợ</p>
-                  <p className="mt-2 text-2xl font-black text-blue-600">{new Intl.NumberFormat('vi-VN').format(stats.totalSponsorValue)} đ</p>
-                </div>
-                <div className="rounded-2xl border border-gray-100 bg-white p-5 shadow-sm">
-                  <p className="text-sm text-gray-500">Đã thanh toán</p>
-                  <p className="mt-2 text-2xl font-black text-green-600">{new Intl.NumberFormat('vi-VN').format(stats.paidSponsorValue)} đ</p>
-                </div>
-                <div className="rounded-2xl border border-gray-100 bg-white p-5 shadow-sm">
-                  <p className="text-sm text-gray-500">Chờ thanh toán</p>
-                  <p className="mt-2 text-2xl font-black text-orange-500">{new Intl.NumberFormat('vi-VN').format(stats.pendingSponsorValue)} đ</p>
-                </div>
+                <StatCard label="Tổng giá trị tài trợ" value={`${new Intl.NumberFormat('vi-VN').format(stats.totalSponsorValue)} đ`} accent="text-blue-600" />
+                <StatCard label="Đã thanh toán" value={`${new Intl.NumberFormat('vi-VN').format(stats.paidSponsorValue)} đ`} accent="text-green-600" />
+                <StatCard label="Chờ thanh toán" value={`${new Intl.NumberFormat('vi-VN').format(stats.pendingSponsorValue)} đ`} accent="text-orange-500" />
               </div>
             )}
 
             {isStaff && (
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
-                <Link to="/submissions" className="group rounded-2xl border border-gray-100 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
-                  <div className="flex items-center gap-4">
-                    <div className="rounded-2xl bg-blue-50 p-3"><UsersIcon className="h-6 w-6 text-blue-500" /></div>
-                    <div><p className="text-xs uppercase tracking-widest text-gray-400">Tổng đăng ký</p><p className="text-2xl font-black text-gray-800">{stats.attendees}</p></div>
+              <div className="rounded-3xl border border-gray-100 bg-white shadow-sm">
+                <div className="flex items-center justify-between border-b border-gray-100 px-5 py-4 sm:px-6">
+                  <div>
+                    <h2 className="text-lg font-bold text-gray-800">Tổng quan hệ thống</h2>
+                    <p className="text-sm text-gray-500">Thống kê nhanh theo vai trò và trạng thái</p>
                   </div>
-                </Link>
-                <Link to="/speakers-list" className="group rounded-2xl border border-gray-100 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
-                  <div className="flex items-center gap-4">
-                    <div className="rounded-2xl bg-pink-50 p-3"><SpeakersIcon className="h-6 w-6 text-pink-500" /></div>
-                    <div><p className="text-xs uppercase tracking-widest text-gray-400">Báo cáo viên</p><p className="text-2xl font-black text-gray-800">{stats.speakers}</p></div>
+                  <Link to="/submissions" className="rounded-full bg-[#eb248e] px-4 py-2 text-sm font-bold text-white transition hover:bg-[#d61f81]">+ Thêm giao dịch</Link>
+                </div>
+
+                <div className="overflow-x-auto">
+                  <table className="w-full min-w-[760px] text-left text-sm">
+                    <thead className="bg-gray-50 text-xs font-bold uppercase tracking-widest text-gray-400">
+                      <tr>
+                        <th className="px-5 py-4">Chỉ số</th>
+                        <th className="px-5 py-4">Giá trị</th>
+                        <th className="px-5 py-4">Mô tả</th>
+                        <th className="px-5 py-4 text-right">Hành động</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-gray-100">
+                      {[
+                        { label: 'Đăng ký', value: stats.attendees, desc: 'Tổng số đăng ký hiện tại', href: '/submissions' },
+                        { label: 'Báo cáo viên', value: stats.speakers, desc: 'Báo cáo viên đã duyệt', href: '/speakers-list' },
+                        { label: 'Nhà tài trợ', value: stats.sponsors, desc: 'Số nhà tài trợ đã xác nhận', href: '/sponsors' },
+                        { label: 'Công việc', value: stats.tasks, desc: 'Công việc đang mở', href: '/tasks' },
+                      ].map((row) => (
+                        <tr key={row.label} className="hover:bg-gray-50">
+                          <td className="px-5 py-4 font-medium text-gray-700">{row.label}</td>
+                          <td className="px-5 py-4 text-lg font-black text-[#1e0f24]">{row.value}</td>
+                          <td className="px-5 py-4 text-gray-500">{row.desc}</td>
+                          <td className="px-5 py-4 text-right">
+                            <Link to={row.href} className="font-semibold text-secondary hover:underline">Xem</Link>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+                <div className="flex items-center justify-between border-t border-gray-100 px-5 py-4 text-sm text-gray-500">
+                  <span>Hiển thị 4 mục nhanh</span>
+                  <div className="flex gap-2">
+                    <button className="rounded-full border border-gray-200 px-3 py-1.5 disabled:opacity-50" disabled>Trước</button>
+                    <button className="rounded-full border border-gray-200 px-3 py-1.5 disabled:opacity-50" disabled>Sau</button>
                   </div>
-                </Link>
-                <Link to="/sponsors" className="group rounded-2xl border border-gray-100 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
-                  <div className="flex items-center gap-4">
-                    <div className="rounded-2xl bg-purple-50 p-3"><SponsorsIcon className="h-6 w-6 text-purple-500" /></div>
-                    <div><p className="text-xs uppercase tracking-widest text-gray-400">Nhà tài trợ</p><p className="text-2xl font-black text-gray-800">{stats.sponsors}</p></div>
-                  </div>
-                </Link>
-                <Link to="/tasks" className="group rounded-2xl border border-gray-100 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
-                  <div className="flex items-center gap-4">
-                    <div className="rounded-2xl bg-slate-50 p-3"><TasksIcon className="h-6 w-6 text-slate-500" /></div>
-                    <div><p className="text-xs uppercase tracking-widest text-gray-400">Công việc</p><p className="text-2xl font-black text-gray-800">{stats.tasks}</p></div>
-                  </div>
-                </Link>
+                </div>
               </div>
             )}
 
             {isSponsor && (
               <div className="grid gap-6 lg:grid-cols-2">
-                <div className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
+                <div className="rounded-3xl border border-gray-100 bg-white p-6 shadow-sm">
                   <h3 className="text-lg font-bold text-gray-800">Thông tin nhanh dành cho đối tác</h3>
                   <div className="mt-4 space-y-3 text-sm leading-7 text-gray-600">
                     <p>• Tài liệu sự kiện và thông báo hậu cần được cập nhật tại kho tài liệu.</p>
                     <p>• Theo dõi trạng thái tài trợ và các mục hỗ trợ từ Ban tổ chức.</p>
                   </div>
                 </div>
-                <div className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
+                <div className="rounded-3xl border border-gray-100 bg-white p-6 shadow-sm">
                   <h3 className="text-lg font-bold text-gray-800">Hành động nhanh</h3>
                   <div className="mt-4 space-y-3">
-                    {quickActions.map((action) => <Link key={action.href} to={action.href} className="block rounded-xl bg-blue-50 px-4 py-3 font-semibold text-blue-700 transition hover:bg-blue-100">{action.label}</Link>)}
+                    {quickActions.map((action) => (
+                      <Link key={action.href} to={action.href} className="block rounded-xl bg-blue-50 px-4 py-3 font-semibold text-blue-700 transition hover:bg-blue-100">{action.label}</Link>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -252,7 +267,7 @@ const Dashboard: React.FC = () => {
 
             {isSpeaker && (
               <div className="grid gap-6 lg:grid-cols-2">
-                <div className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
+                <div className="rounded-3xl border border-gray-100 bg-white p-6 shadow-sm">
                   <h3 className="text-lg font-bold text-gray-800">Bài báo cáo gần đây</h3>
                   <div className="mt-4 space-y-4">
                     {recentSpeakers.length > 0 ? recentSpeakers.map((sp) => (
@@ -264,10 +279,12 @@ const Dashboard: React.FC = () => {
                     )) : <p className="text-sm text-gray-400">Chưa có báo cáo viên nào.</p>}
                   </div>
                 </div>
-                <div className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
+                <div className="rounded-3xl border border-gray-100 bg-white p-6 shadow-sm">
                   <h3 className="text-lg font-bold text-gray-800">Tác vụ nhanh</h3>
                   <div className="mt-4 space-y-3">
-                    {quickActions.map((action) => <Link key={action.href} to={action.href} className="block rounded-xl bg-pink-50 px-4 py-3 font-semibold text-pink-700 transition hover:bg-pink-100">{action.label}</Link>)}
+                    {quickActions.map((action) => (
+                      <Link key={action.href} to={action.href} className="block rounded-xl bg-pink-50 px-4 py-3 font-semibold text-pink-700 transition hover:bg-pink-100">{action.label}</Link>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -275,7 +292,7 @@ const Dashboard: React.FC = () => {
 
             {isDelegate && (
               <div className="grid gap-6 lg:grid-cols-2">
-                <div className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
+                <div className="rounded-3xl border border-gray-100 bg-white p-6 shadow-sm">
                   <h3 className="text-lg font-bold text-gray-800">Thông tin tham dự</h3>
                   <div className="mt-4 space-y-3 text-sm leading-7 text-gray-600">
                     <p>• Trạng thái đăng ký: <span className="font-semibold text-gray-800">Đã xác thực</span></p>
@@ -283,10 +300,12 @@ const Dashboard: React.FC = () => {
                     <p>• Chứng chỉ CME: <span className="font-semibold text-gray-800">Sẽ được cập nhật sau sự kiện</span></p>
                   </div>
                 </div>
-                <div className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
+                <div className="rounded-3xl border border-gray-100 bg-white p-6 shadow-sm">
                   <h3 className="text-lg font-bold text-gray-800">Hành động nhanh</h3>
                   <div className="mt-4 space-y-3">
-                    {quickActions.map((action) => <Link key={action.href} to={action.href} className="block rounded-xl bg-green-50 px-4 py-3 font-semibold text-green-700 transition hover:bg-green-100">{action.label}</Link>)}
+                    {quickActions.map((action) => (
+                      <Link key={action.href} to={action.href} className="block rounded-xl bg-green-50 px-4 py-3 font-semibold text-green-700 transition hover:bg-green-100">{action.label}</Link>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -294,7 +313,7 @@ const Dashboard: React.FC = () => {
 
             {isVolunteer && (
               <div className="grid gap-6 lg:grid-cols-2">
-                <div className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
+                <div className="rounded-3xl border border-gray-100 bg-white p-6 shadow-sm">
                   <h3 className="text-lg font-bold text-gray-800">Công việc của bạn</h3>
                   <div className="mt-4 space-y-4">
                     {upcomingTasks.length > 0 ? upcomingTasks.slice(0, 3).map((task) => (
@@ -305,56 +324,44 @@ const Dashboard: React.FC = () => {
                     )) : <p className="text-sm text-gray-400">Chưa có công việc được giao.</p>}
                   </div>
                 </div>
-                <div className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
+                <div className="rounded-3xl border border-gray-100 bg-white p-6 shadow-sm">
                   <h3 className="text-lg font-bold text-gray-800">Hỗ trợ nhanh</h3>
                   <div className="mt-4 space-y-3">
-                    {quickActions.map((action) => <Link key={action.href} to={action.href} className="block rounded-xl bg-slate-50 px-4 py-3 font-semibold text-slate-700 transition hover:bg-slate-100">{action.label}</Link>)}
+                    {quickActions.map((action) => (
+                      <Link key={action.href} to={action.href} className="block rounded-xl bg-slate-50 px-4 py-3 font-semibold text-slate-700 transition hover:bg-slate-100">{action.label}</Link>
+                    ))}
                   </div>
                 </div>
               </div>
             )}
 
-            {isStaff && (
-              <div className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
-                <h3 className="text-lg font-bold text-gray-800">Đăng ký gần đây</h3>
-                <div className="mt-4 overflow-x-auto">
-                  <table className="w-full text-left text-sm">
-                    <thead className="border-b border-gray-100 text-xs font-bold uppercase tracking-widest text-gray-400">
-                      <tr><th className="pb-3">Họ tên</th><th className="pb-3">Loại</th><th className="pb-3 text-right">Trạng thái</th></tr>
-                    </thead>
-                    <tbody className="divide-y divide-gray-50">
-                      {recentSubmissions.length > 0 ? recentSubmissions.map((sub) => (
-                        <tr key={sub.id} className="transition hover:bg-gray-50">
-                          <td className="py-3 font-medium text-gray-700">{sub.full_name}</td>
-                          <td className="py-3 text-gray-500">{sub.attendee_type}</td>
-                          <td className="py-3 text-right">{sub.status}</td>
-                        </tr>
-                      )) : <tr><td colSpan={3} className="py-4 text-center text-gray-400">Chưa có đăng ký nào.</td></tr>}
-                    </tbody>
-                  </table>
-                </div>
+            {!isStaff && !isSponsor && !isSpeaker && !isDelegate && !isVolunteer && (
+              <div className="rounded-3xl border border-gray-100 bg-white p-6 shadow-sm">
+                <p className="text-sm text-gray-500">Chưa có nội dung phù hợp với vai trò của bạn.</p>
               </div>
             )}
-          </section>
+          </div>
 
           <aside className="lg:col-span-4 space-y-6">
-            <div className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
+            <div className="rounded-3xl border border-gray-100 bg-white p-6 shadow-sm">
               <h3 className="text-lg font-bold text-gray-800">Điều hướng nhanh</h3>
-              <div className="mt-4 space-y-3">
-                {quickActions.map((action) => <Link key={action.href} to={action.href} className="block rounded-xl bg-slate-50 px-4 py-3 font-semibold text-slate-700 transition hover:bg-slate-100">{action.label}</Link>)}
+              <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
+                {quickActions.map((action) => (
+                  <Link key={action.href} to={action.href} className="block rounded-xl bg-slate-50 px-4 py-3 font-semibold text-slate-700 transition hover:bg-slate-100">{action.label}</Link>
+                ))}
               </div>
             </div>
 
-            <div className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
+            <div className="rounded-3xl border border-gray-100 bg-white p-6 shadow-sm">
               <h3 className="text-lg font-bold text-gray-800">Trạng thái hệ thống</h3>
               <div className="mt-4 space-y-3 text-sm text-gray-600">
-                <p>• Giao diện đã tối ưu cho mobile.</p>
-                <p>• Dữ liệu hiển thị theo vai trò người dùng.</p>
-                <p>• Kết nối Supabase đang hoạt động để tải dữ liệu động.</p>
+                <p>• Giao diện tối ưu theo phong cách bảng tài chính.</p>
+                <p>• Các thẻ số liệu được trình bày rõ ràng, sạch sẽ.</p>
+                <p>• Hỗ trợ tốt hơn trên màn hình nhỏ.</p>
               </div>
             </div>
           </aside>
-        </div>
+        </section>
       </main>
     </div>
   );
