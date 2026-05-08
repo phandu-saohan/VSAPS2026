@@ -5,7 +5,7 @@ import { RealtimeChannel } from '@supabase/supabase-js';
 import { Profile, Notification } from './types';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { ToastProvider } from './contexts/ToastContext';
-import { AuthContext } from './contexts/AuthContext';
+import { AuthContext, useAuth, type AuthContextType } from './contexts/AuthContext';
 
 // Page imports using React.lazy
 const Login = lazy(() => import('./pages/Login'));
