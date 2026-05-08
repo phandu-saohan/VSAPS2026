@@ -489,8 +489,6 @@ const BulkEmail: React.FC = () => {
                     </div>
                 </div>
             )}
-                </div>
-            </div>
         </div>
     );
 };
