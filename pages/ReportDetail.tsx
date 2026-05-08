@@ -334,6 +334,49 @@ const ReportDetail: React.FC = () => {
           </div>
         )}
       </main>
+
+      <footer className="mt-20 bg-[#221610] px-4 pb-8 pt-16 text-white md:px-20">
+        <div className="mx-auto max-w-[1280px]">
+          <div className="grid grid-cols-1 gap-10 border-t border-white/10 pt-8 md:grid-cols-3">
+            <div>
+              <div className="mb-4 flex items-center gap-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-sm bg-secondary text-lg font-black text-white">VS</div>
+                <h2 className="text-xl font-black tracking-tight">VSAPS</h2>
+              </div>
+              <p className="text-sm leading-7 text-white/60">
+                Hội Phẫu thuật Tạo hình Thẩm mỹ Việt Nam là tổ chức nghề nghiệp hàng đầu của các bác sĩ chuyên khoa phẫu thuật thẩm mỹ tại Việt Nam.
+              </p>
+            </div>
+
+            <div>
+              <h4 className="mb-4 text-sm font-bold uppercase tracking-[0.2em] text-secondary">Liên kết nhanh</h4>
+              <ul className="space-y-3 text-sm text-white/60">
+                <li><a className="hover:text-white" href="#/">Trang chủ</a></li>
+                <li><a className="hover:text-white" href="#/speakers-list">Danh sách báo cáo viên</a></li>
+                <li><a className="hover:text-white" href="#/register-delegate">Đăng ký tham dự</a></li>
+                <li><a className="hover:text-white" href="#/login">Tài khoản</a></li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="mb-4 text-sm font-bold uppercase tracking-[0.2em] text-secondary">Liên hệ</h4>
+              <ul className="space-y-3 text-sm text-white/60">
+                <li>786 Nguyễn Kiệm, Gò Vấp, TP.HCM</li>
+                <li>(028) 3895 4941</li>
+                <li>vsapsevents@gmail.com</li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="mt-8 flex flex-col gap-3 border-t border-white/10 pt-6 text-xs text-white/40 md:flex-row md:items-center md:justify-between">
+            <p>© 2026 VSAPS. Bảo lưu mọi quyền.</p>
+            <div className="flex gap-6">
+              <a className="hover:text-white" href="#">Điều khoản sử dụng</a>
+              <a className="hover:text-white" href="#">Chính sách bảo mật</a>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
