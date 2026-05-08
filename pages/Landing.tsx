@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { supabase } from '../supabaseClient';
 import { DEFAULT_LANDING_CONFIG, LandingConfig } from '../types/landing';
+import LandingHeader from '../components/LandingHeader';
 
 interface SponsorItem {
   id: number;
@@ -162,44 +163,7 @@ export default function LandingPage() {
         .landing-wrapper .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
       `}</style>
 
-      <nav className="bg-academic-navy text-white sticky top-0 z-50 border-b border-white/10">
-  <div className="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
-
-    {/*  Logo  */}
-    <div className="flex items-center gap-4">
-      <div className="w-10 h-10 bg-secondary rounded-sm flex items-center justify-center font-black text-white text-lg tracking-tighter">VS</div>
-      <div className="h-8 w-px bg-white/20"></div>
-      <span className="text-sm font-semibold tracking-widest uppercase hidden sm:inline">{cfg.event_name}</span>
-    </div>
-
-    {/*  Desktop Links  */}
-    <div className="hidden lg:flex items-center gap-8">
-      <a className="nav-link text-xs font-bold uppercase tracking-widest text-secondary" href="#">Giới thiệu</a>
-      <a className="nav-link text-xs font-bold uppercase tracking-widest hover:text-secondary transition-colors" href="#program">Chương trình</a>
-      <a className="nav-link text-xs font-bold uppercase tracking-widest hover:text-secondary transition-colors" href="#/speakers-list">Diễn giả</a>
-      <a className="nav-link text-xs font-bold uppercase tracking-widest hover:text-secondary transition-colors" href="#venue">Địa điểm</a>
-      <a className="nav-link text-xs font-bold uppercase tracking-widest hover:text-secondary transition-colors" href="#/register-delegate">Đăng ký</a>
-      <a href="#/login" className="ml-4 px-6 py-2 bg-secondary text-white text-xs font-bold uppercase rounded-sm hover:brightness-110 transition-all">Đăng nhập →</a>
-    </div>
-
-    {/*  Mobile Hamburger  */}
-    <button onClick={() => setMenuOpen(!menuOpen)} className="lg:hidden text-white focus:outline-none" aria-label="Menu">
-      <span className="material-symbols-outlined text-2xl">menu</span>
-    </button>
-  </div>
-
-  {/*  Mobile Menu  */}
-  <div className={`lg:hidden overflow-hidden bg-academic-navy border-t border-white/10 transition-all duration-350 ${menuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"}`}>
-    <div className="px-6 py-4 space-y-4">
-      <a className="block text-xs font-bold uppercase tracking-widest text-secondary" href="#">Giới thiệu</a>
-      <a className="block text-xs font-bold uppercase tracking-widest text-white/80 hover:text-secondary" href="#program">Chương trình</a>
-      <a className="block text-xs font-bold uppercase tracking-widest text-white/80 hover:text-secondary" href="#/speakers-list">Diễn giả</a>
-      <a className="block text-xs font-bold uppercase tracking-widest text-white/80 hover:text-secondary" href="#venue">Địa điểm</a>
-      <a className="block text-xs font-bold uppercase tracking-widest text-white/80 hover:text-secondary" href="#/register-delegate">Đăng ký</a>
-      <a href="#/login" className="block px-6 py-3 bg-secondary text-white text-xs font-bold uppercase text-center rounded-sm">Đăng nhập →</a>
-    </div>
-  </div>
-</nav>
+      <LandingHeader active="home" />
 
 {/*  ═══════════════════════ HERO ═══════════════════════  */}
 <section className="relative bg-academic-navy py-10 lg:py-10 overflow-hidden border-b-4 border-secondary">
