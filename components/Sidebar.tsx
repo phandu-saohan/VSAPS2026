@@ -35,19 +35,22 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
             key={item.label}
             to={item.href}
             end={item.href === '/'}
-            onClick={() => setIsOpen(false)} // Close sidebar on navigation
+            onClick={() => setIsOpen(false)}
             className={({ isActive }) =>
-              `flex items-center px-4 py-2.5 rounded-lg text-sm font-medium transition-colors duration-200 ${
+              `group flex items-center px-4 py-3 rounded-xl text-sm font-semibold transition-all duration-200 ease-out transform-gpu ${
                 isActive
-                  ? 'bg-secondary text-white shadow-[0_10px_24px_rgba(235,36,142,0.32)] ring-1 ring-secondary/30'
-                  : 'text-gray-600 hover:bg-gray-100 hover:text-gray-800'
+                  ? 'bg-secondary text-white shadow-[0_12px_28px_rgba(235,36,142,0.28)] ring-1 ring-secondary/25 scale-[1.01]'
+                  : 'text-gray-600 hover:bg-secondary-light hover:text-secondary hover:translate-x-1 hover:shadow-sm'
               }`
             }
           >
             {({ isActive }) => (
               <>
-                <span className={isActive ? 'text-white' : 'text-gray-500'}>{item.icon}</span>
-                <span className="ml-3">{item.label}</span>
+                <span className={`transition-colors duration-200 ${isActive ? 'text-white' : 'text-gray-400 group-hover:text-secondary'}`}>
+                  {item.icon}
+                </span>
+                <span className="ml-3 tracking-wide">{item.label}</span>
+                {isActive && <span className="ml-auto w-2 h-2 rounded-full bg-white/90" />}
               </>
             )}
           </NavLink>
