@@ -18,8 +18,8 @@ const OneSignalInitializer = () => {
         appId: ONE_SIGNAL_APP_ID,
         allowLocalhostAsSecureOrigin: true,
         origin: FRONTEND_URL,
-        serviceWorkerPath: '/service-worker.js',
-        serviceWorkerUpdaterPath: '/service-worker.js',
+        serviceWorkerPath: '/OneSignalSDKWorker.js',
+        serviceWorkerUpdaterPath: '/OneSignalSDKUpdaterWorker.js',
         serviceWorkerParam: { scope: '/' },
       });
 

@@ -83,7 +83,7 @@ const ChangePasswordModal: React.FC<ChangePasswordModalProps> = ({ isOpen, onClo
   return (
     <div className="fixed inset-0 bg-black/55 backdrop-blur-sm flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-2xl shadow-2xl ring-1 ring-black/5 w-full max-w-md overflow-hidden">
-        <div className="px-6 py-4 bg-gradient-to-r from-[#061D5F] to-[#0b2a86] flex items-center justify-between">
+        <div className="px-6 py-4 bg-gradient-to-r from-secondary to-secondary-dark flex items-center justify-between">
           <h2 className="text-xl font-bold text-white">Đổi mật khẩu</h2>
           <button type="button" onClick={handleClose} className="text-white/80 hover:text-white hover:bg-white/10 rounded-full p-1 transition-colors">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
