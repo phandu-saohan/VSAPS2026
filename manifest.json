@@ -15,5 +15,21 @@
       "type": "image/svg+xml",
       "purpose": "any maskable"
     }
+  ],
+  "shortcuts": [
+    {
+      "name": "Dashboard",
+      "short_name": "Dashboard",
+      "description": "Mở bảng điều khiển quản trị",
+      "url": "/#/dashboard",
+      "icons": [{ "src": "/pwa-icon.svg", "sizes": "any", "type": "image/svg+xml" }]
+    },
+    {
+      "name": "Đăng nhập",
+      "short_name": "Login",
+      "description": "Đăng nhập vào hệ thống",
+      "url": "/#/login",
+      "icons": [{ "src": "/pwa-icon.svg", "sizes": "any", "type": "image/svg+xml" }]
+    }
   ]
 }

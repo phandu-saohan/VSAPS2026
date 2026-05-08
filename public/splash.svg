@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1200" role="img" aria-label="VSAPS splash screen">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#061D5F"/>
+      <stop offset="100%" stop-color="#0f2e86"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ff4fa7"/>
+      <stop offset="100%" stop-color="#eb248e"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="1200" fill="url(#bg)"/>
+  <circle cx="600" cy="520" r="240" fill="none" stroke="url(#accent)" stroke-width="34" opacity="0.9"/>
+  <path d="M446 328c42 80 28 162-12 238-44 85-36 153 6 220-92-56-138-154-108-265 24-86 75-156 114-193Z" fill="url(#accent)" opacity="0.95"/>
+  <path d="M754 328c39 37 90 107 114 193 30 111-16 209-108 265 42-67 50-135 6-220-40-76-54-158-12-238Z" fill="url(#accent)" opacity="0.95"/>
+  <path d="M600 320l45 92 101 15-73 71 17 100-90-47-90 47 17-100-73-71 101-15z" fill="url(#accent)"/>
+  <text x="600" y="870" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="122" font-weight="800" letter-spacing="10" fill="#ffffff">VSAPS 2026</text>
+  <text x="600" y="952" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="44" font-weight="500" fill="#dbeafe">Qu£n lý sñ kiÇn</text>
+</svg>

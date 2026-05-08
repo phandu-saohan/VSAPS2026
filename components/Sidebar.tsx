@@ -39,7 +39,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
             className={({ isActive }) =>
               `group flex items-center px-4 py-3 rounded-xl text-sm font-semibold transition-all duration-200 ease-out transform-gpu ${
                 isActive
-                  ? 'bg-secondary text-white shadow-[0_12px_28px_rgba(235,36,142,0.28)] ring-1 ring-secondary/25 scale-[1.01]'
+                  ? 'bg-[#061D5F] text-white shadow-[0_12px_28px_rgba(6,29,95,0.28)] ring-1 ring-[#061D5F]/25 scale-[1.01]'
                   : 'text-gray-600 hover:bg-secondary-light hover:text-secondary hover:translate-x-1 hover:shadow-sm'
               }`
             }
