@@ -85,21 +85,56 @@ const PublicSpeakers: React.FC = () => {
     <div className="min-h-screen bg-[#f8f6f6] text-[#221610] font-display">
       <LandingHeader active="speakers" />
 
-      <section className="bg-academic-navy pb-10 pt-6 text-white">
+      <section className="bg-academic-navy pb-14 pt-10 text-white">
         <div className="mx-auto max-w-[1280px] px-4 md:px-8">
           <FadeSection>
-            <div className="flex flex-wrap justify-between gap-3">
+            <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
               <div className="max-w-2xl">
-                <h1 className="text-4xl font-black leading-tight tracking-[-0.033em] md:text-5xl">Báo cáo viên VSAPS 2026</h1>
-                <p className="mt-3 text-[#bd8dce] text-base font-normal leading-normal">Kết nối với các chuyên gia phẫu thuật tạo hình hàng đầu Việt Nam.</p>
+                <p className="inline-flex rounded-full border border-white/15 bg-white/10 px-4 py-1 text-[11px] font-semibold uppercase tracking-[0.25em] text-white/85">
+                  Scientific Committee
+                </p>
+                <h1 className="mt-4 text-4xl font-black leading-tight tracking-[-0.033em] text-white md:text-5xl">
+                  Báo cáo viên VSAPS 2026
+                </h1>
+                <p className="mt-4 max-w-xl text-base font-normal leading-7 text-white/85">
+                  Kết nối với các chuyên gia phẫu thuật tạo hình hàng đầu Việt Nam.
+                </p>
               </div>
-              <div className="grid grid-cols-1 gap-3 sm:grid-cols-3 w-full md:w-auto">
-                {stats.map((s) => (
-                  <div key={s.label} className="rounded-xl border border-[#40204b] bg-white/5 px-4 py-3 text-center min-w-32">
-                    <div className="text-2xl font-black text-white">{s.value}</div>
-                    <div className="text-[11px] font-semibold uppercase tracking-wider text-[#bd8dce]">{s.label}</div>
+
+              <div className="rounded-3xl border border-white/10 bg-white/10 p-5 shadow-2xl backdrop-blur-xl">
+                <p className="text-sm font-bold text-white">Tìm kiếm nhanh</p>
+                <p className="mt-1 text-sm text-white/70">Theo tên, đơn vị, học hàm hoặc vai trò báo cáo.</p>
+                <div className="mt-5 grid gap-4 sm:grid-cols-2">
+                  <div className="sm:col-span-2">
+                    <label className="mb-2 block text-xs font-semibold uppercase tracking-[0.2em] text-white/55">Từ khóa</label>
+                    <div className="relative">
+                      <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-white/45">search</span>
+                      <input
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        placeholder="Nhập tên báo cáo viên..."
+                        className="w-full rounded-2xl border border-white/10 bg-white px-4 py-3 pl-10 text-sm text-gray-800 outline-none transition focus:border-[#f7b2d0] focus:ring-4 focus:ring-[#f7b2d0]/15"
+                      />
+                    </div>
                   </div>
-                ))}
+
+                  <div>
+                    <label className="mb-2 block text-xs font-semibold uppercase tracking-[0.2em] text-white/55">Phân loại</label>
+                    <select
+                      value={filterType}
+                      onChange={(e) => setFilterType(e.target.value)}
+                      className="w-full rounded-2xl border border-white/10 bg-white px-4 py-3 text-sm text-gray-800 outline-none transition focus:border-[#f7b2d0] focus:ring-4 focus:ring-[#f7b2d0]/15"
+                    >
+                      {speakerTypes.map((t) => <option key={t} value={t}>{t}</option>)}
+                    </select>
+                  </div>
+
+                  <div className="flex items-end">
+                    <button onClick={() => { setSearchTerm(''); setFilterType('All'); }} className="w-full rounded-2xl bg-secondary px-4 py-3 font-bold text-white transition-colors hover:brightness-110">
+                      Đặt lại
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </FadeSection>
@@ -107,29 +142,6 @@ const PublicSpeakers: React.FC = () => {
       </section>
 
       <main className="mx-auto max-w-[1280px] px-4 py-8 md:px-8">
-        <FadeSection>
-          <section className="mb-8 rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
-              <div className="md:col-span-2">
-                <label className="mb-2 block text-sm font-semibold text-gray-700">Tìm kiếm</label>
-                <div className="relative">
-                  <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">search</span>
-                  <input value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} placeholder="Tên bác sĩ..." className="w-full rounded-lg border border-gray-200 py-3 pl-10 pr-4 outline-none transition-all focus:border-[#ec5b13] focus:ring-1 focus:ring-[#ec5b13]" />
-                </div>
-              </div>
-              <div>
-                <label className="mb-2 block text-sm font-semibold text-gray-700">Phân loại</label>
-                <select value={filterType} onChange={(e) => setFilterType(e.target.value)} className="w-full rounded-lg border border-gray-200 bg-white p-3 outline-none focus:border-[#ec5b13] focus:ring-1 focus:ring-[#ec5b13]">
-                  {speakerTypes.map((t) => <option key={t} value={t}>{t}</option>)}
-                </select>
-              </div>
-              <div className="flex items-end">
-                <button onClick={() => { setSearchTerm(''); setFilterType('All'); }} className="w-full rounded-lg bg-[#ec5b13] px-4 py-3 font-bold text-white transition-colors hover:bg-[#d6520d]">Đặt lại</button>
-              </div>
-            </div>
-          </section>
-        </FadeSection>
-
         {loading ? (
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {[1,2,3,4,5,6,7,8].map((i) => <div key={i} className="h-[420px] animate-pulse rounded-xl bg-white border border-gray-200" />)}
@@ -149,23 +161,25 @@ const PublicSpeakers: React.FC = () => {
                   <div className="aspect-[4/5] bg-gray-100">
                     <img src={speaker.avatar_url || `https://ui-avatars.com/api/?name=${encodeURIComponent(speaker.full_name)}&background=random`} alt={speaker.full_name} className="h-full w-full object-contain bg-white transition-transform duration-500 group-hover:scale-105" />
                   </div>
-                  <div className="p-4">
-                    <span className={`inline-flex rounded px-2 py-1 text-[10px] font-bold uppercase tracking-wider ${speakerTypeLabel(speaker.speaker_type) === 'Khách mời quốc tế' ? 'bg-orange-100 text-[#ec5b13]' : 'bg-gray-100 text-gray-600'}`}>
+                  <div className="p-3.5">
+                    <span className={`inline-flex rounded px-2 py-1 text-[10px] font-bold uppercase tracking-wider ${speakerTypeLabel(speaker.speaker_type) === 'Khách mời quốc tế' ? 'bg-[#f7b2d0]/20 text-secondary' : 'bg-gray-100 text-gray-600'}`}>
                       {speakerTypeLabel(speaker.speaker_type)}
                     </span>
-                    <h3 className="mt-3 text-lg font-bold text-[#221610] group-hover:text-[#ec5b13]">{speaker.academic_rank} {speaker.full_name}</h3>
-                    <p className="mt-1 text-sm font-medium text-gray-600">{speaker.workplace}</p>
-                    <div className="mt-4 space-y-2 text-sm text-gray-500">
+                    <h3 className="mt-2.5 text-[15px] font-bold leading-6 text-[#221610] group-hover:text-secondary line-clamp-2 min-h-[3rem]">
+                      {speaker.academic_rank} {speaker.full_name}
+                    </h3>
+                    <p className="mt-1 text-sm font-medium text-gray-600 line-clamp-1">{speaker.workplace}</p>
+                    <div className="mt-3 space-y-1.5 text-sm text-gray-500">
                       <div className="flex items-start gap-2">
-                        <span className="material-symbols-outlined mt-0.5 text-[18px] text-[#ec5b13]">medical_services</span>
+                        <span className="material-symbols-outlined mt-0.5 text-[18px] text-secondary">medical_services</span>
                         <span className="line-clamp-2">{speaker.report_title_vn}</span>
                       </div>
                       <div className="flex items-start gap-2">
-                        <span className="material-symbols-outlined mt-0.5 text-[18px] text-[#ec5b13]">location_on</span>
+                        <span className="material-symbols-outlined mt-0.5 text-[18px] text-secondary">location_on</span>
                         <span>{speaker.country || 'Việt Nam'}</span>
                       </div>
                     </div>
-                    <div className="mt-4 flex items-center justify-between pt-3 text-sm font-semibold text-[#ec5b13] border-t border-gray-100">
+                    <div className="mt-3 flex items-center justify-between border-t border-gray-100 pt-2.5 text-sm font-semibold text-secondary">
                       <span>Xem chi tiết</span>
                       <span className="material-symbols-outlined text-[18px] transition-transform group-hover:translate-x-1">arrow_forward</span>
                     </div>
