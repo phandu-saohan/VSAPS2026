@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { supabase } from '../supabaseClient';
 import { Task, Profile, Status, TaskComment } from '../types';
-import { useAuth } from '../App';
+import { useAuth } from '../contexts/AuthContext';
 import { useToast } from '../contexts/ToastContext';
 
 // Helper to format date

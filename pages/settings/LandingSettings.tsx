@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { supabase } from '../../supabaseClient';
-import { useAuth } from '../../App';
+import { useAuth } from '../../contexts/AuthContext';
 import { useToast } from '../../contexts/ToastContext';
 import { DEFAULT_LANDING_CONFIG, LandingConfig } from '../../types/landing';
 

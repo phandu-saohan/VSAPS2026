@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { supabase } from '../../supabaseClient';
-import { useAuth } from '../../App';
+import { useAuth } from '../../contexts/AuthContext';
 
 const VAPID_PUBLIC_KEY = import.meta.env.VITE_VAPID_PUBLIC_KEY;
 

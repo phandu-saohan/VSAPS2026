@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo, lazy, Suspense } from 'react';
 import { supabase, uploadFileToStorage, getTransformedImageUrl } from '../supabaseClient';
 import { EventDocument, DocumentType } from '../types';
-import { useAuth } from '../App';
+import { useAuth } from '../contexts/AuthContext';
 
 import { ShareIcon } from '../components/icons/ShareIcon';
 const ShareDocumentModal = lazy(() => import('../components/ShareDocumentModal'));

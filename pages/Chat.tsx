@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { supabase } from '../supabaseClient';
-import { useAuth } from '../App';
+import { useAuth } from '../contexts/AuthContext';
 import { Message, Profile } from '../types';
 
 const Chat: React.FC = () => {

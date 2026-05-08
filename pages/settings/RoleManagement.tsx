@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../../supabaseClient';
-import { useAuth } from '../../App';
+import { useAuth } from '../../contexts/AuthContext';
 
 const permissionGroups = {
   'Chung': [

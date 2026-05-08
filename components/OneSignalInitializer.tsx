@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../App';
+import { useAuth } from '../contexts/AuthContext';
 import { FRONTEND_URL } from '../constants';
 
 // Store the init promise in a module-level variable to ensure it's a singleton.

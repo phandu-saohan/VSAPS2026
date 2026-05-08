@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { supabase } from '../supabaseClient';
-import { useAuth } from '../App';
+import { useAuth } from '../contexts/AuthContext';
 import { Notification } from '../types';
 import { BellIcon } from '../components/icons/BellIcon';
 

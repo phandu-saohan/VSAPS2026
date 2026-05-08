@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, lazy, Suspense } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import { NAV_ITEMS } from '../constants';
-import { useAuth } from '../App';
+import { useAuth } from '../contexts/AuthContext';
 import { useTheme, themes } from '../contexts/ThemeContext';
 import { BellIcon } from './icons/BellIcon';
 import { SettingsIcon } from './icons/SettingsIcon';

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo, useRef } from 'react';
-import { useAuth } from '../../App';
+import { useAuth } from '../../contexts/AuthContext';
 import { supabase, uploadFileToStorage } from '../../supabaseClient';
 import { EmailTemplate } from '../../types';
 

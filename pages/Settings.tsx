@@ -5,7 +5,7 @@ import { MailIcon } from '../components/icons/MailIcon';
 import { MessageIcon } from '../components/icons/MessageIcon';
 import { ApiIcon } from '../components/icons/ApiIcon';
 import { NotificationIcon } from '../components/icons/NotificationIcon';
-import { useAuth } from '../App';
+import { useAuth } from '../contexts/AuthContext';
 
 const GlobeIcon: React.FC<{ className?: string }> = ({ className }) => (
   <svg xmlns="http://www.w3.org/2000/svg" className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>

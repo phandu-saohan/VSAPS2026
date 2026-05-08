@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { supabase, uploadFileToStorage, getTransformedImageUrl } from '../supabaseClient';
 import { Sponsor, Status } from '../types';
-import { useAuth } from '../App';
+import { useAuth } from '../contexts/AuthContext';
 
 const toTitleCase = (str: string): string => {
   if (!str) return '';

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { supabase, uploadFileToStorage } from '../supabaseClient';
 import { FinanceTransaction, Profile } from '../types';
-import { useAuth } from '../App';
+import { useAuth } from '../contexts/AuthContext';
 
 const PAGE_SIZE = 20;
 

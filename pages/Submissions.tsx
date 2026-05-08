@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo, useRef, useCallback } from 'react';
 import { supabase, uploadFileToStorage } from '../supabaseClient';
 import { Submission, Status, EmailTemplate, FinanceTransaction, Profile } from '../types';
-import { useAuth } from '../App';
+import { useAuth } from '../contexts/AuthContext';
 import { useToast } from '../contexts/ToastContext';
 import jsPDF from 'jspdf';
 import QRCode from 'qrcode';

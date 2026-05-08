@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { supabase } from '../supabaseClient';
-import { useAuth } from '../App';
+import { useAuth } from '../contexts/AuthContext';
 
 type LoginRole = 'Quản trị viên' | 'Thành viên BTC' | 'Tình nguyện viên' | 'Báo cáo viên' | 'Đại biểu' | 'Nhà tài trợ';
 

@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { supabase } from '../supabaseClient';
 import { Status, Task, Submission, Speaker } from '../types';
-import { useAuth } from '../App';
+import { useAuth } from '../contexts/AuthContext';
 import { UsersIcon } from '../components/icons/UsersIcon';
 import { SponsorsIcon } from '../components/icons/SponsorsIcon';
 import { TasksIcon } from '../components/icons/TasksIcon';

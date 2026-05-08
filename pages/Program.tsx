@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { supabase } from '../supabaseClient';
 import { ProgramItem, Speaker } from '../types';
-import { useAuth } from '../App';
+import { useAuth } from '../contexts/AuthContext';
 
 const AccessDenied: React.FC = () => (
     <div>

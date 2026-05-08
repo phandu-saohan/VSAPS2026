@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { supabase } from '../supabaseClient';
 import { Speaker, Status } from '../types';
-import { useAuth } from '../App';
+import { useAuth } from '../contexts/AuthContext';
 import { useToast } from '../contexts/ToastContext';
 import { SpinnerIcon } from '../components/icons/SpinnerIcon';
 import { uploadFileToStorage } from '../supabaseClient';
