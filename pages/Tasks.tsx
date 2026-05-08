@@ -3,6 +3,7 @@ import { supabase } from '../supabaseClient';
 import { Task, Profile, Status, TaskComment } from '../types';
 import { useAuth } from '../contexts/AuthContext';
 import { useToast } from '../contexts/ToastContext';
+import { sendOneSignalNotification } from '../utils/oneSignal';
 
 // Helper to format date
 const formatDate = (dateString: string | null | undefined) => {
@@ -173,27 +174,15 @@ const Tasks: React.FC = () => {
     };
 
     const sendPushNotification = async (userIds: string[], title: string, message: string) => {
-        if (!userIds || userIds.length === 0) return;
-        
-        // The URL the user will be directed to when they click the notification.
-        const url = `${window.location.origin}/#/tasks`;
-
         try {
-            const { error } = await supabase.functions.invoke('send-onesignal-notification', {
-                body: {
-                    userIds,
-                    title,
-                    message,
-                    url,
-                },
+            await sendOneSignalNotification({
+                userIds,
+                title,
+                message,
+                url: `${window.location.origin}/#/tasks`,
             });
-            if (error) {
-                throw error;
-            }
-            console.log('Push notification sent successfully to:', userIds);
         } catch (err: any) {
             console.error('Error sending push notification:', err);
-            // Attempt to get the detailed error message from the function's response
             const detailedError = err.context?.data?.error || err.message;
             addToast(`Gửi thông báo đẩy thất bại: ${detailedError}`, 'error');
         }
