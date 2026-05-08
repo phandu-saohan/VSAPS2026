@@ -156,10 +156,24 @@ const ReportDetail: React.FC = () => {
                   </div>
                   <div className="space-y-4 p-5">
                     <div>
-                      <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#9a4c6c]">Bài báo cáo</p>
-                      <p className="mt-1 text-sm font-bold text-[#1e0f24]">{speaker.report_title_vn}</p>
+                      <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#9a4c6c]">Họ và tên</p>
+                      <p className="mt-1 text-base font-black text-[#1e0f24]">{speaker.academic_rank} {speaker.full_name}</p>
+                      <p className="mt-1 text-sm text-[#9a4c6c]">{speaker.workplace}</p>
                     </div>
-                    {speaker.report_title_en && <div><p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#9a4c6c]">English title</p><p className="mt-1 text-sm italic text-[#9a4c6c]">{speaker.report_title_en}</p></div>}
+                    <div className="grid gap-2 text-sm text-[#221610]">
+                      <div className="flex items-center justify-between gap-4 rounded-lg bg-[#f8f6f6] px-3 py-2">
+                        <span className="text-[#9a4c6c]">Liên lạc</span>
+                        <span className="font-semibold text-[#1e0f24]">{speaker.email || speaker.phone || '—'}</span>
+                      </div>
+                      <div className="flex items-center justify-between gap-4 rounded-lg bg-[#f8f6f6] px-3 py-2">
+                        <span className="text-[#9a4c6c]">Quốc gia</span>
+                        <span className="font-semibold text-[#1e0f24]">{speaker.country || 'Việt Nam'}</span>
+                      </div>
+                      <div className="flex items-center justify-between gap-4 rounded-lg bg-[#f8f6f6] px-3 py-2">
+                        <span className="text-[#9a4c6c]">Vai trò</span>
+                        <span className="font-semibold text-[#1e0f24]">{speaker.speaker_type}</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </FadeIn>

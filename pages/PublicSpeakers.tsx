@@ -158,14 +158,14 @@ const PublicSpeakers: React.FC = () => {
             {filteredSpeakers.map((speaker) => (
               <FadeSection key={speaker.id}>
                 <Link to={`/reports/${speaker.id}`} className="group block overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-shadow hover:shadow-md">
-                  <div className="bg-gray-100">
-                    <img src={speaker.avatar_url || `https://ui-avatars.com/api/?name=${encodeURIComponent(speaker.full_name)}&background=random`} alt={speaker.full_name} className="w-full object-contain bg-white transition-transform duration-500 group-hover:scale-105" />
+                  <div className="aspect-square bg-gray-100">
+                    <img src={speaker.avatar_url || `https://ui-avatars.com/api/?name=${encodeURIComponent(speaker.full_name)}&background=random`} alt={speaker.full_name} className="h-full w-full object-contain bg-white transition-transform duration-500 group-hover:scale-105" />
                   </div>
                   <div className="p-3.5">
                     <span className={`inline-flex rounded px-2 py-1 text-[10px] font-bold uppercase tracking-wider ${speakerTypeLabel(speaker.speaker_type) === 'Khách mời quốc tế' ? 'bg-[#f7b2d0]/20 text-secondary' : 'bg-gray-100 text-gray-600'}`}>
                       {speakerTypeLabel(speaker.speaker_type)}
                     </span>
-                    <h3 className="mt-2.5 text-[15px] font-bold leading-6 text-[#221610] group-hover:text-secondary line-clamp-2 min-h-[3rem]">
+                    <h3 className="mt-2.5 text-[15px] font-bold leading-6 text-secondary group-hover:text-secondary line-clamp-2">
                       {speaker.academic_rank} {speaker.full_name}
                     </h3>
                     <p className="mt-1 text-sm font-medium text-gray-600 line-clamp-1">{speaker.workplace}</p>
@@ -174,8 +174,12 @@ const PublicSpeakers: React.FC = () => {
                         <span className="material-symbols-outlined mt-0.5 text-[18px] text-secondary">medical_services</span>
                         <span className="line-clamp-2">{speaker.report_title_vn}</span>
                       </div>
-                      <div className="flex items-start gap-2">
-                        <span className="material-symbols-outlined mt-0.5 text-[18px] text-secondary">location_on</span>
+                      <div className="flex items-center gap-2">
+                        <img
+                          src={`https://flagcdn.com/w20/${getCountryCode(speaker.country)}.png`}
+                          alt={speaker.country || 'Việt Nam'}
+                          className="h-4 w-6 rounded-sm object-cover ring-1 ring-gray-200"
+                        />
                         <span>{speaker.country || 'Việt Nam'}</span>
                       </div>
                     </div>
