@@ -12,6 +12,7 @@ export interface LandingConfig {
   event_venue_address: string;
 
   // Media & Images
+  header_logo_url: string;          // Logo hiển thị trên header
   hero_image_url: string;           // Ảnh nền Hero section
   hero_video_thumb_url: string;     // Ảnh thumbnail video preview
   hero_video_url: string;           // URL video YouTube embed
@@ -93,6 +94,7 @@ export const DEFAULT_LANDING_CONFIG: LandingConfig = {
   event_venue_address: '786 Nguyễn Kiệm, Phường 3, Quận Gò Vấp, TP. Hồ Chí Minh',
 
   // Media & Images
+  header_logo_url: '/images/logo-vsaps.png',
   hero_image_url: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1600&q=80',
   hero_video_thumb_url: 'https://images.unsplash.com/photo-1551076805-e1869033e561?w=900&q=80',
   hero_video_url: '',

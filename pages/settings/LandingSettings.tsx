@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { supabase } from '../../supabaseClient';
+import { supabase, uploadFileToStorage } from '../../supabaseClient';
 import { useAuth } from '../../contexts/AuthContext';
 import { useToast } from '../../contexts/ToastContext';
 import { DEFAULT_LANDING_CONFIG, LandingConfig } from '../../types/landing';
@@ -175,6 +175,42 @@ const LandingSettings: React.FC = () => {
       {tab === 'media' && (
         <div className="space-y-7">
           {/* Hero Background */}
+          <div className="border border-gray-200 rounded-lg p-5 space-y-4">
+            <p className="text-sm font-bold text-gray-700 flex items-center gap-2">🖼️ Logo Header</p>
+            <Field label="URL logo hiển thị trên header">
+              <Input
+                value={cfg.header_logo_url ?? ''}
+                onChange={e => set('header_logo_url', e.target.value)}
+                placeholder="/images/logo-vsaps.png hoặc https://..." />
+              {cfg.header_logo_url && (
+                <div className="mt-2 flex items-center gap-3 rounded-md border bg-gray-50 p-3">
+                  <img src={cfg.header_logo_url} alt="Header logo preview" className="h-12 w-12 object-contain" />
+                  <span className="text-xs text-gray-500">Preview</span>
+                </div>
+              )}
+            </Field>
+            <Field label="Upload logo từ máy tính">
+              <input
+                type="file"
+                accept="image/*"
+                onChange={async (e) => {
+                  const file = e.target.files?.[0];
+                  if (!file) return;
+                  const uploadedUrl = await uploadFileToStorage(file, 'event_assets', 'header_logo');
+                  if (uploadedUrl) {
+                    set('header_logo_url', uploadedUrl);
+                    addToast('Đã tải logo lên thành công.', 'success');
+                  } else {
+                    addToast('Không thể tải logo lên.', 'error');
+                  }
+                  e.currentTarget.value = '';
+                }}
+                className="w-full rounded-md border border-gray-200 bg-white px-3 py-2 text-sm"
+              />
+              <p className="mt-1 text-[11px] text-gray-400">Logo nên nền trong suốt, kích thước vuông hoặc ngang ngắn.</p>
+            </Field>
+          </div>
+
           <div className="border border-gray-200 rounded-lg p-5 space-y-4">
             <p className="text-sm font-bold text-gray-700 flex items-center gap-2">🖼️ Ảnh nền Hero</p>
             <Field label="URL ảnh nền (Hero section)">

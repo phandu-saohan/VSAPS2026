@@ -83,7 +83,7 @@ const PublicSpeakers: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#f8f6f6] text-[#221610] font-display">
-      <LandingHeader active="speakers" />
+      <LandingHeader active="speakers" logoUrl="/images/logo-vsaps.png" eventName="VSAPS 2026" />
 
       <section className="bg-academic-navy pb-14 pt-10 text-white">
         <div className="mx-auto max-w-[1280px] px-4 md:px-8">

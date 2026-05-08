@@ -163,7 +163,7 @@ export default function LandingPage() {
         .landing-wrapper .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
       `}</style>
 
-      <LandingHeader active="home" />
+      <LandingHeader active="home" logoUrl={cfg.header_logo_url} eventName={cfg.event_name} />
 
 {/*  ═══════════════════════ HERO ═══════════════════════  */}
 <section className="relative bg-academic-navy py-10 lg:py-10 overflow-hidden border-b-4 border-secondary">

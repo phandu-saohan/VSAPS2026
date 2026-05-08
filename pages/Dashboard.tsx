@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
+import LandingHeader from '../components/LandingHeader';
 import { Link } from 'react-router-dom';
 import { supabase } from '../supabaseClient';
 import { Status, Task, Submission, Speaker } from '../types';
@@ -156,8 +157,10 @@ const Dashboard: React.FC = () => {
   if (error) return <div className="text-red-500">Lỗi: {error}</div>;
 
   return (
-    <div className="space-y-8">
-      <div className="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm">
+    <div className="min-h-screen bg-[#f8f6f6]">
+      <LandingHeader active="other" logoUrl="/images/logo-vsaps.png" eventName="VSAPS 2026" />
+      <div className="mx-auto max-w-7xl space-y-8 px-4 py-8 sm:px-6 lg:px-8">
+        <div className="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm">
         <p className="text-xs uppercase tracking-[0.3em] text-secondary font-bold">{role || 'Hệ thống'}</p>
         <h1 className="mt-2 text-3xl font-bold text-gray-800">Chào mừng trở lại, {profile?.full_name?.split(' ').pop()}!</h1>
         <p className="mt-2 text-gray-600">{subtitle}</p>
@@ -312,6 +315,7 @@ const Dashboard: React.FC = () => {
           </div>
         </div>
       )}
+      </div>
     </div>
   );
 };

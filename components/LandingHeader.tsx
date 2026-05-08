@@ -6,21 +6,26 @@ interface LandingHeaderProps {
   showSearch?: boolean;
   onSearchChange?: (value: string) => void;
   searchValue?: string;
+  logoUrl?: string;
+  eventName?: string;
 }
 
 const linkBase = 'text-white/90 hover:text-[#f7b2d0] transition-colors';
 
-const LandingHeader: React.FC<LandingHeaderProps> = ({ active = 'other', showSearch = false, onSearchChange, searchValue = '' }) => {
+const LandingHeader: React.FC<LandingHeaderProps> = ({ active = 'other', showSearch = false, onSearchChange, searchValue = '', logoUrl, eventName = 'VSAPS 2026' }) => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const logoSrc = logoUrl || '/images/logo-vsaps.png';
 
   return (
     <header className="sticky top-0 z-50 bg-academic-navy text-white border-b border-white/10">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between gap-4 py-3">
-          <Link to="/" className="flex items-center gap-4">
-            <div className="w-10 h-10 bg-secondary rounded-sm flex items-center justify-center font-black text-white text-lg tracking-tighter">VS</div>
-            <div className="h-8 w-px bg-white/20" />
-            <span className="text-sm font-semibold tracking-widest uppercase hidden sm:inline">VSAPS 2026</span>
+          <Link to="/" className="flex items-center gap-3 min-w-0">
+            <div className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-sm bg-white/5 ring-1 ring-white/10">
+              <img src={logoSrc} alt={eventName} className="h-full w-full object-contain p-1" />
+            </div>
+            <div className="hidden sm:block h-8 w-px bg-white/20" />
+            <span className="hidden min-w-0 truncate text-sm font-semibold uppercase tracking-widest sm:inline">{eventName}</span>
           </Link>
 
           <div className="hidden lg:flex items-center gap-8">
@@ -51,8 +56,17 @@ const LandingHeader: React.FC<LandingHeaderProps> = ({ active = 'other', showSea
           </div>
         </div>
 
-        <div className={`lg:hidden overflow-hidden border-t border-white/10 transition-all duration-300 ${menuOpen ? 'max-h-80 opacity-100 py-4' : 'max-h-0 opacity-0'}`}>
+        <div className={`lg:hidden overflow-hidden border-t border-white/10 transition-all duration-300 ${menuOpen ? 'max-h-[32rem] opacity-100 py-4' : 'max-h-0 opacity-0'}`}>
           <div className="space-y-4">
+            <div className="flex items-center gap-3 pb-2">
+              <div className="flex h-9 w-9 items-center justify-center overflow-hidden rounded-sm bg-white/5 ring-1 ring-white/10">
+                <img src={logoSrc} alt={eventName} className="h-full w-full object-contain p-1" />
+              </div>
+              <div className="min-w-0">
+                <p className="truncate text-xs font-bold uppercase tracking-widest text-white">{eventName}</p>
+                <p className="text-[11px] text-white/50">VSAPS</p>
+              </div>
+            </div>
             <Link className="block text-xs font-bold uppercase tracking-widest text-secondary" to="/">Giới thiệu</Link>
             <a className="block text-xs font-bold uppercase tracking-widest text-white/80 hover:text-secondary" href="#program">Chương trình</a>
             <Link className="block text-xs font-bold uppercase tracking-widest text-white/80 hover:text-secondary" to="/speakers-list">Diễn giả</Link>

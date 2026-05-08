@@ -95,7 +95,7 @@ const ReportDetail: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#f8f6f6] text-[#221610]">
-      <LandingHeader active="other" showSearch searchValue={searchTerm} onSearchChange={setSearchTerm} />
+      <LandingHeader active="other" showSearch searchValue={searchTerm} onSearchChange={setSearchTerm} logoUrl="/images/logo-vsaps.png" eventName="VSAPS 2026" />
 
       <main className="mx-auto max-w-[1280px] px-4 py-8 md:px-8">
         <FadeIn className="mb-6 text-sm text-[#9a4c6c]">
