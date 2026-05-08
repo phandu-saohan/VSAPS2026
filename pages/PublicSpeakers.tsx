@@ -147,24 +147,15 @@ const PublicSpeakers: React.FC = () => {
           </div>
           <div className="mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[1.2fr_0.8fr] lg:px-8 lg:py-20">
             <FadeSection className="relative z-10">
-              <p className="mb-4 inline-flex rounded-full border border-white/15 bg-white/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.25em] text-white/80">
+              <p className="mb-4 inline-flex rounded-full border border-white/20 bg-white/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.25em] text-white/90">
                 Scientific Committee
               </p>
-              <h1 className="max-w-3xl text-4xl font-black leading-tight tracking-tight sm:text-5xl lg:text-6xl">
+              <h1 className="max-w-3xl text-4xl font-black leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
                 Đội ngũ diễn giả & chuyên gia VSAPS 2026
               </h1>
-              <p className="mt-5 max-w-2xl text-sm leading-7 text-white/75 sm:text-base">
+              <p className="mt-5 max-w-2xl text-sm leading-7 text-white/85 sm:text-base">
                 Khám phá danh sách các chuyên gia, chủ tọa và báo cáo viên tham gia chương trình khoa học của hội nghị.
               </p>
-
-              <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
-                {stats.map((stat) => (
-                  <div key={stat.label} className="glass-effect rounded-2xl p-4 shadow-premium backdrop-blur-md">
-                    <p className="text-2xl font-black text-white">{stat.value}</p>
-                    <p className="mt-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/55">{stat.label}</p>
-                  </div>
-                ))}
-              </div>
             </FadeSection>
 
             <FadeSection className="relative z-10">
@@ -211,14 +202,10 @@ const PublicSpeakers: React.FC = () => {
               <h2 className="text-2xl font-black text-academic-navy sm:text-3xl">Danh sách chuyên gia</h2>
               <p className="mt-2 text-sm text-academic-grey">{loading ? 'Đang tải dữ liệu...' : `${filteredSpeakers.length} kết quả phù hợp`}</p>
             </div>
-            <div className="hidden rounded-2xl bg-white px-4 py-3 shadow-premium ring-1 ring-border-subtle md:block">
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-academic-grey">Bộ lọc đang chọn</p>
-              <p className="mt-1 text-sm font-bold text-academic-navy">{filterType === 'All' ? 'Tất cả' : filterType}</p>
-            </div>
           </FadeSection>
 
           {loading ? (
-            <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+            <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
               {[1, 2, 3, 4, 5, 6].map((i) => (
                 <div key={i} className="animate-pulse overflow-hidden card-premium">
                   <div className="h-52 bg-gray-200" />
@@ -247,7 +234,7 @@ const PublicSpeakers: React.FC = () => {
                     to={`/reports/${speaker.id}`}
                     className="group overflow-hidden card-premium hover:ring-secondary/20"
                   >
-                    <div className="relative h-56 overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200 sm:h-60">
+                    <div className="relative h-56 overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200 sm:h-56">
                       <img
                         src={speaker.avatar_url || `https://ui-avatars.com/api/?name=${encodeURIComponent(speaker.full_name)}&background=random`}
                         alt={speaker.full_name}
@@ -265,14 +252,14 @@ const PublicSpeakers: React.FC = () => {
                       </div>
                     </div>
 
-                    <div className="space-y-4 p-5">
-                      <div className="flex items-center gap-3 text-sm text-academic-slate">
-                        <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[#f6e8ef] text-secondary">
-                          <span className="material-symbols-outlined text-[20px]">apartment</span>
+                    <div className="space-y-3 p-4">
+                      <div className="flex items-center gap-3 text-xs text-academic-slate">
+                        <div className="flex h-9 w-9 items-center justify-center rounded-2xl bg-[#f6e8ef] text-secondary">
+                          <span className="material-symbols-outlined text-[18px]">apartment</span>
                         </div>
                         <div className="min-w-0 flex-1">
                           <p className="truncate font-semibold text-academic-navy">{speaker.workplace}</p>
-                          <div className="mt-1 flex items-center gap-2 text-xs text-academic-grey">
+                          <div className="mt-1 flex items-center gap-2 text-[11px] text-academic-grey">
                             <img
                               src={`https://flagcdn.com/w20/${getCountryCode(speaker.country)}.png`}
                               className="h-3.5 w-5 rounded-sm object-cover ring-1 ring-border-subtle"
@@ -283,16 +270,16 @@ const PublicSpeakers: React.FC = () => {
                         </div>
                       </div>
 
-                      <div className="rounded-2xl bg-surface p-4">
-                        <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-academic-grey">Đề tài báo cáo</p>
+                      <div className="rounded-2xl bg-surface p-3">
+                        <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-academic-grey">Đề tài</p>
                         <p className="mt-2 line-clamp-2 text-sm font-semibold leading-6 text-academic-navy italic">“{speaker.report_title_vn}”</p>
                       </div>
 
-                      <div className="flex items-center justify-between pt-1">
-                        <span className="text-xs font-semibold text-academic-grey">Xem chi tiết chuyên gia</span>
-                        <span className="inline-flex items-center gap-2 text-sm font-bold text-secondary transition-transform group-hover:translate-x-1">
-                          Chi tiết
-                          <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
+                      <div className="flex items-center justify-between pt-1 text-xs">
+                        <span className="font-semibold text-academic-grey">Xem chi tiết</span>
+                        <span className="inline-flex items-center gap-1 font-bold text-secondary transition-transform group-hover:translate-x-1">
+                          Mở
+                          <span className="material-symbols-outlined text-[16px]">arrow_forward</span>
                         </span>
                       </div>
                     </div>
