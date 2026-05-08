@@ -1,0 +1,19 @@
+{
+  "name": "Quản lý sự kiện VSAPS 2026",
+  "short_name": "VSAPS 2026",
+  "description": "Hệ thống quản lý sự kiện, người dùng, nhà tài trợ và công việc cho VSAPS 2026.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#F8FAFC",
+  "theme_color": "#061D5F",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/pwa-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
