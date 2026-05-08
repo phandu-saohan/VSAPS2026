@@ -231,7 +231,7 @@ const PublicSpeakers: React.FC = () => {
               {filteredSpeakers.map((speaker) => (
                 <FadeSection key={speaker.id}>
                   <Link
-                    to={`/reports/${speaker.id}`}
+                    to={`/speakers-list`}
                     className="group overflow-hidden card-premium hover:ring-secondary/20"
                   >
                     <div className="relative h-56 overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200 sm:h-56">
@@ -276,7 +276,7 @@ const PublicSpeakers: React.FC = () => {
                       </div>
 
                       <div className="flex items-center justify-between pt-1 text-xs">
-                        <span className="font-semibold text-academic-grey">Xem chi tiết</span>
+                        <span className="font-semibold text-academic-grey">Xem thông tin</span>
                         <span className="inline-flex items-center gap-1 font-bold text-secondary transition-transform group-hover:translate-x-1">
                           Mở
                           <span className="material-symbols-outlined text-[16px]">arrow_forward</span>
