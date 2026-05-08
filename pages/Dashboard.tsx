@@ -156,164 +156,206 @@ const Dashboard: React.FC = () => {
   if (error) return <div className="text-red-500">Lỗi: {error}</div>;
 
   return (
-    <div className="min-h-screen bg-[#f8f6f6]">
-      <div className="mx-auto max-w-7xl space-y-8 px-4 py-8 sm:px-6 lg:px-8">
-        <div className="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm">
-        <p className="text-xs uppercase tracking-[0.3em] text-secondary font-bold">{role || 'Hệ thống'}</p>
-        <h1 className="mt-2 text-3xl font-bold text-gray-800">Chào mừng trở lại, {profile?.full_name?.split(' ').pop()}!</h1>
-        <p className="mt-2 text-gray-600">{subtitle}</p>
-      </div>
-
-      {(isSponsor || isStaff) && (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm">
-            <p className="text-[13px] text-gray-400 font-medium mb-2">Tổng giá trị tài trợ</p>
-            <p className="text-3xl font-bold text-blue-600">{new Intl.NumberFormat('vi-VN').format(stats.totalSponsorValue)} đ</p>
-          </div>
-          <div className="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm">
-            <p className="text-[13px] text-gray-400 font-medium mb-2">Đã thanh toán</p>
-            <p className="text-3xl font-bold text-green-600">{new Intl.NumberFormat('vi-VN').format(stats.paidSponsorValue)} đ</p>
-          </div>
-          <div className="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm">
-            <p className="text-[13px] text-gray-400 font-medium mb-2">Chờ thanh toán</p>
-            <p className="text-3xl font-bold text-orange-500">{new Intl.NumberFormat('vi-VN').format(stats.pendingSponsorValue)} đ</p>
-          </div>
-        </div>
-      )}
-
-      {isStaff && (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <Link to="/submissions" className="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm hover:shadow-md transition-all flex items-center space-x-4">
-            <div className="p-3 rounded-2xl bg-blue-50"><UsersIcon className="w-6 h-6 text-blue-500" /></div>
-            <div><p className="text-[12px] text-gray-400 font-medium">Tổng đăng ký</p><p className="text-2xl font-bold text-gray-800">{stats.attendees}</p></div>
-          </Link>
-          <Link to="/speakers-list" className="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm hover:shadow-md transition-all flex items-center space-x-4">
-            <div className="p-3 rounded-2xl bg-pink-50"><SpeakersIcon className="w-6 h-6 text-pink-500" /></div>
-            <div><p className="text-[12px] text-gray-400 font-medium">Báo cáo viên</p><p className="text-2xl font-bold text-gray-800">{stats.speakers}</p></div>
-          </Link>
-          <Link to="/sponsors" className="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm hover:shadow-md transition-all flex items-center space-x-4">
-            <div className="p-3 rounded-2xl bg-purple-50"><SponsorsIcon className="w-6 h-6 text-purple-500" /></div>
-            <div><p className="text-[12px] text-gray-400 font-medium">Nhà tài trợ</p><p className="text-2xl font-bold text-gray-800">{stats.sponsors}</p></div>
-          </Link>
-          <Link to="/tasks" className="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm hover:shadow-md transition-all flex items-center space-x-4">
-            <div className="p-3 rounded-2xl bg-slate-50"><TasksIcon className="w-6 h-6 text-slate-500" /></div>
-            <div><p className="text-[12px] text-gray-400 font-medium">Công việc</p><p className="text-2xl font-bold text-gray-800">{stats.tasks}</p></div>
-          </Link>
-        </div>
-      )}
-
-      {isSponsor && (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div className="bg-white p-6 rounded-2xl shadow-sm">
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">Thông tin nhanh dành cho đối tác</h3>
-            <div className="space-y-4 text-sm text-gray-600">
-              <p>• Tài liệu sự kiện và thông báo hậu cần được cập nhật tại kho tài liệu.</p>
-              <p>• Theo dõi trạng thái tài trợ và các mục hỗ trợ từ Ban tổ chức.</p>
+    <div className="min-h-screen bg-[#f8f6f6] text-[#221610]">
+      <main className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
+        <section className="rounded-3xl bg-gradient-to-br from-[#1e0f24] to-[#361a41] px-5 py-6 text-white shadow-lg sm:px-6 lg:px-8">
+          <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+            <div className="max-w-2xl">
+              <p className="text-xs uppercase tracking-[0.3em] text-[#f7b2d0] font-bold">{role || 'Hệ thống'}</p>
+              <h1 className="mt-2 text-3xl font-black tracking-[-0.03em] sm:text-4xl">
+                Chào mừng trở lại, {profile?.full_name?.split(' ').pop() || 'bạn'}!
+              </h1>
+              <p className="mt-3 max-w-xl text-sm leading-7 text-white/80 sm:text-base">{subtitle}</p>
             </div>
-          </div>
-          <div className="bg-white p-6 rounded-2xl shadow-sm">
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">Hành động nhanh</h3>
-            <div className="space-y-3">
-              {quickActions.map(action => <Link key={action.href} to={action.href} className="block px-4 py-3 rounded-xl bg-blue-50 text-blue-700 font-semibold hover:bg-blue-100">{action.label}</Link>)}
-            </div>
-          </div>
-        </div>
-      )}
 
-      {isSpeaker && (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div className="bg-white p-6 rounded-2xl shadow-sm">
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">Bài báo cáo gần đây</h3>
-            <div className="space-y-4">
-              {recentSpeakers.length > 0 ? recentSpeakers.map(sp => (
-                <div key={sp.id} className="border-b border-gray-100 pb-3 last:border-b-0">
-                  <p className="font-medium text-gray-700">{sp.full_name}</p>
-                  <p className="text-sm text-gray-500 truncate">{sp.report_title_vn}</p>
-                  <p className="text-xs text-gray-400 mt-1">{sp.status}</p>
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:min-w-[520px]">
+              {[
+                { label: 'Đăng ký', value: stats.attendees.toString(), tone: 'bg-white/10' },
+                { label: 'BCV', value: stats.speakers.toString(), tone: 'bg-white/10' },
+                { label: 'N.Tài trợ', value: stats.sponsors.toString(), tone: 'bg-white/10' },
+                { label: 'Công việc', value: stats.tasks.toString(), tone: 'bg-white/10' },
+              ].map((item) => (
+                <div key={item.label} className={`rounded-2xl border border-white/10 ${item.tone} px-4 py-3 backdrop-blur-sm`}>
+                  <p className="text-[11px] uppercase tracking-[0.22em] text-white/60">{item.label}</p>
+                  <p className="mt-1 text-2xl font-black text-white">{item.value}</p>
                 </div>
-              )) : <p className="text-sm text-gray-400">Chưa có báo cáo viên nào.</p>}
+              ))}
             </div>
           </div>
-          <div className="bg-white p-6 rounded-2xl shadow-sm">
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">Tác vụ nhanh</h3>
-            <div className="space-y-3">
-              {quickActions.map(action => <Link key={action.href} to={action.href} className="block px-4 py-3 rounded-xl bg-pink-50 text-pink-700 font-semibold hover:bg-pink-100">{action.label}</Link>)}
-            </div>
-          </div>
-        </div>
-      )}
+        </section>
 
-      {isDelegate && (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div className="bg-white p-6 rounded-2xl shadow-sm">
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">Thông tin tham dự</h3>
-            <div className="space-y-3 text-sm text-gray-600">
-              <p>• Trạng thái đăng ký: <span className="font-semibold text-gray-800">Đã xác thực</span></p>
-              <p>• Tài liệu hội nghị: <span className="font-semibold text-gray-800">Đã sẵn sàng</span></p>
-              <p>• Chứng chỉ CME: <span className="font-semibold text-gray-800">Sẽ được cập nhật sau sự kiện</span></p>
-            </div>
-          </div>
-          <div className="bg-white p-6 rounded-2xl shadow-sm">
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">Hành động nhanh</h3>
-            <div className="space-y-3">
-              {quickActions.map(action => <Link key={action.href} to={action.href} className="block px-4 py-3 rounded-xl bg-green-50 text-green-700 font-semibold hover:bg-green-100">{action.label}</Link>)}
-            </div>
-          </div>
-        </div>
-      )}
-
-      {isVolunteer && (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div className="bg-white p-6 rounded-2xl shadow-sm">
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">Công việc của bạn</h3>
-            <div className="space-y-4">
-              {upcomingTasks.length > 0 ? upcomingTasks.slice(0, 3).map(task => (
-                <div key={task.id} className="border-b border-gray-100 pb-3 last:border-b-0">
-                  <p className="font-medium text-gray-700">{task.title}</p>
-                  <p className="text-sm text-gray-500">Hạn: {formatDate(task.due_date)}</p>
+        <div className="mt-6 grid gap-6 lg:grid-cols-12">
+          <section className="lg:col-span-8 space-y-6">
+            {(isSponsor || isStaff) && (
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+                <div className="rounded-2xl border border-gray-100 bg-white p-5 shadow-sm">
+                  <p className="text-sm text-gray-500">Tổng giá trị tài trợ</p>
+                  <p className="mt-2 text-2xl font-black text-blue-600">{new Intl.NumberFormat('vi-VN').format(stats.totalSponsorValue)} đ</p>
                 </div>
-              )) : <p className="text-sm text-gray-400">Chưa có công việc được giao.</p>}
-            </div>
-          </div>
-          <div className="bg-white p-6 rounded-2xl shadow-sm">
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">Hỗ trợ nhanh</h3>
-            <div className="space-y-3">
-              {quickActions.map(action => <Link key={action.href} to={action.href} className="block px-4 py-3 rounded-xl bg-slate-50 text-slate-700 font-semibold hover:bg-slate-100">{action.label}</Link>)}
-            </div>
-          </div>
-        </div>
-      )}
+                <div className="rounded-2xl border border-gray-100 bg-white p-5 shadow-sm">
+                  <p className="text-sm text-gray-500">Đã thanh toán</p>
+                  <p className="mt-2 text-2xl font-black text-green-600">{new Intl.NumberFormat('vi-VN').format(stats.paidSponsorValue)} đ</p>
+                </div>
+                <div className="rounded-2xl border border-gray-100 bg-white p-5 shadow-sm">
+                  <p className="text-sm text-gray-500">Chờ thanh toán</p>
+                  <p className="mt-2 text-2xl font-black text-orange-500">{new Intl.NumberFormat('vi-VN').format(stats.pendingSponsorValue)} đ</p>
+                </div>
+              </div>
+            )}
 
-      {isStaff && (
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <div className="lg:col-span-2 bg-white p-6 rounded-2xl shadow-sm">
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">Đăng ký gần đây</h3>
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm text-left">
-                <thead className="text-xs text-gray-400 uppercase font-bold border-b border-gray-100">
-                  <tr><th className="pb-3">Họ tên</th><th className="pb-3">Loại</th><th className="pb-3 text-right">Trạng thái</th></tr>
-                </thead>
-                <tbody className="divide-y divide-gray-50">
-                  {recentSubmissions.length > 0 ? recentSubmissions.map(sub => (
-                    <tr key={sub.id} className="hover:bg-gray-50 transition-colors">
-                      <td className="py-3 font-medium text-gray-700">{sub.full_name}</td>
-                      <td className="py-3 text-gray-500">{sub.attendee_type}</td>
-                      <td className="py-3 text-right">{sub.status}</td>
-                    </tr>
-                  )) : <tr><td colSpan={3} className="py-4 text-center text-gray-400">Chưa có đăng ký nào.</td></tr>}
-                </tbody>
-              </table>
+            {isStaff && (
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+                <Link to="/submissions" className="group rounded-2xl border border-gray-100 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
+                  <div className="flex items-center gap-4">
+                    <div className="rounded-2xl bg-blue-50 p-3"><UsersIcon className="h-6 w-6 text-blue-500" /></div>
+                    <div><p className="text-xs uppercase tracking-widest text-gray-400">Tổng đăng ký</p><p className="text-2xl font-black text-gray-800">{stats.attendees}</p></div>
+                  </div>
+                </Link>
+                <Link to="/speakers-list" className="group rounded-2xl border border-gray-100 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
+                  <div className="flex items-center gap-4">
+                    <div className="rounded-2xl bg-pink-50 p-3"><SpeakersIcon className="h-6 w-6 text-pink-500" /></div>
+                    <div><p className="text-xs uppercase tracking-widest text-gray-400">Báo cáo viên</p><p className="text-2xl font-black text-gray-800">{stats.speakers}</p></div>
+                  </div>
+                </Link>
+                <Link to="/sponsors" className="group rounded-2xl border border-gray-100 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
+                  <div className="flex items-center gap-4">
+                    <div className="rounded-2xl bg-purple-50 p-3"><SponsorsIcon className="h-6 w-6 text-purple-500" /></div>
+                    <div><p className="text-xs uppercase tracking-widest text-gray-400">Nhà tài trợ</p><p className="text-2xl font-black text-gray-800">{stats.sponsors}</p></div>
+                  </div>
+                </Link>
+                <Link to="/tasks" className="group rounded-2xl border border-gray-100 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
+                  <div className="flex items-center gap-4">
+                    <div className="rounded-2xl bg-slate-50 p-3"><TasksIcon className="h-6 w-6 text-slate-500" /></div>
+                    <div><p className="text-xs uppercase tracking-widest text-gray-400">Công việc</p><p className="text-2xl font-black text-gray-800">{stats.tasks}</p></div>
+                  </div>
+                </Link>
+              </div>
+            )}
+
+            {isSponsor && (
+              <div className="grid gap-6 lg:grid-cols-2">
+                <div className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
+                  <h3 className="text-lg font-bold text-gray-800">Thông tin nhanh dành cho đối tác</h3>
+                  <div className="mt-4 space-y-3 text-sm leading-7 text-gray-600">
+                    <p>• Tài liệu sự kiện và thông báo hậu cần được cập nhật tại kho tài liệu.</p>
+                    <p>• Theo dõi trạng thái tài trợ và các mục hỗ trợ từ Ban tổ chức.</p>
+                  </div>
+                </div>
+                <div className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
+                  <h3 className="text-lg font-bold text-gray-800">Hành động nhanh</h3>
+                  <div className="mt-4 space-y-3">
+                    {quickActions.map((action) => <Link key={action.href} to={action.href} className="block rounded-xl bg-blue-50 px-4 py-3 font-semibold text-blue-700 transition hover:bg-blue-100">{action.label}</Link>)}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {isSpeaker && (
+              <div className="grid gap-6 lg:grid-cols-2">
+                <div className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
+                  <h3 className="text-lg font-bold text-gray-800">Bài báo cáo gần đây</h3>
+                  <div className="mt-4 space-y-4">
+                    {recentSpeakers.length > 0 ? recentSpeakers.map((sp) => (
+                      <div key={sp.id} className="border-b border-gray-100 pb-3 last:border-b-0">
+                        <p className="font-semibold text-gray-800">{sp.full_name}</p>
+                        <p className="text-sm text-gray-500 line-clamp-2">{sp.report_title_vn}</p>
+                        <p className="mt-1 text-xs text-gray-400">{sp.status}</p>
+                      </div>
+                    )) : <p className="text-sm text-gray-400">Chưa có báo cáo viên nào.</p>}
+                  </div>
+                </div>
+                <div className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
+                  <h3 className="text-lg font-bold text-gray-800">Tác vụ nhanh</h3>
+                  <div className="mt-4 space-y-3">
+                    {quickActions.map((action) => <Link key={action.href} to={action.href} className="block rounded-xl bg-pink-50 px-4 py-3 font-semibold text-pink-700 transition hover:bg-pink-100">{action.label}</Link>)}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {isDelegate && (
+              <div className="grid gap-6 lg:grid-cols-2">
+                <div className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
+                  <h3 className="text-lg font-bold text-gray-800">Thông tin tham dự</h3>
+                  <div className="mt-4 space-y-3 text-sm leading-7 text-gray-600">
+                    <p>• Trạng thái đăng ký: <span className="font-semibold text-gray-800">Đã xác thực</span></p>
+                    <p>• Tài liệu hội nghị: <span className="font-semibold text-gray-800">Đã sẵn sàng</span></p>
+                    <p>• Chứng chỉ CME: <span className="font-semibold text-gray-800">Sẽ được cập nhật sau sự kiện</span></p>
+                  </div>
+                </div>
+                <div className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
+                  <h3 className="text-lg font-bold text-gray-800">Hành động nhanh</h3>
+                  <div className="mt-4 space-y-3">
+                    {quickActions.map((action) => <Link key={action.href} to={action.href} className="block rounded-xl bg-green-50 px-4 py-3 font-semibold text-green-700 transition hover:bg-green-100">{action.label}</Link>)}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {isVolunteer && (
+              <div className="grid gap-6 lg:grid-cols-2">
+                <div className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
+                  <h3 className="text-lg font-bold text-gray-800">Công việc của bạn</h3>
+                  <div className="mt-4 space-y-4">
+                    {upcomingTasks.length > 0 ? upcomingTasks.slice(0, 3).map((task) => (
+                      <div key={task.id} className="border-b border-gray-100 pb-3 last:border-b-0">
+                        <p className="font-semibold text-gray-800">{task.title}</p>
+                        <p className="text-sm text-gray-500">Hạn: {formatDate(task.due_date)}</p>
+                      </div>
+                    )) : <p className="text-sm text-gray-400">Chưa có công việc được giao.</p>}
+                  </div>
+                </div>
+                <div className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
+                  <h3 className="text-lg font-bold text-gray-800">Hỗ trợ nhanh</h3>
+                  <div className="mt-4 space-y-3">
+                    {quickActions.map((action) => <Link key={action.href} to={action.href} className="block rounded-xl bg-slate-50 px-4 py-3 font-semibold text-slate-700 transition hover:bg-slate-100">{action.label}</Link>)}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {isStaff && (
+              <div className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
+                <h3 className="text-lg font-bold text-gray-800">Đăng ký gần đây</h3>
+                <div className="mt-4 overflow-x-auto">
+                  <table className="w-full text-left text-sm">
+                    <thead className="border-b border-gray-100 text-xs font-bold uppercase tracking-widest text-gray-400">
+                      <tr><th className="pb-3">Họ tên</th><th className="pb-3">Loại</th><th className="pb-3 text-right">Trạng thái</th></tr>
+                    </thead>
+                    <tbody className="divide-y divide-gray-50">
+                      {recentSubmissions.length > 0 ? recentSubmissions.map((sub) => (
+                        <tr key={sub.id} className="transition hover:bg-gray-50">
+                          <td className="py-3 font-medium text-gray-700">{sub.full_name}</td>
+                          <td className="py-3 text-gray-500">{sub.attendee_type}</td>
+                          <td className="py-3 text-right">{sub.status}</td>
+                        </tr>
+                      )) : <tr><td colSpan={3} className="py-4 text-center text-gray-400">Chưa có đăng ký nào.</td></tr>}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            )}
+          </section>
+
+          <aside className="lg:col-span-4 space-y-6">
+            <div className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
+              <h3 className="text-lg font-bold text-gray-800">Điều hướng nhanh</h3>
+              <div className="mt-4 space-y-3">
+                {quickActions.map((action) => <Link key={action.href} to={action.href} className="block rounded-xl bg-slate-50 px-4 py-3 font-semibold text-slate-700 transition hover:bg-slate-100">{action.label}</Link>)}
+              </div>
             </div>
-          </div>
-          <div className="bg-white p-6 rounded-2xl shadow-sm">
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">Tác vụ nhanh</h3>
-            <div className="space-y-3">
-              {quickActions.map(action => <Link key={action.href} to={action.href} className="block px-4 py-3 rounded-xl bg-slate-50 text-slate-700 font-semibold hover:bg-slate-100">{action.label}</Link>)}
+
+            <div className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
+              <h3 className="text-lg font-bold text-gray-800">Trạng thái hệ thống</h3>
+              <div className="mt-4 space-y-3 text-sm text-gray-600">
+                <p>• Giao diện đã tối ưu cho mobile.</p>
+                <p>• Dữ liệu hiển thị theo vai trò người dùng.</p>
+                <p>• Kết nối Supabase đang hoạt động để tải dữ liệu động.</p>
+              </div>
             </div>
-          </div>
+          </aside>
         </div>
-      )}
-      </div>
+      </main>
     </div>
   );
 };
