@@ -46,7 +46,10 @@ const useFadeIn = <T extends HTMLElement,>() => {
 const FadeSection: React.FC<{ children: React.ReactNode; className?: string }> = ({ children, className = '' }) => {
   const { ref, visible } = useFadeIn<HTMLDivElement>();
   return (
-    <div ref={ref} className={`transition-all duration-700 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'} ${className}`}>
+    <div
+      ref={ref}
+      className={`fade-up ${visible ? 'visible' : ''} ${className}`}
+    >
       {children}
     </div>
   );
@@ -104,51 +107,59 @@ const PublicSpeakers: React.FC = () => {
   const speakerTypes = ['All', 'Chủ tọa', 'Báo cáo viên', 'Chủ tọa/Báo cáo viên'];
 
   return (
-    <div className="min-h-screen bg-[#f7f9fc] text-gray-800">
-      <header className="sticky top-0 z-50 border-b border-white/10 bg-[#061D5F]/95 text-white shadow-sm backdrop-blur-xl">
+    <div className="min-h-screen bg-surface text-gray-800">
+      <header className="sticky top-0 z-50 border-b border-border-subtle bg-white/90 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
           <a href="#/" className="flex items-center gap-3">
-            <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#eb248e] text-lg font-black text-white shadow-lg shadow-[#eb248e]/20">VS</div>
+            <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-secondary text-lg font-black text-white shadow-premium">
+              VS
+            </div>
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-white/50">VSAPS 2026</p>
-              <p className="text-sm font-bold">Danh sách diễn giả</p>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-academic-grey">VSAPS 2026</p>
+              <p className="text-sm font-bold text-academic-navy">Danh sách diễn giả</p>
             </div>
           </a>
           <nav className="hidden items-center gap-6 md:flex">
-            <a href="#/" className="text-sm font-medium text-white/70 transition-colors hover:text-[#f7b2d0]">Trang chủ</a>
-            <a href="#/speakers-list" className="text-sm font-semibold text-[#f7b2d0]">Diễn giả</a>
-            <a href="#/register-delegate" className="text-sm font-medium text-white/70 transition-colors hover:text-[#f7b2d0]">Đăng ký</a>
-            <a href="#/login" className="rounded-xl bg-[#eb248e] px-5 py-2.5 text-sm font-bold text-white transition-colors hover:bg-[#d61f81]">Đăng nhập</a>
+            <a href="#/" className="nav-link-premium text-sm font-medium text-academic-grey hover:text-academic-navy">Trang chủ</a>
+            <a href="#/speakers-list" className="nav-link-premium text-sm font-semibold text-secondary">Diễn giả</a>
+            <a href="#/register-delegate" className="nav-link-premium text-sm font-medium text-academic-grey hover:text-academic-navy">Đăng ký</a>
+            <a href="#/login" className="btn-premium btn-secondary-premium shadow-premium">Đăng nhập</a>
           </nav>
-          <button onClick={() => setMenuOpen((v) => !v)} className="md:hidden rounded-xl bg-white/10 px-3 py-2 text-sm font-semibold text-white">
+          <button onClick={() => setMenuOpen((v) => !v)} className="md:hidden rounded-xl border border-border-subtle bg-white px-3 py-2 text-sm font-semibold text-academic-navy shadow-sm">
             Menu
           </button>
         </div>
-        <div className={`md:hidden overflow-hidden border-t border-white/10 bg-[#061D5F] transition-all duration-300 ${menuOpen ? 'max-h-80 opacity-100' : 'max-h-0 opacity-0'}`}>
+        <div className={`md:hidden overflow-hidden border-t border-border-subtle bg-white transition-all duration-300 ${menuOpen ? 'max-h-80 opacity-100' : 'max-h-0 opacity-0'}`}>
           <div className="px-4 py-4 space-y-3">
-            <a className="block rounded-xl bg-white/5 px-4 py-3 text-sm font-semibold text-white/80" href="#/">Trang chủ</a>
-            <a className="block rounded-xl bg-white/5 px-4 py-3 text-sm font-semibold text-[#f7b2d0]" href="#/speakers-list">Diễn giả</a>
-            <a className="block rounded-xl bg-white/5 px-4 py-3 text-sm font-semibold text-white/80" href="#/register-delegate">Đăng ký</a>
-            <a className="block rounded-xl bg-[#eb248e] px-4 py-3 text-center text-sm font-bold text-white" href="#/login">Đăng nhập</a>
+            <a className="block rounded-2xl bg-surface px-4 py-3 text-sm font-semibold text-academic-navy" href="#/">Trang chủ</a>
+            <a className="block rounded-2xl bg-surface px-4 py-3 text-sm font-semibold text-secondary" href="#/speakers-list">Diễn giả</a>
+            <a className="block rounded-2xl bg-surface px-4 py-3 text-sm font-semibold text-academic-navy" href="#/register-delegate">Đăng ký</a>
+            <a className="btn-premium btn-secondary-premium w-full" href="#/login">Đăng nhập</a>
           </div>
         </div>
       </header>
 
       <main>
-        <section className="relative overflow-hidden bg-gradient-to-br from-[#061D5F] via-[#09286b] to-[#0c3b92] text-white">
+        <section className="relative overflow-hidden bg-academic-navy text-white">
           <div className="absolute inset-0 opacity-10">
-            <div className="absolute -left-20 top-10 h-72 w-72 rounded-full bg-[#eb248e] blur-3xl" />
+            <div className="absolute -left-20 top-10 h-72 w-72 rounded-full bg-secondary blur-3xl" />
             <div className="absolute right-0 top-24 h-80 w-80 rounded-full bg-cyan-400 blur-3xl" />
           </div>
           <div className="mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[1.2fr_0.8fr] lg:px-8 lg:py-20">
             <FadeSection className="relative z-10">
-              <p className="mb-4 inline-flex rounded-full border border-white/15 bg-white/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.25em] text-white/80">Scientific Committee</p>
-              <h1 className="max-w-3xl text-4xl font-black leading-tight tracking-tight sm:text-5xl lg:text-6xl">Đội ngũ diễn giả & chuyên gia VSAPS 2026</h1>
-              <p className="mt-5 max-w-2xl text-sm leading-7 text-white/75 sm:text-base">Khám phá danh sách các chuyên gia, chủ tọa và báo cáo viên tham gia chương trình khoa học của hội nghị.</p>
+              <p className="mb-4 inline-flex rounded-full border border-white/15 bg-white/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.25em] text-white/80">
+                Scientific Committee
+              </p>
+              <h1 className="max-w-3xl text-4xl font-black leading-tight tracking-tight sm:text-5xl lg:text-6xl">
+                Đội ngũ diễn giả & chuyên gia VSAPS 2026
+              </h1>
+              <p className="mt-5 max-w-2xl text-sm leading-7 text-white/75 sm:text-base">
+                Khám phá danh sách các chuyên gia, chủ tọa và báo cáo viên tham gia chương trình khoa học của hội nghị.
+              </p>
 
               <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
                 {stats.map((stat) => (
-                  <div key={stat.label} className="rounded-2xl border border-white/10 bg-white/10 p-4 shadow-lg backdrop-blur-md">
+                  <div key={stat.label} className="glass-effect rounded-2xl p-4 shadow-premium backdrop-blur-md">
                     <p className="text-2xl font-black text-white">{stat.value}</p>
                     <p className="mt-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/55">{stat.label}</p>
                   </div>
@@ -157,35 +168,35 @@ const PublicSpeakers: React.FC = () => {
             </FadeSection>
 
             <FadeSection className="relative z-10">
-              <div className="rounded-3xl border border-white/10 bg-white/10 p-5 shadow-2xl backdrop-blur-xl lg:ml-auto lg:max-w-md">
-                <p className="text-sm font-bold text-white">Tìm nhanh diễn giả</p>
-                <p className="mt-1 text-sm text-white/65">Theo tên, đơn vị, học hàm hoặc tên bài báo cáo.</p>
+              <div className="glass-effect rounded-3xl p-5 shadow-2xl lg:ml-auto lg:max-w-md">
+                <p className="text-sm font-bold text-academic-navy">Tìm nhanh diễn giả</p>
+                <p className="mt-1 text-sm text-academic-grey">Theo tên, đơn vị, học hàm hoặc tên bài báo cáo.</p>
                 <div className="mt-5 space-y-4">
                   <div>
-                    <label className="mb-2 block text-xs font-semibold uppercase tracking-[0.2em] text-white/50">Từ khóa</label>
+                    <label className="mb-2 block text-xs font-semibold uppercase tracking-[0.2em] text-academic-grey">Từ khóa</label>
                     <input
                       type="text"
                       placeholder="Nhập tên hoặc đơn vị..."
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
-                      className="w-full rounded-2xl border border-white/10 bg-white px-4 py-3 text-sm text-gray-800 shadow-sm outline-none transition focus:border-[#eb248e] focus:ring-4 focus:ring-[#eb248e]/15"
+                      className="w-full rounded-2xl border border-border-subtle bg-white px-4 py-3 text-sm text-gray-800 shadow-sm outline-none transition focus:border-secondary focus:ring-4 focus:ring-secondary/15"
                     />
                   </div>
                   <div>
-                    <label className="mb-3 block text-xs font-semibold uppercase tracking-[0.2em] text-white/50">Phân loại</label>
+                    <label className="mb-3 block text-xs font-semibold uppercase tracking-[0.2em] text-academic-grey">Phân loại</label>
                     <div className="flex flex-wrap gap-2">
                       {speakerTypes.map((t) => (
                         <button
                           key={t}
                           onClick={() => setFilterType(t)}
-                          className={`rounded-full px-4 py-2 text-xs font-bold transition-all ${filterType === t ? 'bg-[#eb248e] text-white shadow-lg shadow-[#eb248e]/20' : 'bg-white/10 text-white/80 hover:bg-white/15'}`}
+                          className={`rounded-full px-4 py-2 text-xs font-bold transition-all ${filterType === t ? 'btn-secondary-premium shadow-premium' : 'bg-white text-academic-grey ring-1 ring-border-subtle hover:bg-surface'}`}
                         >
                           {t === 'All' ? 'Tất cả' : t}
                         </button>
                       ))}
                     </div>
                   </div>
-                  <a href="#/register-delegate" className="inline-flex w-full items-center justify-center rounded-2xl bg-white px-4 py-3 text-sm font-bold text-[#061D5F] transition-colors hover:bg-[#f5f7fb]">
+                  <a href="#/register-delegate" className="btn-premium btn-primary-premium shadow-premium w-full">
                     Đăng ký tham dự
                   </a>
                 </div>
@@ -197,19 +208,19 @@ const PublicSpeakers: React.FC = () => {
         <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-16">
           <FadeSection className="mb-6 flex items-end justify-between gap-4">
             <div>
-              <h2 className="text-2xl font-black text-[#061D5F] sm:text-3xl">Danh sách chuyên gia</h2>
-              <p className="mt-2 text-sm text-gray-500">{loading ? 'Đang tải dữ liệu...' : `${filteredSpeakers.length} kết quả phù hợp`}</p>
+              <h2 className="text-2xl font-black text-academic-navy sm:text-3xl">Danh sách chuyên gia</h2>
+              <p className="mt-2 text-sm text-academic-grey">{loading ? 'Đang tải dữ liệu...' : `${filteredSpeakers.length} kết quả phù hợp`}</p>
             </div>
-            <div className="hidden rounded-2xl bg-white px-4 py-3 shadow-sm ring-1 ring-gray-100 md:block">
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gray-400">Bộ lọc đang chọn</p>
-              <p className="mt-1 text-sm font-bold text-gray-800">{filterType === 'All' ? 'Tất cả' : filterType}</p>
+            <div className="hidden rounded-2xl bg-white px-4 py-3 shadow-premium ring-1 ring-border-subtle md:block">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-academic-grey">Bộ lọc đang chọn</p>
+              <p className="mt-1 text-sm font-bold text-academic-navy">{filterType === 'All' ? 'Tất cả' : filterType}</p>
             </div>
           </FadeSection>
 
           {loading ? (
             <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
               {[1, 2, 3, 4, 5, 6].map((i) => (
-                <div key={i} className="animate-pulse overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-gray-100">
+                <div key={i} className="animate-pulse overflow-hidden card-premium">
                   <div className="h-52 bg-gray-200" />
                   <div className="space-y-3 p-5">
                     <div className="h-4 w-24 rounded bg-gray-200" />
@@ -222,10 +233,10 @@ const PublicSpeakers: React.FC = () => {
             </div>
           ) : filteredSpeakers.length === 0 ? (
             <FadeSection>
-              <div className="rounded-3xl border border-dashed border-gray-200 bg-white px-6 py-20 text-center shadow-sm">
-                <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-[#f6e8ef] text-2xl text-[#eb248e]">✦</div>
-                <h3 className="text-xl font-black text-[#061D5F]">Không tìm thấy kết quả phù hợp</h3>
-                <p className="mt-2 text-sm text-gray-500">Hãy thử đổi từ khóa hoặc bộ lọc để tìm diễn giả khác.</p>
+              <div className="card-premium border-dashed px-6 py-20 text-center">
+                <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-[#f6e8ef] text-2xl text-secondary">✦</div>
+                <h3 className="text-xl font-black text-academic-navy">Không tìm thấy kết quả phù hợp</h3>
+                <p className="mt-2 text-sm text-academic-grey">Hãy thử đổi từ khóa hoặc bộ lọc để tìm diễn giả khác.</p>
               </div>
             </FadeSection>
           ) : (
@@ -234,7 +245,7 @@ const PublicSpeakers: React.FC = () => {
                 <FadeSection key={speaker.id}>
                   <Link
                     to={`/reports/${speaker.id}`}
-                    className="group overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-gray-100 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:ring-[#eb248e]/20"
+                    className="group overflow-hidden card-premium hover:ring-secondary/20"
                   >
                     <div className="relative h-56 overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200 sm:h-60">
                       <img
@@ -242,7 +253,7 @@ const PublicSpeakers: React.FC = () => {
                         alt={speaker.full_name}
                         className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#061D5F]/90 via-[#061D5F]/10 to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-academic-navy/90 via-academic-navy/10 to-transparent" />
                       <div className="absolute left-4 top-4 flex gap-2">
                         <span className="rounded-full bg-white/15 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.2em] text-white backdrop-blur-md">
                           {speaker.speaker_type}
@@ -255,16 +266,16 @@ const PublicSpeakers: React.FC = () => {
                     </div>
 
                     <div className="space-y-4 p-5">
-                      <div className="flex items-center gap-3 text-sm text-gray-600">
-                        <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[#f6e8ef] text-[#eb248e]">
+                      <div className="flex items-center gap-3 text-sm text-academic-slate">
+                        <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[#f6e8ef] text-secondary">
                           <span className="material-symbols-outlined text-[20px]">apartment</span>
                         </div>
                         <div className="min-w-0 flex-1">
-                          <p className="truncate font-semibold text-gray-800">{speaker.workplace}</p>
-                          <div className="mt-1 flex items-center gap-2 text-xs text-gray-500">
+                          <p className="truncate font-semibold text-academic-navy">{speaker.workplace}</p>
+                          <div className="mt-1 flex items-center gap-2 text-xs text-academic-grey">
                             <img
                               src={`https://flagcdn.com/w20/${getCountryCode(speaker.country)}.png`}
-                              className="h-3.5 w-5 rounded-sm object-cover ring-1 ring-gray-100"
+                              className="h-3.5 w-5 rounded-sm object-cover ring-1 ring-border-subtle"
                               alt={speaker.country || ''}
                             />
                             <span>{speaker.country || 'Việt Nam'}</span>
@@ -272,14 +283,14 @@ const PublicSpeakers: React.FC = () => {
                         </div>
                       </div>
 
-                      <div className="rounded-2xl bg-gray-50 p-4">
-                        <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-gray-400">Đề tài báo cáo</p>
-                        <p className="mt-2 line-clamp-2 text-sm font-semibold leading-6 text-[#061D5F] italic">“{speaker.report_title_vn}”</p>
+                      <div className="rounded-2xl bg-surface p-4">
+                        <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-academic-grey">Đề tài báo cáo</p>
+                        <p className="mt-2 line-clamp-2 text-sm font-semibold leading-6 text-academic-navy italic">“{speaker.report_title_vn}”</p>
                       </div>
 
                       <div className="flex items-center justify-between pt-1">
-                        <span className="text-xs font-semibold text-gray-400">Xem chi tiết chuyên gia</span>
-                        <span className="inline-flex items-center gap-2 text-sm font-bold text-[#eb248e] transition-transform group-hover:translate-x-1">
+                        <span className="text-xs font-semibold text-academic-grey">Xem chi tiết chuyên gia</span>
+                        <span className="inline-flex items-center gap-2 text-sm font-bold text-secondary transition-transform group-hover:translate-x-1">
                           Chi tiết
                           <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
                         </span>
@@ -293,11 +304,11 @@ const PublicSpeakers: React.FC = () => {
         </section>
       </main>
 
-      <footer className="border-t border-gray-200 bg-[#061D5F] text-white">
+      <footer className="border-t border-border-subtle bg-academic-navy text-white">
         <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 lg:grid-cols-3 lg:px-8">
           <div>
             <div className="flex items-center gap-3">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#eb248e] text-lg font-black text-white">VS</div>
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-secondary text-lg font-black text-white">VS</div>
               <div>
                 <p className="text-sm font-semibold uppercase tracking-[0.25em] text-white/50">VSAPS 2026</p>
                 <p className="text-xl font-black">Scientific Forum</p>
