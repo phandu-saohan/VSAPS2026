@@ -485,43 +485,43 @@ const Tasks: React.FC = () => {
             
              {isModalOpen && (
                  <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-                     <div className={`bg-white rounded-lg shadow-xl w-full max-h-[95vh] overflow-hidden flex flex-col ${isNew ? 'max-w-lg' : 'max-w-5xl'}`}>
-                        <div className="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
-                            <h2 className="text-xl font-bold text-gray-800">{isNew ? 'Thêm công việc mới' : 'Chi tiết công việc'}</h2>
-                            <button onClick={closeModal} className="text-gray-400 hover:text-gray-600">
+                     <div className={`bg-white rounded-2xl shadow-2xl ring-1 ring-black/5 w-full max-h-[95vh] overflow-hidden flex flex-col ${isNew ? 'max-w-lg' : 'max-w-5xl'}`}>
+                        <div className="px-6 py-4 border-b border-gray-200 bg-gradient-to-r from-[#061D5F] to-[#0b2a86] flex justify-between items-center">
+                            <h2 className="text-xl font-bold text-white">{isNew ? 'Thêm công việc mới' : 'Chi tiết công việc'}</h2>
+                            <button onClick={closeModal} className="text-white/80 hover:text-white hover:bg-white/10 rounded-full p-1 transition-colors">
                                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                             </button>
                         </div>
 
                         <div className={`flex flex-col ${!isNew ? 'lg:flex-row' : ''} overflow-hidden h-full flex-1`}>
                             {/* Cột Trái: Chi tiết & Form chỉnh sửa */}
-                            <div className={`p-6 overflow-y-auto border-gray-200 flex-1 ${!isNew ? 'lg:w-1/2 lg:border-r' : 'w-full'}`}>
-                                {error && <p className="mb-4 text-sm text-red-600 bg-red-50 p-3 rounded-md">{error}</p>}
+                            <div className={`p-6 overflow-y-auto border-gray-200 bg-gray-50/40 flex-1 ${!isNew ? 'lg:w-1/2 lg:border-r' : 'w-full'}`}>
+                                {error && <p className="mb-4 text-sm text-red-600 bg-red-50 border border-red-100 p-3 rounded-xl">{error}</p>}
                                 <div className="space-y-4">
                                     <div>
-                                        <label className="block text-sm font-medium text-gray-700">Tiêu đề</label>
-                                        <input type="text" name="title" value={editingTask.title || ''} onChange={handleChange} className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-secondary focus:border-secondary"/>
+                                        <label className="block text-sm font-semibold text-gray-700">Tiêu đề</label>
+                                        <input type="text" name="title" value={editingTask.title || ''} onChange={handleChange} className="mt-1 block w-full border-gray-300 rounded-xl shadow-sm focus:ring-[#061D5F] focus:border-[#061D5F]"/>
                                     </div>
                                     <div>
-                                        <label className="block text-sm font-medium text-gray-700">Mô tả</label>
-                                        <textarea name="description" value={editingTask.description || ''} onChange={handleChange} rows={!isNew ? 3 : 4} className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-secondary focus:border-secondary"/>
+                                        <label className="block text-sm font-semibold text-gray-700">Mô tả</label>
+                                        <textarea name="description" value={editingTask.description || ''} onChange={handleChange} rows={!isNew ? 3 : 4} className="mt-1 block w-full border-gray-300 rounded-xl shadow-sm focus:ring-[#061D5F] focus:border-[#061D5F]"/>
                                     </div>
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                         <div>
-                                            <label className="block text-sm font-medium text-gray-700">Người thực hiện</label>
-                                            <select name="assignee_id" value={editingTask.assignee_id || ''} onChange={handleChange} className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-secondary focus:border-secondary">
+                                            <label className="block text-sm font-semibold text-gray-700">Người thực hiện</label>
+                                            <select name="assignee_id" value={editingTask.assignee_id || ''} onChange={handleChange} className="mt-1 block w-full border-gray-300 rounded-xl shadow-sm focus:ring-[#061D5F] focus:border-[#061D5F]">
                                                 <option value="">-- Chọn thành viên --</option>
                                                 {profiles.map(p => <option key={p.id} value={p.id}>{p.full_name}</option>)}
                                             </select>
                                         </div>
                                         <div>
-                                            <label className="block text-sm font-medium text-gray-700">Hạn chót</label>
-                                            <input type="date" name="due_date" value={editingTask.due_date || ''} onChange={handleChange} className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-secondary focus:border-secondary"/>
+                                            <label className="block text-sm font-semibold text-gray-700">Hạn chót</label>
+                                            <input type="date" name="due_date" value={editingTask.due_date || ''} onChange={handleChange} className="mt-1 block w-full border-gray-300 rounded-xl shadow-sm focus:ring-[#061D5F] focus:border-[#061D5F]"/>
                                         </div>
                                     </div>
                                     <div>
-                                        <label className="block text-sm font-medium text-gray-700">Trạng thái</label>
-                                        <select name="status" value={editingTask.status || ''} onChange={handleChange} className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-secondary focus:border-secondary">
+                                        <label className="block text-sm font-semibold text-gray-700">Trạng thái</label>
+                                        <select name="status" value={editingTask.status || ''} onChange={handleChange} className="mt-1 block w-full border-gray-300 rounded-xl shadow-sm focus:ring-[#061D5F] focus:border-[#061D5F]">
                                             <option value="Chờ duyệt">Chờ duyệt</option>
                                             <option value="Đang thực hiện">Đang thực hiện</option>
                                             <option value="Hoàn thành">Hoàn thành</option>
@@ -529,8 +529,8 @@ const Tasks: React.FC = () => {
                                     </div>
                                 </div>
                                 <div className="mt-6 flex justify-end space-x-3">
-                                    <button onClick={closeModal} className="px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 font-medium">Đóng</button>
-                                    <button onClick={handleSave} disabled={loading} className="px-4 py-2 bg-secondary text-white rounded-lg hover:bg-secondary-dark disabled:opacity-50 font-medium shadow-sm">
+                                    <button onClick={closeModal} className="px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded-xl hover:bg-gray-50 active:scale-[0.98] transition-all font-medium shadow-sm">Đóng</button>
+                                    <button onClick={handleSave} disabled={loading} className="px-4 py-2 bg-[#061D5F] text-white rounded-xl hover:bg-[#0b2a86] active:scale-[0.98] transition-all disabled:opacity-50 font-medium shadow-md">
                                         {loading ? 'Đang lưu...' : 'Lưu thay đổi'}
                                     </button>
                                 </div>
@@ -579,12 +579,12 @@ const Tasks: React.FC = () => {
                                                 value={newComment}
                                                 onChange={(e) => setNewComment(e.target.value)}
                                                 placeholder="Thêm bình luận..."
-                                                className="flex-1 px-4 py-2 border border-gray-300 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-secondary"
+                                                className="flex-1 px-4 py-2 border border-gray-300 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-[#061D5F] bg-white"
                                             />
                                             <button 
                                                 type="submit" 
                                                 disabled={!newComment.trim()}
-                                                className="p-2 bg-secondary text-white rounded-full hover:bg-secondary-dark focus:outline-none focus:ring-2 focus:ring-secondary disabled:opacity-50"
+                                                className="p-2 bg-[#061D5F] text-white rounded-full hover:bg-[#0b2a86] focus:outline-none focus:ring-2 focus:ring-[#061D5F] disabled:opacity-50 active:scale-[0.98] transition-all shadow-sm"
                                             >
                                                 <svg className="w-4 h-4 transform rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
                                             </button>
@@ -598,13 +598,17 @@ const Tasks: React.FC = () => {
             )}
             
             {taskToDelete && (
-                 <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-                     <div className="bg-white rounded-lg shadow-xl p-6 w-full max-w-md m-4">
-                         <h2 className="text-2xl font-bold mb-4">Xác nhận xóa</h2>
-                         <p>Bạn có chắc chắn muốn xóa công việc <span className="font-semibold">"{taskToDelete.title}"</span>?</p>
-                         <div className="mt-6 flex justify-end space-x-3">
-                             <button onClick={() => setTaskToDelete(null)} className="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300">Hủy</button>
-                             <button onClick={confirmDelete} className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700">Xóa</button>
+                 <div className="fixed inset-0 bg-black/55 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+                     <div className="bg-white rounded-2xl shadow-2xl ring-1 ring-black/5 w-full max-w-md overflow-hidden">
+                         <div className="px-6 py-4 bg-gradient-to-r from-[#061D5F] to-[#0b2a86]">
+                             <h2 className="text-xl font-bold text-white">Xác nhận xóa</h2>
+                         </div>
+                         <div className="p-6 bg-gray-50/40">
+                             <p className="text-gray-700">Bạn có chắc chắn muốn xóa công việc <span className="font-semibold text-gray-900">"{taskToDelete.title}"</span>?</p>
+                             <div className="mt-6 flex justify-end space-x-3">
+                                 <button onClick={() => setTaskToDelete(null)} className="px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded-xl hover:bg-gray-50 active:scale-[0.98] transition-all">Hủy</button>
+                                 <button onClick={confirmDelete} className="px-4 py-2 bg-red-600 text-white rounded-xl hover:bg-red-700 active:scale-[0.98] transition-all shadow-sm">Xóa</button>
+                             </div>
                          </div>
                      </div>
                  </div>
