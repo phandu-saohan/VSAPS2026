@@ -59,6 +59,16 @@ type Recipient = {
     name?: string;
 }
 
+type SendLog = {
+    id: number;
+    subject: string;
+    recipient_count: number;
+    success_count: number;
+    failed_count: number;
+    created_at: string;
+    created_by?: string | null;
+};
+
 const BulkEmail: React.FC = () => {
     const { hasPermission } = useAuth();
     const { addToast } = useToast();
@@ -74,7 +84,11 @@ const BulkEmail: React.FC = () => {
 
     const [isFetchingList, setIsFetchingList] = useState(false);
     const [isSending, setIsSending] = useState(false);
-    const [concurrency] = useState(3);
+    const [isPreviewOpen, setIsPreviewOpen] = useState(false);
+    const [concurrency] = useState(10);
+    const MAX_RECIPIENTS_PER_BATCH = 50;
+    const [sendLogs, setSendLogs] = useState<SendLog[]>([]);
+    const [isLoadingLogs, setIsLoadingLogs] = useState(true);
     
     useEffect(() => {
         if (window.ClassicEditor) {
@@ -107,6 +121,24 @@ const BulkEmail: React.FC = () => {
                 editorInstance.current = null;
             }
         };
+    }, []);
+
+    useEffect(() => {
+        const fetchLogs = async () => {
+            setIsLoadingLogs(true);
+            const { data, error } = await supabase
+                .from('bulk_email_logs')
+                .select('id, subject, recipient_count, success_count, failed_count, created_at, created_by')
+                .order('created_at', { ascending: false })
+                .limit(10);
+
+            if (!error && data) {
+                setSendLogs(data as SendLog[]);
+            }
+            setIsLoadingLogs(false);
+        };
+
+        fetchLogs();
     }, []);
 
     useEffect(() => {
@@ -196,19 +228,25 @@ const BulkEmail: React.FC = () => {
         }
     }, [activeTab, recipients, parsedManualEmails]);
 
-    const sendInBatches = async () => {
-        const batches: Recipient[][] = [];
-        for (let i = 0; i < currentRecipients.length; i += concurrency) {
-            batches.push(currentRecipients.slice(i, i + concurrency));
-        }
+    const renderPreviewHtml = (recipient: Recipient) =>
+        body.replace(/{{name}}/g, recipient.name || '').replace(/{{email}}/g, recipient.email);
 
-        for (const batch of batches) {
+    const batchedRecipients = useMemo(() => {
+        const batches: Recipient[][] = [];
+        for (let i = 0; i < currentRecipients.length; i += MAX_RECIPIENTS_PER_BATCH) {
+            batches.push(currentRecipients.slice(i, i + MAX_RECIPIENTS_PER_BATCH));
+        }
+        return batches;
+    }, [currentRecipients]);
+
+    const sendInBatches = async () => {
+        for (const batch of batchedRecipients) {
             const results = await Promise.allSettled(
                 batch.map(recipient => supabase.functions.invoke('send-email', {
                     body: {
                         to: recipient.email,
                         subject,
-                        html: body.replace(/{{name}}/g, recipient.name || '').replace(/{{email}}/g, recipient.email),
+                        html: renderPreviewHtml(recipient),
                     },
                 }))
             );
@@ -221,6 +259,10 @@ const BulkEmail: React.FC = () => {
     };
 
     const handleBulkSend = async () => {
+        if (currentRecipients.length > MAX_RECIPIENTS_PER_BATCH) {
+            throw new Error(`Mỗi lần gửi chỉ cho phép tối đa ${MAX_RECIPIENTS_PER_BATCH} người nhận.`);
+        }
+
         const { data, error } = await supabase.functions.invoke('send-bulk-email', {
             body: {
                 recipients: currentRecipients,
@@ -230,8 +272,31 @@ const BulkEmail: React.FC = () => {
         });
 
         if (error) throw error;
-        if (data?.failedCount > 0) {
-            addToast(`Đã gửi ${currentRecipients.length - data.failedCount}/${currentRecipients.length} email.`, 'warning');
+
+        const successCount = data?.successCount ?? Math.max(currentRecipients.length - (data?.failedCount || 0), 0);
+        const failedCount = data?.failedCount ?? 0;
+
+        const { error: logError } = await supabase.from('bulk_email_logs').insert({
+            subject,
+            recipient_count: currentRecipients.length,
+            success_count: successCount,
+            failed_count: failedCount,
+            created_by: null,
+        });
+
+        if (logError) {
+            console.error('Failed to save bulk email log:', logError);
+        } else {
+            const { data: logsData } = await supabase
+                .from('bulk_email_logs')
+                .select('id, subject, recipient_count, success_count, failed_count, created_at, created_by')
+                .order('created_at', { ascending: false })
+                .limit(10);
+            if (logsData) setSendLogs(logsData as SendLog[]);
+        }
+
+        if (failedCount > 0) {
+            addToast(`Đã gửi ${successCount}/${currentRecipients.length} email.`, 'warning');
         } else {
             addToast(`Đã gửi thành công email đến ${currentRecipients.length} người nhận.`, 'success');
         }
@@ -251,6 +316,10 @@ const BulkEmail: React.FC = () => {
             return;
         }
 
+        setIsPreviewOpen(true);
+    };
+
+    const confirmSend = async () => {
         if (!window.confirm(`Bạn có chắc muốn gửi email này đến ${currentRecipients.length} người nhận?`)) {
             return;
         }
@@ -259,6 +328,7 @@ const BulkEmail: React.FC = () => {
 
         try {
             await handleBulkSend();
+            setIsPreviewOpen(false);
             setSubject('');
             if (editorInstance.current) editorInstance.current.setData('');
             setManualEmails('');
@@ -347,11 +417,78 @@ const BulkEmail: React.FC = () => {
                             Biến có sẵn: <code className="font-mono bg-gray-100 p-0.5 rounded">{`{{name}}`}</code>, <code className="font-mono bg-gray-100 p-0.5 rounded">{`{{email}}`}</code>. Biến `name` sẽ được thay thế nếu có trong danh sách.
                         </p>
                     </div>
-                    <div>
-                         <button onClick={handleSend} disabled={isSending || currentRecipients.length === 0} className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#eb248e] hover:bg-[#d61f81] disabled:opacity-50">
+                    <div className="flex gap-3">
+                         <button onClick={() => setIsPreviewOpen(true)} disabled={isSending || currentRecipients.length === 0} className="w-full flex justify-center py-3 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50">
+                            Xem trước email
+                        </button>
+                        <button onClick={confirmSend} disabled={isSending || currentRecipients.length === 0} className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#eb248e] hover:bg-[#d61f81] disabled:opacity-50">
                             {isSending ? <><SpinnerIcon className="w-5 h-5 mr-2" /> Đang gửi...</> : `Gửi đến ${currentRecipients.length} người`}
                         </button>
                     </div>
+
+                    <div className="rounded-2xl border border-gray-100 bg-gray-50 p-4">
+                        <div className="flex items-center justify-between gap-3">
+                            <div>
+                                <h3 className="text-sm font-bold text-gray-800">Lịch sử gửi gần đây</h3>
+                                <p className="text-xs text-gray-500">10 lần gửi email mới nhất</p>
+                            </div>
+                        </div>
+                        <div className="mt-4 space-y-3">
+                            {isLoadingLogs ? (
+                                <div className="text-sm text-gray-500">Đang tải log...</div>
+                            ) : sendLogs.length === 0 ? (
+                                <div className="text-sm text-gray-500">Chưa có log gửi mail.</div>
+                            ) : sendLogs.map((log) => (
+                                <div key={log.id} className="rounded-xl bg-white p-3 shadow-sm">
+                                    <div className="flex items-start justify-between gap-3">
+                                        <div>
+                                            <p className="text-sm font-semibold text-gray-800 line-clamp-1">{log.subject}</p>
+                                            <p className="text-xs text-gray-500">{new Date(log.created_at).toLocaleString('vi-VN')}</p>
+                                        </div>
+                                        <div className="text-right text-xs text-gray-500">
+                                            <p>Tổng: {log.recipient_count}</p>
+                                            <p className="text-green-600">OK: {log.success_count}</p>
+                                            <p className="text-red-500">Fail: {log.failed_count}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {isPreviewOpen && currentRecipients.length > 0 && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4 py-6">
+                    <div className="w-full max-w-4xl rounded-2xl bg-white p-5 shadow-2xl">
+                        <div className="flex items-start justify-between gap-4">
+                            <div>
+                                <h3 className="text-lg font-bold text-gray-800">Xem trước email</h3>
+                                <p className="text-sm text-gray-500">Hiển thị cho người nhận đầu tiên trong danh sách.</p>
+                            </div>
+                            <button onClick={() => setIsPreviewOpen(false)} className="text-gray-400 hover:text-gray-700">✕</button>
+                        </div>
+                        <div className="mt-4 grid gap-4 lg:grid-cols-2">
+                            <div className="rounded-xl border border-gray-200 p-4">
+                                <p className="text-xs font-semibold uppercase tracking-widest text-gray-400">Người nhận mẫu</p>
+                                <p className="mt-2 font-medium text-gray-800">{currentRecipients[0]?.name || '—'}</p>
+                                <p className="text-sm text-gray-500">{currentRecipients[0]?.email}</p>
+                                <div className="mt-4 text-sm text-gray-600">
+                                    <p><span className="font-semibold">Tiêu đề:</span> {subject}</p>
+                                </div>
+                            </div>
+                            <div className="rounded-xl border border-gray-200 p-4">
+                                <p className="text-xs font-semibold uppercase tracking-widest text-gray-400">Nội dung HTML</p>
+                                <div className="mt-2 max-h-[420px] overflow-auto rounded-lg border border-gray-100 bg-gray-50 p-4 text-sm text-gray-700" dangerouslySetInnerHTML={{ __html: renderPreviewHtml(currentRecipients[0]) }} />
+                            </div>
+                        </div>
+                        <div className="mt-5 flex justify-end gap-3">
+                            <button onClick={() => setIsPreviewOpen(false)} className="rounded-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Đóng</button>
+                            <button onClick={confirmSend} className="rounded-md bg-[#eb248e] px-4 py-2 text-sm font-medium text-white hover:bg-[#d61f81]">Xác nhận gửi</button>
+                        </div>
+                    </div>
+                </div>
+            )}
                 </div>
             </div>
         </div>
