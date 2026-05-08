@@ -2,7 +2,7 @@ import React, { createContext, useContext, useState, ReactNode, useCallback } fr
 import { v4 as uuidv4 } from 'uuid';
 import Toast from '../components/Toast';
 
-type ToastType = 'success' | 'error' | 'info' | 'warning';
+export type ToastType = 'success' | 'error' | 'info' | 'warning';
 
 interface ToastMessage {
   id: string;

@@ -4,6 +4,8 @@ import { supabase } from '../supabaseClient';
 import { useAuth } from '../contexts/AuthContext';
 import { Notification } from '../types';
 import { BellIcon } from '../components/icons/BellIcon';
+import { toastTypeFromKind } from '../utils/toast';
+import { useToast } from '../contexts/ToastContext';
 
 const PAGE_SIZE = 15;
 
@@ -25,6 +27,7 @@ const timeSince = (dateString: string) => {
 
 const NotificationsPage: React.FC = () => {
   const { profile, markNotificationAsRead, clearAllNotifications } = useAuth();
+  const { addToast } = useToast();
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -83,9 +86,10 @@ const NotificationsPage: React.FC = () => {
     setNotifications(current => current.map(n => ({ ...n, read: true })));
   };
 
-  const handleNotificationClick = (id: number) => {
-    markNotificationAsRead(id);
-    setNotifications(current => current.map(n => n.id === id ? { ...n, read: true } : n));
+  const handleNotificationClick = (notification: Notification) => {
+    markNotificationAsRead(notification.id);
+    setNotifications(current => current.map(n => n.id === notification.id ? { ...n, read: true } : n));
+    addToast(notification.title || notification.message, toastTypeFromKind(notification.kind));
   };
   
   const totalPages = Math.ceil(totalCount / PAGE_SIZE);
@@ -121,7 +125,7 @@ const NotificationsPage: React.FC = () => {
                         <li key={n.id}>
                             <Link 
                                 to={n.link || '#'}
-                                onClick={() => handleNotificationClick(n.id)}
+                                onClick={() => handleNotificationClick(n)}
                                 className={`block hover:bg-gray-50 transition-colors ${!n.read ? 'bg-[#fde7f1]' : ''}`}
                             >
                                 <div className="p-4 sm:p-6 flex items-start space-x-4">

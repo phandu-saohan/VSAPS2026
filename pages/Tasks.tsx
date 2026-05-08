@@ -4,6 +4,8 @@ import { Task, Profile, Status, TaskComment } from '../types';
 import { useAuth } from '../contexts/AuthContext';
 import { useToast } from '../contexts/ToastContext';
 import { sendOneSignalNotification } from '../utils/oneSignal';
+import { toastTypeFromKind } from '../utils/toast';
+import { buildNotificationPayload } from '../utils/notification';
 
 // Helper to format date
 const formatDate = (dateString: string | null | undefined) => {
@@ -132,7 +134,7 @@ const Tasks: React.FC = () => {
         } else {
             // Check if we need to notify assignee
             if (editingTask.assignee_id && editingTask.assignee_id !== currentUser.id) {
-                createNotification({
+                createNotification(buildNotificationPayload({
                     user_id: editingTask.assignee_id,
                     title: 'Bình luận mới trong công việc',
                     message: `${currentUser.full_name} đã bình luận vào công việc "${editingTask.title}"`,
@@ -140,7 +142,7 @@ const Tasks: React.FC = () => {
                     channel: 'in_app',
                     link: '/tasks',
                     meta: { task_id: editingTask.id, comment: content }
-                });
+                }));
             }
         }
     };

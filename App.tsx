@@ -6,6 +6,7 @@ import { Profile, Notification } from './types';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { ToastProvider } from './contexts/ToastContext';
 import { AuthContext, useAuth, type AuthContextType } from './contexts/AuthContext';
+import { buildNotificationPayload } from './utils/notification';
 
 // Page imports using React.lazy
 const Login = lazy(() => import('./pages/Login'));
@@ -166,15 +167,7 @@ const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     }, [session]);
 
     const createNotification = useCallback(async (notification: Omit<Notification, 'id' | 'created_at' | 'read'>) => {
-        const payload = {
-            ...notification,
-            title: notification.title || notification.message,
-            kind: notification.kind || 'system',
-            channel: notification.channel || 'in_app',
-            meta: notification.meta || null,
-            read: false,
-        };
-
+        const payload = { ...buildNotificationPayload(notification), read: false };
         const { error } = await supabase.from('notifications').insert([payload]);
         if (error) {
             console.error('Error creating notification:', error.message);
