@@ -776,7 +776,7 @@ const Submissions: React.FC = () => {
                         <span className="material-symbols-outlined text-lg">refresh</span>
                     </button>
                     {!isSponsorRole && hasPermission('submissions:create') && (
-                        <button onClick={() => openModal()} className="px-5 py-2.5 bg-secondary text-white font-bold rounded-xl hover:bg-secondary-dark transition-all shadow-sm flex items-center gap-2">
+                        <button onClick={() => openModal()} className="px-5 py-2.5 bg-[#eb248e] text-white font-bold rounded-xl hover:bg-[#d61f81] transition-all shadow-sm flex items-center gap-2">
                             <span className="material-symbols-outlined text-lg font-black">add</span>
                             Thêm Đăng ký
                         </button>

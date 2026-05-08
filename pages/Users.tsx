@@ -194,7 +194,7 @@ const Users: React.FC = () => {
         {hasPermission('users:create') && (
             <button
                 onClick={() => openModal()}
-                className="px-4 py-2 bg-secondary text-white font-semibold rounded-lg hover:bg-secondary-dark transition-colors w-full md:w-auto"
+                className="px-4 py-2 bg-[#eb248e] text-white font-semibold rounded-lg hover:bg-[#d61f81] transition-colors w-full md:w-auto"
             >
                 + Thêm người dùng
             </button>

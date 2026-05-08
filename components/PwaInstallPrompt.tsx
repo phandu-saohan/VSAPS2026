@@ -54,7 +54,7 @@ const PwaInstallPrompt: React.FC = () => {
     <div className="fixed inset-x-4 bottom-20 md:bottom-6 z-50 mx-auto max-w-md">
       <div className="rounded-2xl border border-white/10 bg-[#061D5F] text-white shadow-2xl p-4 backdrop-blur-xl">
         <div className="flex items-start gap-3">
-          <div className="w-11 h-11 rounded-xl bg-secondary flex items-center justify-center flex-shrink-0">
+          <div className="w-11 h-11 rounded-xl bg-[#eb248e] flex items-center justify-center flex-shrink-0">
             <DownloadIcon className="w-5 h-5 text-white" />
           </div>
           <div className="flex-1">
@@ -65,13 +65,13 @@ const PwaInstallPrompt: React.FC = () => {
             <div className="mt-4 flex gap-2">
               <button
                 onClick={handleInstall}
-                className="px-4 py-2 rounded-xl bg-secondary text-white text-sm font-bold hover:brightness-110"
+                className="px-4 py-2 rounded-xl bg-white text-[#061D5F] text-sm font-bold hover:bg-slate-100 active:scale-[0.98] transition-all"
               >
                 Cài ngay
               </button>
               <button
                 onClick={() => setVisible(false)}
-                className="px-4 py-2 rounded-xl bg-white/10 text-white text-sm font-semibold hover:bg-white/15"
+                className="px-4 py-2 rounded-xl bg-transparent border border-white/25 text-white text-sm font-semibold hover:bg-white/15 active:scale-[0.98] transition-all"
               >
                 Để sau
               </button>

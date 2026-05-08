@@ -9,7 +9,7 @@ const NotFound: React.FC = () => {
       <p className="text-gray-500 mt-2">Xin lỗi, trang bạn đang tìm kiếm không tồn tại.</p>
       <Link
         to="/"
-        className="mt-8 px-6 py-3 bg-secondary text-white font-semibold rounded-lg hover:bg-secondary-dark transition-colors duration-200"
+        className="mt-8 px-6 py-3 bg-[#eb248e] text-white font-semibold rounded-lg hover:bg-[#d61f81] transition-colors duration-200"
       >
         Về bảng điều khiển
       </Link>

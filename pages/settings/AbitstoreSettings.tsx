@@ -130,7 +130,7 @@ const AbitstoreSettings: React.FC = () => {
            <button
             type="submit"
             disabled={loading || !canEdit}
-            className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-secondary hover:bg-secondary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary disabled:opacity-50"
+            className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-[#eb248e] hover:bg-[#d61f81] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#eb248e] disabled:opacity-50"
           >
             {loading ? 'Đang lưu...' : 'Lưu cấu hình'}
           </button>

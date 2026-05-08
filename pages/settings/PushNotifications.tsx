@@ -109,7 +109,7 @@ const PushNotifications: React.FC = () => {
           <h1 className="text-2xl font-bold text-gray-900">Quản lý thông báo đẩy</h1>
           <p className="text-sm text-gray-600 mt-1">Đăng ký thiết bị, xem subscription và gửi push test end-to-end.</p>
         </div>
-        <button onClick={enablePush} className="px-4 py-2 rounded-lg bg-secondary text-white font-semibold">
+        <button onClick={enablePush} className="px-4 py-2 rounded-lg bg-[#eb248e] text-white font-semibold hover:bg-[#d61f81] transition-colors">
           Bật thông báo
         </button>
       </div>
@@ -143,7 +143,7 @@ const PushNotifications: React.FC = () => {
           <button
             onClick={() => sendTestPush()}
             disabled={sending}
-            className="mt-4 px-4 py-2 rounded-lg bg-secondary text-white font-semibold disabled:opacity-60"
+            className="mt-4 px-4 py-2 rounded-lg bg-[#eb248e] text-white font-semibold hover:bg-[#d61f81] disabled:opacity-60 transition-colors"
           >
             {sending ? 'Đang gửi...' : 'Gửi push test cho tôi'}
           </button>

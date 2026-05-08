@@ -173,7 +173,7 @@ const SpeakerManagement: React.FC = () => {
                     <button onClick={fetchSpeakers} className="p-2.5 bg-white border border-gray-200 text-gray-600 rounded-xl hover:bg-gray-50 transition-colors shadow-sm flex items-center">
                         <span className="material-symbols-outlined text-lg">refresh</span>
                     </button>
-                    <button onClick={() => openModal()} className="px-5 py-2.5 bg-secondary text-white font-bold rounded-xl hover:bg-secondary-dark transition-all shadow-sm flex items-center gap-2">
+                    <button onClick={() => openModal()} className="px-5 py-2.5 bg-[#eb248e] text-white font-bold rounded-xl hover:bg-[#d61f81] transition-all shadow-sm flex items-center gap-2">
                         <span className="material-symbols-outlined text-lg font-black">add</span>
                         Thêm Báo cáo viên
                     </button>

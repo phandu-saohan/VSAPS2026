@@ -99,7 +99,7 @@ const NotificationsPage: React.FC = () => {
             </div>
             <button 
                 onClick={handleClearAll}
-                className="px-4 py-2 bg-secondary text-white font-semibold rounded-lg hover:bg-secondary-dark transition-colors w-full sm:w-auto"
+                className="px-4 py-2 bg-[#eb248e] text-white font-semibold rounded-lg hover:bg-[#d61f81] transition-colors w-full sm:w-auto"
             >
                 Đánh dấu tất cả đã đọc
             </button>

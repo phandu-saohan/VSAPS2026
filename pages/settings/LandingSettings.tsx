@@ -96,7 +96,7 @@ const LandingSettings: React.FC = () => {
             👁 Xem trang
           </a>
           <button onClick={handleSave} disabled={saving}
-            className="px-5 py-2 bg-secondary text-white text-xs font-bold rounded-md hover:bg-secondary-dark disabled:opacity-60 transition-colors flex items-center gap-2">
+            className="px-5 py-2 bg-[#eb248e] text-white text-xs font-bold rounded-md hover:bg-[#d61f81] disabled:opacity-60 transition-colors flex items-center gap-2">
             {saving ? '⏳ Đang lưu...' : '💾 Lưu thay đổi'}
           </button>
         </div>
@@ -543,7 +543,7 @@ const LandingSettings: React.FC = () => {
       {/* Bottom Save Button */}
       <div className="mt-8 pt-5 border-t border-gray-200 flex justify-end">
         <button onClick={handleSave} disabled={saving}
-          className="px-7 py-2.5 bg-secondary text-white text-sm font-bold rounded-md hover:bg-secondary-dark disabled:opacity-60 transition-colors">
+          className="px-7 py-2.5 bg-[#eb248e] text-white text-sm font-bold rounded-md hover:bg-[#d61f81] disabled:opacity-60 transition-colors">
           {saving ? '⏳ Đang lưu...' : '💾 Lưu thay đổi'}
         </button>
       </div>

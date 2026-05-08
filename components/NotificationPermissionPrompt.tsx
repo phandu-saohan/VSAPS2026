@@ -98,7 +98,7 @@ const NotificationPermissionPrompt: React.FC = () => {
           <button
             onClick={handleEnable}
             disabled={loading}
-            className="px-4 py-2 rounded-xl bg-secondary text-white text-sm font-bold disabled:opacity-60"
+            className="px-4 py-2 rounded-xl bg-[#eb248e] text-white text-sm font-bold hover:bg-[#d61f81] active:scale-[0.98] transition-all disabled:opacity-60 disabled:cursor-not-allowed"
           >
             {loading ? 'Đang bật...' : 'Cho phép'}
           </button>
@@ -107,7 +107,7 @@ const NotificationPermissionPrompt: React.FC = () => {
               localStorage.setItem('vsaps-notification-prompt-seen', '1');
               setVisible(false);
             }}
-            className="px-4 py-2 rounded-xl bg-gray-100 text-gray-700 text-sm font-semibold"
+            className="px-4 py-2 rounded-xl bg-secondary-light text-secondary text-sm font-semibold hover:bg-secondary/15 active:scale-[0.98] transition-all"
           >
             Để sau
           </button>

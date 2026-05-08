@@ -49,7 +49,7 @@ const Settings: React.FC = () => {
                 </div>
                 <button
                     onClick={() => setPushModalOpen(true)}
-                    className="px-4 py-2 rounded-lg bg-secondary text-white font-semibold hover:brightness-110"
+                    className="px-4 py-2 rounded-lg bg-[#eb248e] text-white font-semibold hover:bg-[#d61f81] transition-colors"
                 >
                     Bật thông báo
                 </button>

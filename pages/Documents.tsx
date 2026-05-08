@@ -216,7 +216,7 @@ const Documents: React.FC = () => {
                     <p className="mt-2 text-gray-600">Lưu trữ và chia sẻ các tệp tin quan trọng của sự kiện.</p>
                 </div>
                 {hasPermission('documents:create') && (
-                    <button onClick={() => openModal()} className="px-4 py-2 bg-secondary text-white font-semibold rounded-lg hover:bg-secondary-dark transition-colors">
+                    <button onClick={() => openModal()} className="px-4 py-2 bg-[#eb248e] text-white font-semibold rounded-lg hover:bg-[#d61f81] transition-colors">
                         + Thêm tài liệu
                     </button>
                 )}
@@ -321,7 +321,7 @@ const Documents: React.FC = () => {
                         </div>
                         <div className="mt-6 flex justify-end space-x-3">
                             <button onClick={closeModal} className="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300">Hủy</button>
-                            <button onClick={handleSave} disabled={loading || isUploading} className="px-4 py-2 bg-secondary text-white rounded-md hover:bg-secondary-dark disabled:opacity-50">
+                            <button onClick={handleSave} disabled={loading || isUploading} className="px-4 py-2 bg-[#eb248e] text-white rounded-md hover:bg-[#d61f81] disabled:opacity-50">
                                 {loading ? 'Đang lưu...' : 'Lưu'}
                             </button>
                         </div>

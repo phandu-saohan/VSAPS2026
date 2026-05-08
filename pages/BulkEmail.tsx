@@ -332,7 +332,7 @@ const BulkEmail: React.FC = () => {
                         </p>
                     </div>
                     <div>
-                         <button onClick={handleSend} disabled={isSending || currentRecipients.length === 0} className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-secondary hover:bg-secondary-dark disabled:opacity-50">
+                         <button onClick={handleSend} disabled={isSending || currentRecipients.length === 0} className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#eb248e] hover:bg-[#d61f81] disabled:opacity-50">
                             {isSending ? <><SpinnerIcon className="w-5 h-5 mr-2" /> Đang gửi...</> : `Gửi đến ${currentRecipients.length} người`}
                         </button>
                     </div>

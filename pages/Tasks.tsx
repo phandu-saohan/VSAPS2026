@@ -412,7 +412,7 @@ const Tasks: React.FC = () => {
                     <p className="mt-2 text-gray-600">Phân công và theo dõi tiến độ các công việc của ban tổ chức.</p>
                 </div>
                 {hasPermission('tasks:create') && (
-                    <button onClick={() => openModal()} className="px-4 py-2 bg-secondary text-white font-semibold rounded-lg hover:bg-secondary-dark transition-colors w-full md:w-auto">
+                    <button onClick={() => openModal()} className="px-4 py-2 bg-[#eb248e] text-white font-semibold rounded-lg hover:bg-[#d61f81] transition-colors w-full md:w-auto">
                         + Thêm công việc
                     </button>
                 )}
@@ -486,7 +486,7 @@ const Tasks: React.FC = () => {
              {isModalOpen && (
                  <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
                      <div className={`bg-white rounded-2xl shadow-2xl ring-1 ring-black/5 w-full max-h-[95vh] overflow-hidden flex flex-col ${isNew ? 'max-w-lg' : 'max-w-5xl'}`}>
-                        <div className="px-6 py-4 border-b border-gray-200 bg-gradient-to-r from-[#061D5F] to-[#0b2a86] flex justify-between items-center">
+                        <div className="px-6 py-4 border-b border-gray-200 bg-gradient-to-r from-secondary to-secondary-dark flex justify-between items-center">
                             <h2 className="text-xl font-bold text-white">{isNew ? 'Thêm công việc mới' : 'Chi tiết công việc'}</h2>
                             <button onClick={closeModal} className="text-white/80 hover:text-white hover:bg-white/10 rounded-full p-1 transition-colors">
                                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
@@ -600,7 +600,7 @@ const Tasks: React.FC = () => {
             {taskToDelete && (
                  <div className="fixed inset-0 bg-black/55 backdrop-blur-sm flex items-center justify-center z-50 p-4">
                      <div className="bg-white rounded-2xl shadow-2xl ring-1 ring-black/5 w-full max-w-md overflow-hidden">
-                         <div className="px-6 py-4 bg-gradient-to-r from-[#061D5F] to-[#0b2a86]">
+                         <div className="px-6 py-4 bg-gradient-to-r from-secondary to-secondary-dark">
                              <h2 className="text-xl font-bold text-white">Xác nhận xóa</h2>
                          </div>
                          <div className="p-6 bg-gray-50/40">

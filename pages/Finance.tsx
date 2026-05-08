@@ -270,7 +270,7 @@ const Finance: React.FC = () => {
                     <p className="mt-2 text-gray-600">Theo dõi các giao dịch tài chính của sự kiện.</p>
                 </div>
                 {hasPermission('finance:create') && (
-                    <button onClick={() => openModal()} className="px-4 py-2 bg-secondary text-white font-semibold rounded-lg hover:bg-secondary-dark transition-colors">
+                    <button onClick={() => openModal()} className="px-4 py-2 bg-[#eb248e] text-white font-semibold rounded-lg hover:bg-[#d61f81] transition-colors">
                         + Thêm Giao dịch
                     </button>
                 )}
@@ -389,67 +389,74 @@ const Finance: React.FC = () => {
 
             {/* Add/Edit Modal */}
             {isModalOpen && (
-                 <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-                     <div className="bg-white rounded-lg shadow-xl p-6 w-full max-w-2xl max-h-[90vh] overflow-y-auto">
-                        <h2 className="text-2xl font-bold mb-4">{isNew ? 'Thêm giao dịch' : 'Chỉnh sửa giao dịch'}</h2>
-                        {error && <p className="mb-4 text-red-500">{error}</p>}
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700">Loại giao dịch</label>
-                                <select name="type" value={editingTransaction.type || ''} onChange={handleChange} className="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
-                                    <option value="Chi">Chi</option>
-                                    <option value="Thu">Thu</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700">Ngày giao dịch</label>
-                                <input type="date" name="transaction_date" value={editingTransaction.transaction_date || ''} onChange={handleChange} className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"/>
-                            </div>
-                            <div className="md:col-span-2">
-                                <label className="block text-sm font-medium text-gray-700">Tiêu đề</label>
-                                <input type="text" name="title" value={editingTransaction.title || ''} onChange={handleChange} className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"/>
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700">Số tiền (VND)</label>
-                                <input type="number" name="amount" value={String(editingTransaction.amount || 0)} onChange={handleChange} className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"/>
-                            </div>
-                             <div>
-                                <label className="block text-sm font-medium text-gray-700">Tài khoản</label>
-                                <select name="account" value={editingTransaction.account || ''} onChange={handleChange} className="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
-                                    <option value="">-- Chọn tài khoản --</option>
-                                    <option value="TK Lộc Phát">TK Lộc Phát</option>
-                                    <option value="TK Hội Nghị">TK Hội Nghị</option>
-                                </select>
-                            </div>
-                             <div>
-                                <label className="block text-sm font-medium text-gray-700">Người xử lý</label>
-                                <select name="handler_id" value={editingTransaction.handler_id || ''} onChange={handleChange} className="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
-                                    <option value="">-- Chọn người xử lý --</option>
-                                    {profiles.map(p => <option key={p.id} value={p.id}>{p.full_name}</option>)}
-                                </select>
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700">Phương thức thanh toán</label>
-                                <select name="payment_method" value={editingTransaction.payment_method || ''} onChange={handleChange} className="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
-                                    <option>Chuyển khoản</option>
-                                    <option>Tiền mặt</option>
-                                    <option>Khác</option>
-                                </select>
-                            </div>
-                            <div className="md:col-span-2">
-                                <label className="block text-sm font-medium text-gray-700">Ảnh hóa đơn/chứng từ</label>
-                                <input type="file" accept="image/*" onChange={handleFileChange} className="mt-1 text-sm"/>
-                                {isUploading && <p className="text-xs text-secondary">Đang tải lên...</p>}
-                                {editingTransaction.receipt_url && <a href={editingTransaction.receipt_url} target="_blank" rel="noopener noreferrer" className="text-secondary text-sm hover:underline mt-1 inline-block">Xem ảnh</a>}
-                            </div>
-                            <div className="md:col-span-2">
-                                <label className="block text-sm font-medium text-gray-700">Ghi chú</label>
-                                <textarea name="notes" value={editingTransaction.notes || ''} onChange={handleChange} rows={3} className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"/>
-                            </div>
+                 <div className="fixed inset-0 bg-black/55 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+                     <div className="bg-white rounded-2xl shadow-2xl ring-1 ring-black/5 w-full max-w-2xl max-h-[90vh] overflow-hidden flex flex-col">
+                        <div className="px-6 py-4 bg-gradient-to-r from-secondary to-secondary-dark flex items-center justify-between">
+                            <h2 className="text-xl font-bold text-white">{isNew ? 'Thêm giao dịch' : 'Chỉnh sửa giao dịch'}</h2>
+                            <button onClick={closeModal} className="text-white/80 hover:text-white hover:bg-white/10 rounded-full p-1 transition-colors">
+                                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                            </button>
                         </div>
-                        <div className="mt-6 flex justify-end space-x-3">
-                            <button onClick={closeModal} className="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300">Hủy</button>
-                            <button onClick={handleSave} disabled={loading || isUploading} className="px-4 py-2 bg-secondary text-white rounded-md hover:bg-secondary-dark disabled:opacity-50">
+                        <div className="p-6 overflow-y-auto bg-gray-50/40">
+                          {error && <p className="mb-4 text-red-600 text-sm p-3 bg-red-50 border border-red-100 rounded-xl">{error}</p>}
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                              <div>
+                                  <label className="block text-sm font-semibold text-gray-700">Loại giao dịch</label>
+                                  <select name="type" value={editingTransaction.type || ''} onChange={handleChange} className="mt-1 block w-full border-gray-300 rounded-xl shadow-sm focus:ring-[#061D5F] focus:border-[#061D5F]">
+                                      <option value="Chi">Chi</option>
+                                      <option value="Thu">Thu</option>
+                                  </select>
+                              </div>
+                              <div>
+                                  <label className="block text-sm font-semibold text-gray-700">Ngày giao dịch</label>
+                                  <input type="date" name="transaction_date" value={editingTransaction.transaction_date || ''} onChange={handleChange} className="mt-1 block w-full border-gray-300 rounded-xl shadow-sm focus:ring-[#061D5F] focus:border-[#061D5F]"/>
+                              </div>
+                              <div className="md:col-span-2">
+                                  <label className="block text-sm font-semibold text-gray-700">Tiêu đề</label>
+                                  <input type="text" name="title" value={editingTransaction.title || ''} onChange={handleChange} className="mt-1 block w-full border-gray-300 rounded-xl shadow-sm focus:ring-[#061D5F] focus:border-[#061D5F]"/>
+                              </div>
+                              <div>
+                                  <label className="block text-sm font-semibold text-gray-700">Số tiền (VND)</label>
+                                  <input type="number" name="amount" value={String(editingTransaction.amount || 0)} onChange={handleChange} className="mt-1 block w-full border-gray-300 rounded-xl shadow-sm focus:ring-[#061D5F] focus:border-[#061D5F]"/>
+                              </div>
+                               <div>
+                                  <label className="block text-sm font-semibold text-gray-700">Tài khoản</label>
+                                  <select name="account" value={editingTransaction.account || ''} onChange={handleChange} className="mt-1 block w-full border-gray-300 rounded-xl shadow-sm focus:ring-[#061D5F] focus:border-[#061D5F]">
+                                      <option value="">-- Chọn tài khoản --</option>
+                                      <option value="TK Lộc Phát">TK Lộc Phát</option>
+                                      <option value="TK Hội Nghị">TK Hội Nghị</option>
+                                  </select>
+                              </div>
+                               <div>
+                                  <label className="block text-sm font-semibold text-gray-700">Người xử lý</label>
+                                  <select name="handler_id" value={editingTransaction.handler_id || ''} onChange={handleChange} className="mt-1 block w-full border-gray-300 rounded-xl shadow-sm focus:ring-[#061D5F] focus:border-[#061D5F]">
+                                      <option value="">-- Chọn người xử lý --</option>
+                                      {profiles.map(p => <option key={p.id} value={p.id}>{p.full_name}</option>)}
+                                  </select>
+                              </div>
+                              <div>
+                                  <label className="block text-sm font-semibold text-gray-700">Phương thức thanh toán</label>
+                                  <select name="payment_method" value={editingTransaction.payment_method || ''} onChange={handleChange} className="mt-1 block w-full border-gray-300 rounded-xl shadow-sm focus:ring-[#061D5F] focus:border-[#061D5F]">
+                                      <option>Chuyển khoản</option>
+                                      <option>Tiền mặt</option>
+                                      <option>Khác</option>
+                                  </select>
+                              </div>
+                              <div className="md:col-span-2">
+                                  <label className="block text-sm font-semibold text-gray-700">Ảnh hóa đơn/chứng từ</label>
+                                  <input type="file" accept="image/*" onChange={handleFileChange} className="mt-1 text-sm"/>
+                                  {isUploading && <p className="text-xs text-[#061D5F] font-medium mt-1">Đang tải lên...</p>}
+                                  {editingTransaction.receipt_url && <a href={editingTransaction.receipt_url} target="_blank" rel="noopener noreferrer" className="text-[#061D5F] text-sm font-semibold hover:underline mt-1 inline-block">Xem ảnh</a>}
+                              </div>
+                              <div className="md:col-span-2">
+                                  <label className="block text-sm font-semibold text-gray-700">Ghi chú</label>
+                                  <textarea name="notes" value={editingTransaction.notes || ''} onChange={handleChange} rows={3} className="mt-1 block w-full border-gray-300 rounded-xl shadow-sm focus:ring-[#061D5F] focus:border-[#061D5F]"/>
+                              </div>
+                          </div>
+                        </div>
+                        <div className="px-6 py-4 border-t border-gray-200 bg-white flex justify-end gap-3">
+                            <button onClick={closeModal} className="px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded-xl hover:bg-gray-50 active:scale-[0.98] transition-all">Hủy</button>
+                            <button onClick={handleSave} disabled={loading || isUploading} className="px-4 py-2 bg-[#eb248e] text-white rounded-xl hover:bg-[#d61f81] active:scale-[0.98] transition-all disabled:opacity-50 shadow-md">
                                 {loading ? 'Đang lưu...' : 'Lưu'}
                             </button>
                         </div>
@@ -459,13 +466,17 @@ const Finance: React.FC = () => {
             
             {/* Delete Confirmation Modal */}
             {transactionToDelete && (
-                 <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-                     <div className="bg-white rounded-lg shadow-xl p-6 w-full max-w-md">
-                         <h2 className="text-2xl font-bold mb-4">Xác nhận xóa</h2>
-                         <p>Bạn có chắc chắn muốn xóa giao dịch <span className="font-semibold">"{transactionToDelete.title}"</span>? Hành động này không thể hoàn tác.</p>
-                         <div className="mt-6 flex justify-end space-x-3">
-                             <button onClick={() => setTransactionToDelete(null)} className="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300">Hủy</button>
-                             <button onClick={confirmDelete} className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700">Xác nhận xóa</button>
+                 <div className="fixed inset-0 bg-black/55 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+                     <div className="bg-white rounded-2xl shadow-2xl ring-1 ring-black/5 w-full max-w-md overflow-hidden">
+                         <div className="px-6 py-4 bg-gradient-to-r from-secondary to-secondary-dark">
+                             <h2 className="text-xl font-bold text-white">Xác nhận xóa</h2>
+                         </div>
+                         <div className="p-6 bg-gray-50/40">
+                           <p className="text-gray-700">Bạn có chắc chắn muốn xóa giao dịch <span className="font-semibold text-gray-900">"{transactionToDelete.title}"</span>? Hành động này không thể hoàn tác.</p>
+                           <div className="mt-6 flex justify-end gap-3">
+                               <button onClick={() => setTransactionToDelete(null)} className="px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded-xl hover:bg-gray-50 active:scale-[0.98] transition-all">Hủy</button>
+                               <button onClick={confirmDelete} className="px-4 py-2 bg-[#eb248e] text-white rounded-xl hover:bg-[#d61f81] active:scale-[0.98] transition-all shadow-md">Xác nhận xóa</button>
+                           </div>
                          </div>
                      </div>
                  </div>
