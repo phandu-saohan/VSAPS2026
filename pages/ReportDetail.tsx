@@ -37,6 +37,7 @@ const ReportDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [speaker, setSpeaker] = useState<Speaker | null>(null);
   const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     const fetchItem = async () => {
