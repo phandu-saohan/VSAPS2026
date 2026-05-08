@@ -158,8 +158,8 @@ const PublicSpeakers: React.FC = () => {
             {filteredSpeakers.map((speaker) => (
               <FadeSection key={speaker.id}>
                 <Link to={`/reports/${speaker.id}`} className="group block overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-shadow hover:shadow-md">
-                  <div className="aspect-[4/5] bg-gray-100">
-                    <img src={speaker.avatar_url || `https://ui-avatars.com/api/?name=${encodeURIComponent(speaker.full_name)}&background=random`} alt={speaker.full_name} className="h-full w-full object-contain bg-white transition-transform duration-500 group-hover:scale-105" />
+                  <div className="bg-gray-100">
+                    <img src={speaker.avatar_url || `https://ui-avatars.com/api/?name=${encodeURIComponent(speaker.full_name)}&background=random`} alt={speaker.full_name} className="w-full object-contain bg-white transition-transform duration-500 group-hover:scale-105" />
                   </div>
                   <div className="p-3.5">
                     <span className={`inline-flex rounded px-2 py-1 text-[10px] font-bold uppercase tracking-wider ${speakerTypeLabel(speaker.speaker_type) === 'Khách mời quốc tế' ? 'bg-[#f7b2d0]/20 text-secondary' : 'bg-gray-100 text-gray-600'}`}>
