@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import LandingHeader from '../components/LandingHeader';
 import { Link } from 'react-router-dom';
 import { supabase } from '../supabaseClient';
 import { Status, Task, Submission, Speaker } from '../types';
@@ -158,7 +157,6 @@ const Dashboard: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#f8f6f6]">
-      <LandingHeader active="other" logoUrl="/images/logo-vsaps.png" eventName="VSAPS 2026" />
       <div className="mx-auto max-w-7xl space-y-8 px-4 py-8 sm:px-6 lg:px-8">
         <div className="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm">
         <p className="text-xs uppercase tracking-[0.3em] text-secondary font-bold">{role || 'Hệ thống'}</p>

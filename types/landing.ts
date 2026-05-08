@@ -34,15 +34,6 @@ export interface LandingConfig {
     countries: string;
   };
 
-  // Speakers (manual override — can also pull from DB)
-  featured_speakers: Array<{
-    id: number;
-    name: string;
-    institution: string;
-    specialty: string;
-    avatar_url?: string;
-  }>;
-
   // Registration Prices
   registration_prices: Array<{
     id: number;
@@ -120,13 +111,6 @@ export const DEFAULT_LANDING_CONFIG: LandingConfig = {
     companies: '20',
     countries: '5',
   },
-
-  featured_speakers: [
-    { id: 1, name: 'GS. James Miller', institution: 'Trường Y Harvard, USA', specialty: 'Tiên phong trong kỹ thuật tái tạo vi mạch và các mô hình phẫu thuật tái tạo.', avatar_url: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400&q=80' },
-    { id: 2, name: 'TS. Elena Rodriguez', institution: 'Đại học Barcelona, TBN', specialty: 'Chuyên gia về da liễu thẩm mỹ không xâm lấn và dược lý laser tiên tiến.', avatar_url: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&q=80' },
-    { id: 3, name: 'GS. Hiroshi Tanaka', institution: 'Đại học Tokyo, Nhật Bản', specialty: 'Chuyên gia tái tạo khuôn mặt độ chính xác cao và vi phẫu hỗ trợ bằng robot.', avatar_url: 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=400&q=80' },
-    { id: 4, name: 'TS. Sofia Lee', institution: 'Seoul Medical Center, Hàn Quốc', specialty: 'Trưởng nhóm nghiên cứu nâng mũi tập trung vào biến thể thẩm mỹ chủng tộc Châu Á.', avatar_url: 'https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=400&q=80' },
-  ],
 
   registration_prices: [
     {

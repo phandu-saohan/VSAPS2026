@@ -4,13 +4,12 @@ import { useAuth } from '../../contexts/AuthContext';
 import { useToast } from '../../contexts/ToastContext';
 import { DEFAULT_LANDING_CONFIG, LandingConfig } from '../../types/landing';
 
-type Tab = 'general' | 'media' | 'stats' | 'speakers' | 'prices' | 'registration' | 'contact';
+type Tab = 'general' | 'media' | 'stats' | 'prices' | 'registration' | 'contact';
 
 const TAB_LIST: { id: Tab; label: string; icon: string }[] = [
   { id: 'general', label: 'Thông tin chung', icon: '📋' },
   { id: 'media', label: 'Media & Hình ảnh', icon: '🖼️' },
   { id: 'stats', label: 'Chỉ số thống kê', icon: '📊' },
-  { id: 'speakers', label: 'Diễn giả nổi bật', icon: '🎤' },
   { id: 'prices', label: 'Phí đăng ký', icon: '💳' },
   { id: 'registration', label: 'Cài đặt đăng ký', icon: '⚙️' },
   { id: 'contact', label: 'Liên hệ', icon: '📞' },
@@ -356,66 +355,6 @@ const LandingSettings: React.FC = () => {
               </div>
             ))}
           </div>
-        </div>
-      )}
-
-      {/* ── Tab: Diễn giả ── */}
-      {tab === 'speakers' && (
-        <div className="space-y-4">
-          <p className="text-xs text-gray-500 bg-blue-50 border border-blue-200 rounded-md px-4 py-3">
-            💡 Nhập tối đa 4 diễn giả nổi bật. Để hiển thị tất cả diễn giả, vào module <strong>CT/BCV</strong> trong menu chính.
-          </p>
-          {cfg.featured_speakers.map((spk, idx) => (
-            <div key={spk.id} className="border border-gray-200 rounded-lg p-5 space-y-4">
-              <div className="flex justify-between items-center">
-                <p className="text-sm font-bold text-gray-700">Diễn giả #{idx + 1}</p>
-                <button
-                  onClick={() => set('featured_speakers', cfg.featured_speakers.filter((_, i) => i !== idx))}
-                  className="text-xs text-red-500 hover:text-red-700 font-medium">
-                  ✕ Xóa
-                </button>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                <Field label="Họ và tên *">
-                  <Input value={spk.name} onChange={e => {
-                    const s = [...cfg.featured_speakers]; s[idx] = { ...s[idx], name: e.target.value };
-                    set('featured_speakers', s);
-                  }} placeholder="GS. Nguyễn Văn A" />
-                </Field>
-                <Field label="Cơ sở / Tổ chức">
-                  <Input value={spk.institution} onChange={e => {
-                    const s = [...cfg.featured_speakers]; s[idx] = { ...s[idx], institution: e.target.value };
-                    set('featured_speakers', s);
-                  }} placeholder="Đại học Y Hà Nội" />
-                </Field>
-              </div>
-              <Field label="Chuyên môn (mô tả ngắn)">
-                <Textarea value={spk.specialty} rows={2} onChange={e => {
-                  const s = [...cfg.featured_speakers]; s[idx] = { ...s[idx], specialty: e.target.value };
-                  set('featured_speakers', s);
-                }} placeholder="Chuyên gia về..." />
-              </Field>
-              <Field label="URL ảnh đại diện">
-                <Input value={spk.avatar_url || ''} onChange={e => {
-                  const s = [...cfg.featured_speakers]; s[idx] = { ...s[idx], avatar_url: e.target.value };
-                  set('featured_speakers', s);
-                }} placeholder="https://..." />
-                {spk.avatar_url && (
-                  <img src={spk.avatar_url} alt={spk.name} className="mt-2 w-16 h-16 object-cover rounded-full border" />
-                )}
-              </Field>
-            </div>
-          ))}
-
-          {cfg.featured_speakers.length < 4 && (
-            <button
-              onClick={() => set('featured_speakers', [...cfg.featured_speakers, {
-                id: Date.now(), name: '', institution: '', specialty: '', avatar_url: '',
-              }])}
-              className="w-full py-3 border-2 border-dashed border-gray-300 text-sm text-gray-500 hover:border-secondary hover:text-secondary transition-colors rounded-lg">
-              + Thêm diễn giả
-            </button>
-          )}
         </div>
       )}
 
