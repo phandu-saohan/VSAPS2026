@@ -25,6 +25,7 @@ npm run build
 ### Biến môi trường frontend
 - `VITE_SUPABASE_URL`
 - `VITE_SUPABASE_ANON_KEY`
+- `VITE_ONESIGNAL_APP_ID`
 - `GEMINI_API_KEY` nếu dùng tính năng AI
 
 ### Biến môi trường backend / Supabase Edge Functions
