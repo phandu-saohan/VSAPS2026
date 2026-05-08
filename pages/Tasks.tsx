@@ -134,8 +134,12 @@ const Tasks: React.FC = () => {
             if (editingTask.assignee_id && editingTask.assignee_id !== currentUser.id) {
                 createNotification({
                     user_id: editingTask.assignee_id,
+                    title: 'Bình luận mới trong công việc',
                     message: `${currentUser.full_name} đã bình luận vào công việc "${editingTask.title}"`,
-                    link: '/tasks'
+                    kind: 'task',
+                    channel: 'in_app',
+                    link: '/tasks',
+                    meta: { task_id: editingTask.id, comment: content }
                 });
             }
         }
@@ -259,41 +263,46 @@ const Tasks: React.FC = () => {
 
             if (isNew) {
                 if (newAssigneeId) {
-                    await sendPushNotification(
-                        [newAssigneeId],
-                        'Công việc mới được giao',
-                        `${assignerName} đã giao cho bạn công việc mới: "${taskTitle}"`
-                    );
+                    await sendOneSignalNotification({
+                        userIds: [newAssigneeId],
+                        title: 'Công việc mới được giao',
+                        message: `${assignerName} đã giao cho bạn công việc mới: "${taskTitle}"`,
+                        url: `${window.location.origin}/#/tasks`,
+                    });
                 }
             } else { // It's an update
                 if (newAssigneeId && newAssigneeId !== oldAssigneeId) {
                     // Re-assigned
-                    await sendPushNotification(
-                        [newAssigneeId],
-                        'Bạn có công việc mới',
-                        `${assignerName} đã giao cho bạn công việc: "${taskTitle}"`
-                    );
+                    await sendOneSignalNotification({
+                        userIds: [newAssigneeId],
+                        title: 'Bạn có công việc mới',
+                        message: `${assignerName} đã giao cho bạn công việc: "${taskTitle}"`,
+                        url: `${window.location.origin}/#/tasks`,
+                    });
                     if (oldAssigneeId) {
-                        await sendPushNotification(
-                            [oldAssigneeId],
-                            'Công việc đã được gỡ bỏ',
-                            `Công việc "${taskTitle}" đã được giao cho người khác.`
-                        );
+                        await sendOneSignalNotification({
+                            userIds: [oldAssigneeId],
+                            title: 'Công việc đã được gỡ bỏ',
+                            message: `Công việc "${taskTitle}" đã được giao cho người khác.`,
+                            url: `${window.location.origin}/#/tasks`,
+                        });
                     }
                 } else if (!newAssigneeId && oldAssigneeId) {
                     // Un-assigned
-                     await sendPushNotification(
-                        [oldAssigneeId],
-                        'Công việc đã được gỡ bỏ',
-                        `Bạn đã được gỡ khỏi công việc "${originalTask?.title}".`
-                    );
+                     await sendOneSignalNotification({
+                        userIds: [oldAssigneeId],
+                        title: 'Công việc đã được gỡ bỏ',
+                        message: `Bạn đã được gỡ khỏi công việc "${originalTask?.title}".`,
+                        url: `${window.location.origin}/#/tasks`,
+                    });
                 } else if (newAssigneeId) {
                     // Details updated, assignee same
-                     await sendPushNotification(
-                        [newAssigneeId],
-                        'Công việc được cập nhật',
-                        `Thông tin công việc "${taskTitle}" đã được cập nhật.`
-                    );
+                     await sendOneSignalNotification({
+                        userIds: [newAssigneeId],
+                        title: 'Công việc được cập nhật',
+                        message: `Thông tin công việc "${taskTitle}" đã được cập nhật.`,
+                        url: `${window.location.origin}/#/tasks`,
+                    });
                 }
             }
             
@@ -344,11 +353,12 @@ const Tasks: React.FC = () => {
             addToast(errorMessage, 'error');
         } else {
             if (assigneeId) {
-                await sendPushNotification(
-                    [assigneeId],
-                    'Công việc đã bị xóa',
-                    `Công việc "${taskTitle}" mà bạn được giao đã bị xóa.`
-                );
+                await sendOneSignalNotification({
+                    userIds: [assigneeId],
+                    title: 'Công việc đã bị xóa',
+                    message: `Công việc "${taskTitle}" mà bạn được giao đã bị xóa.`,
+                    url: `${window.location.origin}/#/tasks`,
+                });
             }
             setTasks(tasks.filter(t => t.id !== taskToDelete.id));
             setTaskToDelete(null);

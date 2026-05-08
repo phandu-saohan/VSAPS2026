@@ -122,10 +122,10 @@ const NotificationsPage: React.FC = () => {
                             <Link 
                                 to={n.link || '#'}
                                 onClick={() => handleNotificationClick(n.id)}
-                                className={`block hover:bg-gray-50 transition-colors ${!n.read ? 'bg-secondary-light' : ''}`}
+                                className={`block hover:bg-gray-50 transition-colors ${!n.read ? 'bg-[#fde7f1]' : ''}`}
                             >
                                 <div className="p-4 sm:p-6 flex items-start space-x-4">
-                                     <div className={`w-3 h-3 rounded-full mt-1.5 flex-shrink-0 ${!n.read ? 'bg-secondary' : 'bg-gray-300'}`}></div>
+                                     <div className={`w-3 h-3 rounded-full mt-1.5 flex-shrink-0 ${!n.read ? 'bg-[#eb248e]' : 'bg-gray-300'}`}></div>
                                      <div className="flex-1">
                                          <p className="text-sm text-gray-800">{n.message}</p>
                                          <p className="text-xs text-gray-500 mt-1">{timeSince(n.created_at)}</p>

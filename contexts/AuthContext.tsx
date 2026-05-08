@@ -12,7 +12,7 @@ export interface AuthContextType {
   logout: () => void;
   markNotificationAsRead: (id: number) => Promise<void>;
   clearAllNotifications: () => Promise<void>;
-  createNotification: (notification: Omit<Notification, 'id' | 'created_at' | 'read' | 'user_id'> & { user_id: string }) => Promise<void>;
+  createNotification: (notification: Omit<Notification, 'id' | 'created_at' | 'read'> & { user_id: string }) => Promise<void>;
   notifyAdmins: (message: string, link: string) => Promise<void>;
 }
 

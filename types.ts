@@ -7,13 +7,20 @@ export interface Profile {
   last_login?: string | null;
 }
 
+export type NotificationKind = 'info' | 'success' | 'warning' | 'error' | 'task' | 'finance' | 'system';
+export type NotificationChannel = 'in_app' | 'push' | 'toast';
+
 export interface Notification {
   id: number;
   user_id: string;
+  title?: string | null;
   message: string;
+  kind: NotificationKind;
+  channel: NotificationChannel;
   link?: string | null;
   read: boolean;
   created_at: string;
+  meta?: Record<string, any> | null;
 }
 
 export enum Status {

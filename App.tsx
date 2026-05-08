@@ -166,8 +166,19 @@ const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     }, [session]);
 
     const createNotification = useCallback(async (notification: Omit<Notification, 'id' | 'created_at' | 'read'>) => {
-        const { error } = await supabase.from('notifications').insert([{ ...notification, read: false }]);
-        if (error) console.error('Error creating notification:', error.message);
+        const payload = {
+            ...notification,
+            title: notification.title || notification.message,
+            kind: notification.kind || 'system',
+            channel: notification.channel || 'in_app',
+            meta: notification.meta || null,
+            read: false,
+        };
+
+        const { error } = await supabase.from('notifications').insert([payload]);
+        if (error) {
+            console.error('Error creating notification:', error.message);
+        }
     }, []);
 
     const notifyAdmins = useCallback(async (message: string, link: string) => {
@@ -183,8 +194,12 @@ const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
 
         const notificationsToInsert = admins.map(admin => ({
             user_id: admin.id,
+            title: message,
             message,
+            kind: 'system' as const,
+            channel: 'in_app' as const,
             link,
+            meta: null,
             read: false,
         }));
         
