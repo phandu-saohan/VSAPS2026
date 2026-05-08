@@ -220,6 +220,23 @@ const BulkEmail: React.FC = () => {
         }
     };
 
+    const handleBulkSend = async () => {
+        const { data, error } = await supabase.functions.invoke('send-bulk-email', {
+            body: {
+                recipients: currentRecipients,
+                subject,
+                html: body,
+            },
+        });
+
+        if (error) throw error;
+        if (data?.failedCount > 0) {
+            addToast(`Đã gửi ${currentRecipients.length - data.failedCount}/${currentRecipients.length} email.`, 'warning');
+        } else {
+            addToast(`Đã gửi thành công email đến ${currentRecipients.length} người nhận.`, 'success');
+        }
+    };
+
     const handleSend = async () => {
         if (currentRecipients.length === 0) {
             addToast('Vui lòng chọn hoặc nhập ít nhất một người nhận.', 'warning');
@@ -241,8 +258,7 @@ const BulkEmail: React.FC = () => {
         setIsSending(true);
 
         try {
-            await sendInBatches();
-            addToast(`Đã gửi thành công email đến ${currentRecipients.length} người nhận.`, 'success');
+            await handleBulkSend();
             setSubject('');
             if (editorInstance.current) editorInstance.current.setData('');
             setManualEmails('');
@@ -267,7 +283,7 @@ const BulkEmail: React.FC = () => {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <div className="lg:col-span-1 bg-white p-6 rounded-lg shadow-sm space-y-6">
+                <div className="lg:col-span-1 bg-white p-5 rounded-2xl shadow-sm space-y-6">
                     <div>
                         <h2 className="text-lg font-semibold text-gray-800">1. Chọn người nhận</h2>
                         <div className="mt-2 text-sm text-gray-600">
@@ -316,7 +332,7 @@ const BulkEmail: React.FC = () => {
                     </div>
                 </div>
 
-                <div className="lg:col-span-2 bg-white p-6 rounded-lg shadow-sm space-y-6">
+                <div className="lg:col-span-2 bg-white p-5 rounded-2xl shadow-sm space-y-6">
                      <h2 className="text-lg font-semibold text-gray-800">2. Soạn email</h2>
                      <div>
                         <label htmlFor="email-subject" className="block text-sm font-medium text-gray-700">Tiêu đề</label>
