@@ -29,14 +29,13 @@ const NotificationPermissionPrompt: React.FC = () => {
       const permission = await Notification.requestPermission();
       if (permission !== 'granted') return;
 
+      localStorage.setItem('vsaps-notification-prompt-seen', '1');
+      setVisible(false);
+
       if (!window.OneSignalDeferred) window.OneSignalDeferred = [];
       window.OneSignalDeferred.push(async (OneSignal) => {
         await OneSignal.login(profile?.id || session?.user?.id);
-        const accepted = await OneSignal.Notifications.requestPermission();
-        if (accepted) {
-          localStorage.setItem('vsaps-notification-prompt-seen', '1');
-          setVisible(false);
-        }
+        await OneSignal.Notifications.requestPermission();
       });
     } catch (error) {
       console.error(error);

@@ -97,27 +97,30 @@ const ReportDetail: React.FC = () => {
     <div className="min-h-screen bg-academic-surface text-academic-slate">
       <LandingHeader active="other" showSearch searchValue={searchTerm} onSearchChange={setSearchTerm} logoUrl="/images/logo-vsaps.png" eventName="VSAPS 2026" />
 
-      <main className="mx-auto max-w-[1280px] px-4 py-8 md:px-8">
-        <FadeIn className="mb-6 text-sm text-academic-grey">
-          <Link to="/" className="hover:text-secondary">Trang chủ</Link>
-          <span className="mx-2">/</span>
-          <Link to="/speakers-list" className="hover:text-secondary">Danh sách báo cáo viên</Link>
-          <span className="mx-2">/</span>
-          <span className="text-academic-navy">Chi tiết báo cáo</span>
-        </FadeIn>
+      <main className="mx-auto w-full max-w-none px-4 py-6 sm:px-6 lg:px-8 lg:py-8 2xl:px-10">
+        <div className="rounded-3xl border border-border-subtle bg-white p-5 shadow-sm sm:p-6 lg:p-8">
+          <FadeIn className="text-sm text-academic-grey">
+            <Link to="/" className="transition hover:text-secondary">Trang chủ</Link>
+            <span className="mx-2">/</span>
+            <Link to="/speakers-list" className="transition hover:text-secondary">Danh sách báo cáo viên</Link>
+            <span className="mx-2">/</span>
+            <span className="text-academic-navy">Chi tiết báo cáo</span>
+          </FadeIn>
+        </div>
 
         {loading ? (
-          <div className="grid place-items-center py-24"><div className="h-12 w-12 animate-spin rounded-full border-4 border-secondary/20 border-t-secondary" /></div>
+          <div className="mt-6 grid place-items-center rounded-3xl border border-border-subtle bg-white py-24 shadow-sm"><div className="h-12 w-12 animate-spin rounded-full border-4 border-secondary/20 border-t-secondary" /></div>
         ) : !speaker ? (
-          <FadeIn>
-            <div className="rounded-xl border border-dashed border-border-subtle bg-white py-16 text-center">
+          <FadeIn className="mt-6">
+            <div className="rounded-3xl border border-dashed border-border-subtle bg-white py-16 text-center shadow-sm">
               <p className="text-lg font-bold text-academic-navy">Không tìm thấy bài báo cáo</p>
-              <Link to="/speakers-list" className="mt-6 inline-flex rounded-lg bg-secondary px-4 py-2 font-bold text-white">Quay lại danh sách</Link>
+              <Link to="/speakers-list" className="mt-6 inline-flex rounded-full bg-secondary px-4 py-2 font-bold text-white transition hover:brightness-110">Quay lại danh sách</Link>
             </div>
           </FadeIn>
         ) : (
-          <div className="grid gap-8 lg:grid-cols-12 lg:gap-12">
-            <article className="lg:col-span-8 space-y-6">
+          <>
+            <div className="mt-6 grid gap-6 lg:grid-cols-12 lg:gap-8">
+              <article className="space-y-6 lg:col-span-8">
               <FadeIn>
                 <div className="space-y-4">
                   <div className="flex flex-wrap gap-2">
@@ -129,7 +132,7 @@ const ReportDetail: React.FC = () => {
               </FadeIn>
 
               <FadeIn>
-                <div className="rounded-xl border border-border-subtle bg-white p-5 shadow-sm">
+                <div className="rounded-3xl border border-border-subtle bg-white p-5 shadow-sm">
                   <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                     <div className="flex items-center gap-3">
                       <img src={speaker.avatar_url || `https://ui-avatars.com/api/?name=${encodeURIComponent(speaker.full_name)}&background=random`} alt={speaker.full_name} className="h-12 w-12 rounded-full object-cover" />
@@ -331,7 +334,8 @@ const ReportDetail: React.FC = () => {
                 </div>
               </FadeIn>
             </aside>
-          </div>
+            </div>
+          </>
         )}
       </main>
 
