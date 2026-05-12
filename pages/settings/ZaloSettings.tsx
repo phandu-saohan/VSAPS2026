@@ -9,19 +9,18 @@ const ZaloSettings: React.FC = () => {
 
   const [settings, setSettings] = useState<Partial<SystemSettings>>({});
   const [loading, setLoading] = useState(false);
+  const [saving, setSaving] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState('');
-
-  const [refreshing, setRefreshing] = useState(false);
-  const [refreshStatus, setRefreshStatus] = useState<{ type: 'success' | 'error', message: string } | null>(null);
-
+  const [checking, setChecking] = useState(false);
+  const [checkResult, setCheckResult] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
 
   useEffect(() => {
     const fetchSettings = async () => {
         setLoading(true);
         const { data, error: fetchError } = await supabase
             .from('settings')
-            .select('oa_id, oa_secret_key')
+            .select('oa_id, oa_secret_key, access_token')
             .eq('id', 1)
             .single();
 
@@ -31,13 +30,13 @@ const ZaloSettings: React.FC = () => {
             setSettings({
                 oa_id: data.oa_id || '',
                 oa_secret_key: data.oa_secret_key || '',
+                access_token: data.access_token || '',
             });
         }
         setLoading(false);
     };
     fetchSettings();
   }, []);
-
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -50,12 +49,13 @@ const ZaloSettings: React.FC = () => {
         setError("Bạn không có quyền thực hiện hành động này.");
         return;
     }
-    setLoading(true);
+    setSaving(true);
     setSuccess(false);
     setError('');
 
     const dataToSave = {
         oa_id: settings.oa_id,
+        access_token: settings.access_token,
         ...(settings.oa_secret_key && { oa_secret_key: settings.oa_secret_key })
     };
 
@@ -69,26 +69,30 @@ const ZaloSettings: React.FC = () => {
         setSuccess(true);
         setTimeout(() => setSuccess(false), 3000);
     }
-    setLoading(false);
+    setSaving(false);
   };
 
-  const handleManualRefresh = async () => {
+  const handleTestConnection = async () => {
     if (!canEdit) {
-      setRefreshStatus({ type: 'error', message: "Bạn không có quyền thực hiện hành động này." });
+      setCheckResult({ type: 'error', message: 'Bạn không có quyền thực hiện hành động này.' });
       return;
     }
-    setRefreshing(true);
-    setRefreshStatus(null);
+    setChecking(true);
+    setCheckResult(null);
     try {
-      const { data, error: invokeError } = await supabase.functions.invoke('refresh-zalo-token');
+      const { data, error: invokeError } = await supabase.functions.invoke('test-zalo-connection', {
+        body: {
+          oa_id: settings.oa_id,
+          access_token: settings.access_token,
+        },
+      });
       if (invokeError) throw invokeError;
-      setRefreshStatus({ type: 'success', message: (data as any)?.message || "Làm mới token thành công!" });
+      setCheckResult({ type: 'success', message: (data as any)?.message || 'Kết nối Zalo thành công.' });
     } catch (err: any) {
-      console.error("Refresh error:", err);
-      const errorMessage = err.context?.data?.error || err.message || "Đã xảy ra lỗi khi làm mới token.";
-      setRefreshStatus({ type: 'error', message: `Lỗi: ${errorMessage}` });
+      const errorMessage = err.context?.data?.error || err.message || 'Không thể kết nối tới Zalo.';
+      setCheckResult({ type: 'error', message: `Lỗi: ${errorMessage}` });
     } finally {
-      setRefreshing(false);
+      setChecking(false);
     }
   };
 
@@ -98,10 +102,10 @@ const ZaloSettings: React.FC = () => {
       <p className="mt-1 text-sm text-gray-500">Cấu hình Zalo Official Account (OA) để tích hợp các tính năng Zalo.</p>
 
       <div className="mt-4 p-4 bg-blue-50 border border-blue-200 text-blue-800 rounded-md">
-        <h3 className="font-semibold">Cơ chế tự động</h3>
+        <h3 className="font-semibold">Thông tin cài đặt</h3>
         <p className="text-sm mt-1">
-          Hệ thống sẽ tự động lấy và làm mới <strong>Access Token</strong> mỗi 23 giờ bằng cách sử dụng <strong>OA ID</strong> và <strong>Secret Key</strong> bạn cung cấp.
-          Bạn không cần phải nhập Access Token thủ công. Để cơ chế này hoạt động, một cron job cần được thiết lập trên Supabase.
+          Điền <strong>OA ID</strong>, <strong>OA Secret Key</strong> và <strong>Access Token</strong> để hệ thống có thể gọi API Zalo.
+          Bạn có thể lưu token thủ công hoặc kiểm tra kết nối ngay bên dưới.
         </p>
       </div>
       
@@ -135,36 +139,47 @@ const ZaloSettings: React.FC = () => {
             className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-secondary focus:border-secondary sm:text-sm disabled:bg-gray-100"
           />
         </div>
+
+        <div>
+          <label htmlFor="access_token" className="block text-sm font-medium text-gray-700">Access Token</label>
+          <textarea
+            name="access_token"
+            id="access_token"
+            rows={4}
+            value={settings.access_token || ''}
+            onChange={handleChange}
+            placeholder="Dán access token từ Zalo vào đây"
+            disabled={!canEdit}
+            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-secondary focus:border-secondary sm:text-sm disabled:bg-gray-100"
+          />
+        </div>
         
-        <div className="flex items-center justify-end space-x-4">
+        <div className="flex flex-wrap items-center justify-end gap-3">
            {success && <p className="text-sm text-green-600">Đã lưu cài đặt thành công!</p>}
            <button
+            type="button"
+            onClick={handleTestConnection}
+            disabled={checking || !canEdit}
+            className="inline-flex justify-center py-2 px-4 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary disabled:opacity-50"
+          >
+            {checking ? 'Đang kiểm tra...' : 'Kiểm tra kết nối'}
+          </button>
+           <button
             type="submit"
-            disabled={loading || !canEdit}
+            disabled={saving || !canEdit}
             className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-[#eb248e] hover:bg-[#d61f81] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#eb248e] disabled:opacity-50"
           >
-            {loading ? 'Đang lưu...' : 'Lưu thay đổi'}
+            {saving ? 'Đang lưu...' : 'Lưu thay đổi'}
           </button>
         </div>
       </form>
 
-      <div className="mt-8 pt-6 border-t max-w-lg">
-        <h3 className="text-lg font-medium text-gray-800">Làm mới thủ công</h3>
-        <p className="mt-1 text-sm text-gray-500">
-          Nếu bạn cần Access Token mới ngay lập tức, bạn có thể kích hoạt quá trình làm mới thủ công.
-        </p>
-        {refreshStatus && (
-          <p className={`mt-2 text-sm p-2 rounded-md ${refreshStatus.type === 'success' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
-            {refreshStatus.message}
+      <div className="mt-6 max-w-lg">
+        {checkResult && (
+          <p className={`text-sm p-3 rounded-md ${checkResult.type === 'success' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
+            {checkResult.message}
           </p>
         )}
-        <button
-          onClick={handleManualRefresh}
-          disabled={refreshing || !canEdit}
-          className="mt-3 inline-flex justify-center py-2 px-4 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary disabled:opacity-50"
-        >
-          {refreshing ? 'Đang làm mới...' : 'Làm mới Access Token'}
-        </button>
       </div>
 
     </div>

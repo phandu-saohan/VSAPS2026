@@ -27,7 +27,6 @@ const EmailSettings = lazy(() => import('./pages/settings/EmailSettings'));
 const ZaloSettings = lazy(() => import('./pages/settings/ZaloSettings'));
 const EmailTemplates = lazy(() => import('./pages/settings/EmailTemplates'));
 const BulkEmail = lazy(() => import('./pages/BulkEmail'));
-const AbitstoreSettings = lazy(() => import('./pages/settings/AbitstoreSettings'));
 const SpeakerRegistration = lazy(() => import('./pages/SpeakerRegistration'));
 const DelegateRegistration = lazy(() => import('./pages/DelegateRegistration'));
 const LandingPage = lazy(() => import('./pages/Landing'));
@@ -305,7 +304,6 @@ const App: React.FC = () => {
                           <Route path="email" element={<EmailSettings />} />
                           <Route path="zalo" element={<ZaloSettings />} />
                           <Route path="templates" element={<EmailTemplates />} />
-                          <Route path="abitstore" element={<AbitstoreSettings />} />
                           <Route path="push" element={<PushNotifications />} />
                           <Route path="landing" element={<LandingSettings />} />
                       </Route>

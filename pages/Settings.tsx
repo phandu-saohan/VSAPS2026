@@ -20,7 +20,6 @@ const settingsNav = [
     { name: 'Mẫu Email', href: '/settings/templates', icon: MailIcon },
     { name: 'Cài đặt Email', href: '/settings/email', icon: MailIcon },
     { name: 'Cài đặt Zalo', href: '/settings/zalo', icon: MessageIcon },
-    { name: 'Tích hợp Abitstore', href: '/settings/abitstore', icon: ApiIcon },
     { name: 'Thông báo đẩy', href: '/settings/push', icon: NotificationIcon },
     { name: 'Trang Giới thiệu', href: '/settings/landing', icon: GlobeIcon },
 ];

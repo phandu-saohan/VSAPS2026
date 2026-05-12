@@ -3,15 +3,19 @@ import { createClient } from '@supabase/supabase-js';
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
-if (!supabaseUrl) {
-  throw new Error('Thiếu biến môi trường VITE_SUPABASE_URL.');
+const fallbackSupabaseUrl = 'https://example.supabase.co';
+const fallbackSupabaseAnonKey = 'public-anon-key';
+
+if (!supabaseUrl || !supabaseAnonKey) {
+    console.warn(
+        'Supabase environment variables are missing. Using a fallback client so the app can still render, but data fetching will not work until VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY are configured.'
+    );
 }
 
-if (!supabaseAnonKey) {
-  throw new Error('Thiếu biến môi trường VITE_SUPABASE_ANON_KEY.');
-}
-
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+export const supabase = createClient(
+    supabaseUrl || fallbackSupabaseUrl,
+    supabaseAnonKey || fallbackSupabaseAnonKey
+);
 
 /**
  * Uploads a file to a specified Supabase storage bucket.

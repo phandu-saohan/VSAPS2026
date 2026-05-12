@@ -238,26 +238,35 @@ export default function LandingPage() {
       </div>
 
       {/*  Right: Video Card  */}
-      <div className="relative group fade-up visible">
+      <div className="relative group fade-up visible flex flex-col items-center justify-center">
         <div className="absolute -inset-3 bg-secondary/20 blur-2xl group-hover:bg-secondary/30 transition-all duration-500 rounded-sm"></div>
-        <div className="relative aspect-video bg-academic-navy border border-white/10 overflow-hidden shadow-2xl cursor-pointer" onClick={() => setVideoModalOpen(true)} >
-          <img alt="Video Preview – VSAPS 2025 Highlights"
-            className="w-full h-full object-cover opacity-50 group-hover:scale-105 transition-transform duration-700"
-            src={normalizePublicStorageUrl(cfg.hero_video_thumb_url) || 'https://images.unsplash.com/photo-1551076805-e1869033e561?w=900&q=80'}/>
+        <div className="relative aspect-video w-full bg-academic-navy border border-white/10 overflow-hidden shadow-2xl">
+          <video
+            className="w-full h-full object-cover opacity-70"
+            src={cfg.hero_video_url || undefined}
+            poster={normalizePublicStorageUrl(cfg.hero_video_thumb_url) || 'https://images.unsplash.com/photo-1551076805-e1869033e561?w=900&q=80'}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+          />
           <div className="absolute inset-0 bg-gradient-to-t from-academic-navy/80 via-transparent to-transparent"></div>
-          {/*  Play btn  */}
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-20 h-20 rounded-full bg-secondary/90 flex items-center justify-center text-white shadow-xl group-hover:scale-110 group-hover:bg-secondary transition-all duration-300">
-              <span className="material-symbols-outlined text-4xl" style={{ fontVariationSettings: "'FILL' 1" }}>play_arrow</span>
-            </div>
-          </div>
           {/*  Label  */}
           <div className="absolute bottom-6 left-6 right-6">
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 justify-center">
               <div className="w-2 h-2 rounded-full bg-secondary animate-pulse"></div>
               <span className="text-[10px] font-bold text-white uppercase tracking-widest">Xem Highlight Hội nghị VSAPS 2025</span>
             </div>
           </div>
+        </div>
+        <div className="relative z-20 mt-6 sm:mt-8 px-2 sm:px-6 lg:px-8 text-center pointer-events-none max-w-full">
+          <p className="text-secondary font-extrabold italic uppercase tracking-[0.18em] text-lg sm:text-2xl leading-tight text-center whitespace-nowrap sm:whitespace-normal">
+            SHAPING THE FUTURE
+          </p>
+          <p className="text-white/95 font-light italic uppercase tracking-[0.14em] text-sm sm:text-lg lg:text-xl leading-tight text-center break-words sm:whitespace-nowrap max-w-full px-1">
+            OF AESTHETIC &amp; PLASTIC SURGERY TOGETHER
+          </p>
         </div>
       </div>
     </div>
