@@ -94,25 +94,25 @@ const ReportDetail: React.FC = () => {
   const keywords = useMemo(() => speaker?.keywords?.split(',').map((k) => k.trim()).filter(Boolean) || [], [speaker]);
 
   return (
-    <div className="min-h-screen bg-[#f8f6f6] text-[#221610]">
+    <div className="min-h-screen bg-academic-surface text-academic-slate">
       <LandingHeader active="other" showSearch searchValue={searchTerm} onSearchChange={setSearchTerm} logoUrl="/images/logo-vsaps.png" eventName="VSAPS 2026" />
 
       <main className="mx-auto max-w-[1280px] px-4 py-8 md:px-8">
-        <FadeIn className="mb-6 text-sm text-[#9a4c6c]">
-          <Link to="/" className="hover:text-[#ec5b13]">Trang chủ</Link>
+        <FadeIn className="mb-6 text-sm text-academic-grey">
+          <Link to="/" className="hover:text-secondary">Trang chủ</Link>
           <span className="mx-2">/</span>
-          <Link to="/speakers-list" className="hover:text-[#ec5b13]">Danh sách báo cáo viên</Link>
+          <Link to="/speakers-list" className="hover:text-secondary">Danh sách báo cáo viên</Link>
           <span className="mx-2">/</span>
-          <span className="text-[#221610]">Chi tiết báo cáo</span>
+          <span className="text-academic-navy">Chi tiết báo cáo</span>
         </FadeIn>
 
         {loading ? (
-          <div className="grid place-items-center py-24"><div className="h-12 w-12 animate-spin rounded-full border-4 border-[#ec5b13]/20 border-t-[#ec5b13]" /></div>
+          <div className="grid place-items-center py-24"><div className="h-12 w-12 animate-spin rounded-full border-4 border-secondary/20 border-t-secondary" /></div>
         ) : !speaker ? (
           <FadeIn>
-            <div className="rounded-xl border border-dashed border-gray-300 bg-white py-16 text-center">
-              <p className="text-lg font-bold">Không tìm thấy bài báo cáo</p>
-              <Link to="/speakers-list" className="mt-6 inline-flex rounded-lg bg-[#ec5b13] px-4 py-2 font-bold text-white">Quay lại danh sách</Link>
+            <div className="rounded-xl border border-dashed border-border-subtle bg-white py-16 text-center">
+              <p className="text-lg font-bold text-academic-navy">Không tìm thấy bài báo cáo</p>
+              <Link to="/speakers-list" className="mt-6 inline-flex rounded-lg bg-secondary px-4 py-2 font-bold text-white">Quay lại danh sách</Link>
             </div>
           </FadeIn>
         ) : (
@@ -121,25 +121,25 @@ const ReportDetail: React.FC = () => {
               <FadeIn>
                 <div className="space-y-4">
                   <div className="flex flex-wrap gap-2">
-                    <span className="rounded-full bg-[#ec5b13]/10 px-3 py-1 text-xs font-bold uppercase tracking-wide text-[#ec5b13]">{speaker.category || 'Phẫu thuật tạo hình'}</span>
-                    <span className="rounded-full border border-[#e6a1ff]/30 bg-white px-3 py-1 text-xs font-bold uppercase tracking-wide text-[#9a4c6c]">{speaker.speaker_type === 'Báo cáo viên' ? 'Báo cáo viên trong nước' : 'Khách mời quốc tế'}</span>
+                    <span className="rounded-full bg-secondary/10 px-3 py-1 text-xs font-bold uppercase tracking-wide text-secondary">{speaker.category || 'Phẫu thuật tạo hình'}</span>
+                    <span className="rounded-full border border-border-subtle bg-white px-3 py-1 text-xs font-bold uppercase tracking-wide text-academic-slate">{speaker.speaker_type === 'Báo cáo viên' ? 'Báo cáo viên trong nước' : 'Khách mời quốc tế'}</span>
                   </div>
-                  <h1 className="text-3xl font-black tracking-[-0.033em] text-[#1e0f24] md:text-4xl lg:text-[42px]">{speaker.report_title_vn}</h1>
+                  <h1 className="text-3xl font-black tracking-[-0.033em] text-academic-navy md:text-4xl lg:text-[42px]">{speaker.report_title_vn}</h1>
                 </div>
               </FadeIn>
 
               <FadeIn>
-                <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
+                <div className="rounded-xl border border-border-subtle bg-white p-5 shadow-sm">
                   <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                     <div className="flex items-center gap-3">
                       <img src={speaker.avatar_url || `https://ui-avatars.com/api/?name=${encodeURIComponent(speaker.full_name)}&background=random`} alt={speaker.full_name} className="h-12 w-12 rounded-full object-cover" />
                       <div>
-                        <p className="text-xs text-[#9a4c6c]">{speaker.workplace}</p>
+                        <p className="text-xs text-academic-grey">{speaker.workplace}</p>
                       </div>
                     </div>
                     <div className="flex flex-wrap gap-2 text-xs">
-                      <span className="rounded-full bg-[#f8f6f6] px-3 py-1 font-semibold text-[#221610]">{speaker.speaker_type}</span>
-                      <span className="rounded-full bg-[#f8f6f6] px-3 py-1 font-semibold text-[#221610]">{speaker.country || 'Việt Nam'}</span>
+                      <span className="rounded-full bg-academic-surface px-3 py-1 font-semibold text-academic-slate">{speaker.speaker_type}</span>
+                      <span className="rounded-full bg-academic-surface px-3 py-1 font-semibold text-academic-slate">{speaker.country || 'Việt Nam'}</span>
                     </div>
                   </div>
                 </div>
@@ -147,12 +147,12 @@ const ReportDetail: React.FC = () => {
 
               {speaker.abstract_text && (
                 <FadeIn>
-                  <section className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
-                    <div className="mb-4 flex items-center gap-3 border-b border-gray-100 pb-3">
-                      <span className="material-symbols-outlined text-[#ec5b13]">subject</span>
-                      <h2 className="text-lg font-black text-[#1e0f24]">Tóm tắt</h2>
+                  <section className="rounded-xl border border-border-subtle bg-white p-6 shadow-sm">
+                    <div className="mb-4 flex items-center gap-3 border-b border-border-subtle pb-3">
+                      <span className="material-symbols-outlined text-secondary">subject</span>
+                      <h2 className="text-lg font-black text-academic-navy">Tóm tắt</h2>
                     </div>
-                    <div className="prose max-w-none prose-p:leading-8 prose-p:text-[#221610] prose-headings:text-[#1e0f24]">
+                    <div className="prose max-w-none prose-p:leading-8 prose-p:text-academic-slate prose-headings:text-academic-navy">
                       <div dangerouslySetInnerHTML={{ __html: speaker.abstract_text }} />
                     </div>
                   </section>
@@ -161,12 +161,12 @@ const ReportDetail: React.FC = () => {
 
               {speaker.abstract_text_en && (
                 <FadeIn>
-                  <section className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
-                    <div className="mb-4 flex items-center gap-3 border-b border-gray-100 pb-3">
-                      <span className="material-symbols-outlined text-[#ec5b13]">language</span>
-                      <h2 className="text-lg font-black text-[#1e0f24]">Abstract (English)</h2>
+                  <section className="rounded-xl border border-border-subtle bg-white p-6 shadow-sm">
+                    <div className="mb-4 flex items-center gap-3 border-b border-border-subtle pb-3">
+                      <span className="material-symbols-outlined text-secondary">language</span>
+                      <h2 className="text-lg font-black text-academic-navy">Abstract (English)</h2>
                     </div>
-                    <div className="prose max-w-none prose-p:leading-8 prose-p:text-[#221610] prose-headings:text-[#1e0f24]">
+                    <div className="prose max-w-none prose-p:leading-8 prose-p:text-academic-slate prose-headings:text-academic-navy">
                       <div dangerouslySetInnerHTML={{ __html: speaker.abstract_text_en }} />
                     </div>
                   </section>
@@ -175,38 +175,38 @@ const ReportDetail: React.FC = () => {
 
               {keywords.length > 0 && (
                 <FadeIn>
-                  <section className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
-                    <div className="mb-4 flex items-center gap-3 border-b border-gray-100 pb-3">
-                      <span className="material-symbols-outlined text-[#ec5b13]">sell</span>
-                      <h2 className="text-lg font-black text-[#1e0f24]">Từ khóa</h2>
+                  <section className="rounded-xl border border-border-subtle bg-white p-6 shadow-sm">
+                    <div className="mb-4 flex items-center gap-3 border-b border-border-subtle pb-3">
+                      <span className="material-symbols-outlined text-secondary">sell</span>
+                      <h2 className="text-lg font-black text-academic-navy">Từ khóa</h2>
                     </div>
                     <div className="flex flex-wrap gap-2">
-                      {keywords.map((kw) => <span key={kw} className="rounded-full border border-gray-200 bg-[#f8f6f6] px-3 py-1.5 text-sm font-semibold text-[#221610]">{kw}</span>)}
+                      {keywords.map((kw) => <span key={kw} className="rounded-full border border-border-subtle bg-academic-surface px-3 py-1.5 text-sm font-semibold text-academic-slate">{kw}</span>)}
                     </div>
                   </section>
                 </FadeIn>
               )}
 
               <FadeIn>
-                <section className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
-                  <div className="mb-4 flex items-center gap-3 border-b border-gray-100 pb-3">
-                    <span className="material-symbols-outlined text-[#ec5b13]">chat</span>
-                    <h2 className="text-lg font-black text-[#1e0f24]">Bình luận</h2>
+                <section className="rounded-xl border border-border-subtle bg-white p-6 shadow-sm">
+                  <div className="mb-4 flex items-center gap-3 border-b border-border-subtle pb-3">
+                    <span className="material-symbols-outlined text-secondary">chat</span>
+                    <h2 className="text-lg font-black text-academic-navy">Bình luận</h2>
                   </div>
 
                   <div className="space-y-4">
                     {commentLoading ? (
-                      <div className="rounded-xl bg-[#f8f6f6] p-4 text-sm text-[#9a4c6c]">Đang tải bình luận...</div>
+                      <div className="rounded-xl bg-academic-surface p-4 text-sm text-academic-grey">Đang tải bình luận...</div>
                     ) : comments.length === 0 ? (
-                      <div className="rounded-xl bg-[#f8f6f6] p-4 text-sm text-[#9a4c6c]">Chưa có bình luận nào.</div>
+                      <div className="rounded-xl bg-academic-surface p-4 text-sm text-academic-grey">Chưa có bình luận nào.</div>
                     ) : (
                       comments.map((comment) => (
-                        <div key={comment.id} className="rounded-xl bg-[#f8f6f6] p-4">
+                        <div key={comment.id} className="rounded-xl bg-academic-surface p-4">
                           <div className="flex items-center justify-between gap-4">
-                            <p className="font-bold text-[#1e0f24]">{comment.author}</p>
-                            <span className="text-xs text-[#9a4c6c]">{comment.createdAt}</span>
+                            <p className="font-bold text-academic-navy">{comment.author}</p>
+                            <span className="text-xs text-academic-grey">{comment.createdAt}</span>
                           </div>
-                          <p className="mt-2 text-sm leading-7 text-[#221610]">{comment.content}</p>
+                          <p className="mt-2 text-sm leading-7 text-academic-slate">{comment.content}</p>
                         </div>
                       ))
                     )}
@@ -217,14 +217,14 @@ const ReportDetail: React.FC = () => {
                       value={commentAuthor}
                       onChange={(e) => setCommentAuthor(e.target.value)}
                       placeholder="Tên của bạn"
-                      className="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm outline-none transition focus:border-[#e6a1ff] focus:ring-4 focus:ring-[#e6a1ff]/15"
+                      className="w-full rounded-xl border border-border-subtle bg-white px-4 py-3 text-sm outline-none transition focus:border-secondary focus:ring-4 focus:ring-secondary/10"
                     />
                     <textarea
                       value={commentText}
                       onChange={(e) => setCommentText(e.target.value)}
                       rows={4}
                       placeholder="Viết bình luận của bạn..."
-                      className="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm outline-none transition focus:border-[#e6a1ff] focus:ring-4 focus:ring-[#e6a1ff]/15"
+                      className="w-full rounded-xl border border-border-subtle bg-white px-4 py-3 text-sm outline-none transition focus:border-secondary focus:ring-4 focus:ring-secondary/10"
                     />
                     <button
                       disabled={commentSaving}
@@ -256,7 +256,7 @@ const ReportDetail: React.FC = () => {
                         }
                         setCommentSaving(false);
                       }}
-                      className="rounded-lg bg-[#ec5b13] px-4 py-2.5 font-bold text-white transition-colors hover:bg-[#d6520d] disabled:cursor-not-allowed disabled:opacity-60"
+                      className="rounded-lg bg-secondary px-4 py-2.5 font-bold text-white transition-colors hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-60"
                     >
                       {commentSaving ? 'Đang gửi...' : 'Gửi bình luận'}
                     </button>
@@ -267,24 +267,24 @@ const ReportDetail: React.FC = () => {
 
             <aside className="lg:col-span-4 space-y-6">
               <FadeIn>
-                <div className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
+                <div className="overflow-hidden rounded-xl border border-border-subtle bg-white shadow-sm">
                   <div className="relative aspect-[4/5] bg-white">
                     <img src={speaker.avatar_url || `https://ui-avatars.com/api/?name=${encodeURIComponent(speaker.full_name)}&background=random`} alt={speaker.full_name} className="h-full w-full object-contain bg-white" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#1e0f24]/10 via-transparent to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-academic-navy/10 via-transparent to-transparent" />
                   </div>
                   <div className="space-y-4 p-5">
-                    <div className="grid gap-2 text-sm text-[#221610]">
-                      <div className="flex items-center justify-between gap-4 rounded-lg bg-[#f8f6f6] px-3 py-2">
-                        <span className="text-[#9a4c6c]">Liên lạc</span>
-                        <span className="font-semibold text-[#1e0f24]">{speaker.email || speaker.phone || '—'}</span>
+                    <div className="grid gap-2 text-sm text-academic-slate">
+                      <div className="flex items-center justify-between gap-4 rounded-lg bg-academic-surface px-3 py-2">
+                        <span className="text-academic-grey">Liên lạc</span>
+                        <span className="font-semibold text-academic-navy">{speaker.email || speaker.phone || '—'}</span>
                       </div>
-                      <div className="flex items-center justify-between gap-4 rounded-lg bg-[#f8f6f6] px-3 py-2">
-                        <span className="text-[#9a4c6c]">Quốc gia</span>
-                        <span className="font-semibold text-[#1e0f24]">{speaker.country || 'Việt Nam'}</span>
+                      <div className="flex items-center justify-between gap-4 rounded-lg bg-academic-surface px-3 py-2">
+                        <span className="text-academic-grey">Quốc gia</span>
+                        <span className="font-semibold text-academic-navy">{speaker.country || 'Việt Nam'}</span>
                       </div>
-                      <div className="flex items-center justify-between gap-4 rounded-lg bg-[#f8f6f6] px-3 py-2">
-                        <span className="text-[#9a4c6c]">Vai trò</span>
-                        <span className="font-semibold text-[#1e0f24]">{speaker.speaker_type}</span>
+                      <div className="flex items-center justify-between gap-4 rounded-lg bg-academic-surface px-3 py-2">
+                        <span className="text-academic-grey">Vai trò</span>
+                        <span className="font-semibold text-academic-navy">{speaker.speaker_type}</span>
                       </div>
                     </div>
                   </div>

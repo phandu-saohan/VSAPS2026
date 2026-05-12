@@ -163,39 +163,42 @@ const SpeakerManagement: React.FC = () => {
     }
 
     return (
-        <div className="space-y-6">
-            <div className="flex flex-col md:flex-row justify-between md:items-center gap-4">
-                <div>
-                    <h1 className="text-3xl font-bold text-gray-800 tracking-tight">Quản lý Báo cáo viên</h1>
-                    <p className="text-gray-500 text-sm mt-1 font-medium">Theo dõi bài báo cáo và hồ sơ chuyên gia.</p>
-                </div>
-                <div className="flex gap-2">
-                    <button onClick={fetchSpeakers} className="p-2.5 bg-white border border-gray-200 text-gray-600 rounded-xl hover:bg-gray-50 transition-colors shadow-sm flex items-center">
-                        <span className="material-symbols-outlined text-lg">refresh</span>
-                    </button>
-                    <button onClick={() => openModal()} className="px-5 py-2.5 bg-[#eb248e] text-white font-bold rounded-xl hover:bg-[#d61f81] transition-all shadow-sm flex items-center gap-2">
-                        <span className="material-symbols-outlined text-lg font-black">add</span>
-                        Thêm Báo cáo viên
-                    </button>
+        <div className="space-y-6 bg-academic-surface">
+            <div className="rounded-3xl border border-border-subtle bg-white p-6 shadow-sm md:p-8">
+                <div className="flex flex-col md:flex-row justify-between md:items-center gap-4">
+                    <div>
+                        <p className="text-xs font-bold uppercase tracking-[0.28em] text-secondary">Báo cáo viên</p>
+                        <h1 className="mt-2 text-3xl font-extrabold tracking-tight text-academic-navy">Quản lý Báo cáo viên</h1>
+                        <p className="mt-1 text-sm font-medium text-academic-grey">Theo dõi bài báo cáo và hồ sơ chuyên gia.</p>
+                    </div>
+                    <div className="flex gap-2">
+                        <button onClick={fetchSpeakers} className="flex items-center rounded-xl border border-border-subtle bg-white p-2.5 text-academic-grey shadow-sm transition-colors hover:bg-academic-surface hover:text-academic-navy">
+                            <span className="material-symbols-outlined text-lg">refresh</span>
+                        </button>
+                        <button onClick={() => openModal()} className="flex items-center gap-2 rounded-xl bg-secondary px-5 py-2.5 font-bold text-white shadow-sm transition-all hover:brightness-110">
+                            <span className="material-symbols-outlined text-lg font-black">add</span>
+                            Thêm Báo cáo viên
+                        </button>
+                    </div>
                 </div>
             </div>
 
-            <div className="bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
+            <div className="rounded-3xl border border-border-subtle bg-white p-4 shadow-sm md:p-5">
                 <div className="flex flex-wrap gap-4">
-                    <div className="flex-1 min-w-[300px] relative">
-                        <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">search</span>
+                    <div className="relative min-w-[300px] flex-1">
+                        <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-academic-grey">search</span>
                         <input 
                             type="text" 
                             placeholder="Tìm theo tên, email, đơn vị..." 
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
-                            className="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-secondary/20 focus:border-secondary outline-none transition-all text-sm"
+                            className="w-full rounded-xl border border-border-subtle pl-10 pr-4 py-2.5 text-sm outline-none transition-all focus:border-secondary focus:ring-4 focus:ring-secondary/10"
                         />
                     </div>
                     <select 
                         value={filterStatus}
                         onChange={(e) => setFilterStatus(e.target.value as any)}
-                        className="px-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-secondary/20 focus:border-secondary outline-none transition-all text-sm font-medium bg-gray-50/50"
+                        className="rounded-xl border border-border-subtle bg-academic-surface px-4 py-2.5 text-sm font-medium outline-none transition-all focus:border-secondary focus:ring-4 focus:ring-secondary/10"
                     >
                         <option value="All">Tất cả trạng thái</option>
                         <option value={Status.PENDING}>Chờ duyệt</option>
