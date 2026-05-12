@@ -340,7 +340,7 @@ const ReportDetail: React.FC = () => {
       </main>
 
       <footer className="mt-20 bg-[#221610] px-4 pb-8 pt-16 text-white md:px-20">
-        <div className="mx-auto max-w-[1280px]">
+        <div className="mx-auto w-full max-w-none">
           <div className="grid grid-cols-1 gap-10 border-t border-white/10 pt-8 md:grid-cols-3">
             <div>
               <div className="mb-4 flex items-center gap-3">
